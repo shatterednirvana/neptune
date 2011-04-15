@@ -1,0 +1,6 @@
+
+neptune :type => "mpi",
+  :keyname => "cluster",
+  :code => "MpiQueen",
+  :nodes_to_use => 2
+

@@ -1,0 +1,23 @@
+#!/usr/bin/ruby
+
+$VERBOSE = nil # to surpress excessive SSL cert warnings
+
+$:.unshift File.join(File.dirname(__FILE__), "..", "lib")
+require 'neptune'
+
+if ARGV.length == 1
+  file = ARGV[0]
+  unless File.exists?(file)
+    abort("File #{file} does not exist.")
+  end
+
+  load file
+else
+  unless ARGV.length % 2 == 0
+    abort("When creating a Neptune job on the fly, an even number of parameters must be specified.")
+  end
+
+  params = Hash[*ARGV]
+  puts neptune(params)
+end
+

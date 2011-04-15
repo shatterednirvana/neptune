@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+
+  <title>Class: AppControllerClient</title>
+
+  <link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+
+  <script src="./js/jquery.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/thickbox-compressed.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/quicksearch.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/darkfish.js" type="text/javascript"
+    charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+      </div>
+    </div>
+
+    <div id="file-metadata">
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li><a href="./lib/app_controller_client_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/app_controller_client.rb">lib/app_controller_client.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      
+    </div>
+
+    <div id="class-metadata">
+
+      <!-- Parent Class -->
+      
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        
+        <p class="link"><a href="Object.html">Object</a></p>
+        
+      </div>
+      
+
+      <!-- Namespace Contents -->
+      
+
+      <!-- Method Quickref -->
+      
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+          <li><a href="#method-c-new">::new</a></li>
+          
+          <li><a href="#method-i-compile_code">#compile_code</a></li>
+          
+          <li><a href="#method-i-get_acl">#get_acl</a></li>
+          
+          <li><a href="#method-i-get_output">#get_output</a></li>
+          
+          <li><a href="#method-i-make_call">#make_call</a></li>
+          
+          <li><a href="#method-i-put_input">#put_input</a></li>
+          
+          <li><a href="#method-i-set_acl">#set_acl</a></li>
+          
+          <li><a href="#method-i-start_neptune_job">#start_neptune_job</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Included Modules -->
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="./LICENSE.html">LICENSE</a></li>
+        
+          <li class="file"><a href="./README.html">README</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class/Module Index
+          <span class="search-toggle"><img src="./images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <ul class="link-list">
+        
+          <li><a href="./AppControllerClient.html">AppControllerClient</a></li>
+        
+          <li><a href="./CommonFunctions.html">CommonFunctions</a></li>
+        
+          <li><a href="./Object.html">Object</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <div id="documentation">
+    <h1 class="class">AppControllerClient</h1>
+
+    <div id="description">
+      
+<p>A client that uses SOAP messages to communicate with the underlying cloud
+platform (here, AppScale). This client is similar to that used in the
+AppScale Tools, but with non-Neptune SOAP calls removed.</p>
+
+    </div>
+
+    <!-- Constants -->
+    
+
+    <!-- Attributes -->
+    
+    <div id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="conn-attribute-method" class="method-detail">
+        <a name="conn"></a>
+        
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">conn</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="ip-attribute-method" class="method-detail">
+        <a name="ip"></a>
+        
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">ip</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="secret-attribute-method" class="method-detail">
+        <a name="secret"></a>
+        
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">secret</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- Methods -->
+    
+    <div id="public-class-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="new-method" class="method-detail ">
+        <a name="method-c-new"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(ip, secret)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>A constructor that requires both the IP address of the machine to
+communicate with as well as the secret (string) needed to perform
+communication. AppControllers will reject SOAP calls if this secret
+(basically a password) is not present - it can be found in the user’s
+.appscale directory, and a helper method is usually present to fetch this
+for us.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="new-source">
+<pre>
+<span class="ruby-comment"># File lib/app_controller_client.rb, line 26</span>
+def initialize(ip, secret)
+  <span class="ruby-ivar">@ip</span> = ip
+  <span class="ruby-ivar">@secret</span> = secret
+  
+  <span class="ruby-ivar">@conn</span> = <span class="ruby-constant">SOAP</span>::<span class="ruby-constant">RPC</span>::<span class="ruby-constant">Driver</span>.new(&quot;https://#{@ip}:17443&quot;)
+  <span class="ruby-ivar">@conn</span>.add_method(<span class="ruby-string">&quot;neptune_start_job&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.add_method(<span class="ruby-string">&quot;neptune_put_input&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.add_method(<span class="ruby-string">&quot;neptune_get_output&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.add_method(<span class="ruby-string">&quot;neptune_get_acl&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.add_method(<span class="ruby-string">&quot;neptune_set_acl&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.add_method(<span class="ruby-string">&quot;neptune_compile_code&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </div>
+  
+    <div id="public-instance-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="compile_code-method" class="method-detail ">
+        <a name="method-i-compile_code"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">compile_code</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code"
+            id="compile_code-source">
+<pre>
+<span class="ruby-comment"># File lib/app_controller_client.rb, line 152</span>
+def compile_code(job_data)
+  result = <span class="ruby-string">&quot;&quot;</span>
+  make_call(<span class="ruby-constant">NO_TIMEOUT</span>, false) { 
+    result = conn.neptune_compile_code(job_data, <span class="ruby-ivar">@secret</span>)
+  }  
+  abort(result) if result =~ <span class="ruby-regexp">/Error:/</span>
+  return result
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="get_acl-method" class="method-detail ">
+        <a name="method-i-get_acl"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">get_acl</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the ACL associated with the named piece of data stored in the
+underlying cloud platform. Right now, data can only be public or private,
+but future versions will add individual user support. Input, output, and
+exceptions mirror that of start_neptune_job.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="get_acl-source">
+<pre>
+<span class="ruby-comment"># File lib/app_controller_client.rb, line 129</span>
+def get_acl(job_data)
+  result = <span class="ruby-string">&quot;&quot;</span>
+  make_call(<span class="ruby-constant">NO_TIMEOUT</span>, false) { 
+    result = conn.neptune_get_acl(job_data, <span class="ruby-ivar">@secret</span>)
+  }  
+  abort(result) if result =~ <span class="ruby-regexp">/Error:/</span>
+  return result
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="get_output-method" class="method-detail ">
+        <a name="method-i-get_output"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">get_output</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Retrieves the output of a Neptune job, stored in an underlying database.
+Within AppScale, a special application runs, referred to as the Repository,
+which provides a key-value interface to Neptune job data. Data is stored as
+though it were on a file system, therefore output be of the usual form
+/folder/filename . Currently the contents of the file is returned as a
+string to the caller, but as this may be inefficient for non-trivial output
+jobs, the next version of Neptune will add an additional call to directly
+copy the output to a file on the local filesystem. See <a
+href="AppControllerClient.html#method-i-start_neptune_job">start_neptune_job</a>
+for conditions by which this method can abort as well as the input format
+used for job_data.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="get_output-source">
+<pre>
+<span class="ruby-comment"># File lib/app_controller_client.rb, line 115</span>
+def get_output(job_data)
+  result = <span class="ruby-string">&quot;&quot;</span>
+  make_call(<span class="ruby-constant">NO_TIMEOUT</span>, false) { 
+    result = conn.neptune_get_output(job_data, <span class="ruby-ivar">@secret</span>)
+  }  
+  abort(result) if result =~ <span class="ruby-regexp">/Error:/</span>
+  return result
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="make_call-method" class="method-detail ">
+        <a name="method-i-make_call"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">make_call</span><span
+            class="method-args">(time, retry_on_except)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>A helper method to make SOAP calls for us. This method is mainly here to
+reduce code duplication: all SOAP calls expect a certain timeout and can
+tolerate certain exceptions, so we consolidate this code into this method.
+Here, the caller specifies the timeout for the SOAP call (or NO_TIMEOUT if
+an infinite timeout is required) as well as whether the call should be
+retried in the face of exceptions. Exceptions can occur if the machine is
+not yet running or is too busy to handle the request, so these exceptions
+are automatically retried regardless of the retry value. Typically callers
+set this to false to catch ‘Connection Refused’ exceptions or the like.
+Finally, the caller must provide a block of code that indicates the SOAP
+call to make: this is really all that differs between the calling methods.
+The result of the block is returned to the caller.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="make_call-source">
+<pre>
+<span class="ruby-comment"># File lib/app_controller_client.rb, line 52</span>
+def make_call(time, retry_on_except)
+  begin
+    <span class="ruby-constant">Timeout</span>::timeout(time) {
+      yield if block_given?
+    }
+  rescue <span class="ruby-constant">Errno</span>::<span class="ruby-constant">ECONNREFUSED</span>
+    if retry_on_except
+      retry
+    else
+      abort(<span class="ruby-string">&quot;Connection was refused. Is the AppController running?&quot;</span>)
+    end
+  rescue <span class="ruby-constant">OpenSSL</span>::<span class="ruby-constant">SSL</span>::<span class="ruby-constant">SSLError</span>, <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-constant">Timeout</span>::<span class="ruby-constant">Error</span>
+    retry
+  rescue <span class="ruby-constant">Exception</span> =&gt; except
+    if retry_on_except
+      retry
+    else
+      abort(&quot;We saw an unexpected error of the type #{except.class} with the following message:\n#{except}.&quot;)
+    end
+  end
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="put_input-method" class="method-detail ">
+        <a name="method-i-put_input"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">put_input</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Stores a file stored on the user’s local file system in the underlying
+database. The user can specify to use either the underlying database that
+AppScale is using, or alternative storage mechanisms (as of writing, Google
+Storage, Amazon S3, and Eucalyptus Walrus are supported) via the storage
+parameter.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="put_input-source">
+<pre>
+<span class="ruby-comment"># File lib/app_controller_client.rb, line 96</span>
+def put_input(job_data)
+  result = <span class="ruby-string">&quot;&quot;</span>
+  make_call(<span class="ruby-constant">NO_TIMEOUT</span>, false) { 
+    result = conn.neptune_put_input(job_data, <span class="ruby-ivar">@secret</span>)
+  }  
+  abort(result) if result =~ <span class="ruby-regexp">/Error:/</span>
+  return result
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="set_acl-method" class="method-detail ">
+        <a name="method-i-set_acl"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">set_acl</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Sets the ACL of a specified pieces of data stored in the underlying cloud
+platform. As is the case with <a
+href="AppControllerClient.html#method-i-get_acl">get_acl</a>, ACLs can be
+either public or private right now, but this will be expanded upon in the
+future. As with the other SOAP calls, input, output, and exceptions mirror
+that of start_neptune_job.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="set_acl-source">
+<pre>
+<span class="ruby-comment"># File lib/app_controller_client.rb, line 143</span>
+def set_acl(job_data)
+  result = <span class="ruby-string">&quot;&quot;</span>
+  make_call(<span class="ruby-constant">NO_TIMEOUT</span>, false) { 
+    result = conn.neptune_set_acl(job_data, <span class="ruby-ivar">@secret</span>)
+  }  
+  abort(result) if result =~ <span class="ruby-regexp">/Error:/</span>
+  return result
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="start_neptune_job-method" class="method-detail ">
+        <a name="method-i-start_neptune_job"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">start_neptune_job</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Initiates the start of a Neptune job, whether it be a HPC job (MPI, X10, or
+MapReduce), or a scaling job (e.g., for AppScale itself). This method
+should not be used for retrieving the output of a job or getting / setting
+output ACLs, but just for starting new HPC / scaling jobs. This method
+takes a hash containing the parameters of the job to run, and can abort if
+the AppController it calls returns an error (e.g., if a bad secret is used
+or the machine isn’t running). Otherwise, the return value of this method
+is the result returned from the AppController.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="start_neptune_job-source">
+<pre>
+<span class="ruby-comment"># File lib/app_controller_client.rb, line 82</span>
+def start_neptune_job(job_data)
+  result = <span class="ruby-string">&quot;&quot;</span>
+  make_call(<span class="ruby-constant">NO_TIMEOUT</span>, false) { 
+    result = conn.neptune_start_job(job_data, <span class="ruby-ivar">@secret</span>)
+  }  
+  abort(result) if result =~ <span class="ruby-regexp">/Error:/</span>
+  return result
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </div>
+  
+
+  </div>
+
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
+
+</body>
+</html>
+

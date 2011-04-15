@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+
+  <title>Module: CommonFunctions</title>
+
+  <link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+
+  <script src="./js/jquery.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/thickbox-compressed.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/quicksearch.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/darkfish.js" type="text/javascript"
+    charset="utf-8"></script>
+
+</head>
+<body class="module">
+
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+      </div>
+    </div>
+
+    <div id="file-metadata">
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li><a href="./lib/common_functions_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/common_functions.rb">lib/common_functions.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      
+    </div>
+
+    <div id="class-metadata">
+
+      <!-- Parent Class -->
+      
+
+      <!-- Namespace Contents -->
+      
+
+      <!-- Method Quickref -->
+      
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+          <li><a href="#method-c-get_from_yaml">::get_from_yaml</a></li>
+          
+          <li><a href="#method-c-get_secret_key">::get_secret_key</a></li>
+          
+          <li><a href="#method-c-scp_file">::scp_file</a></li>
+          
+          <li><a href="#method-c-scp_to_shadow">::scp_to_shadow</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Included Modules -->
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="./LICENSE.html">LICENSE</a></li>
+        
+          <li class="file"><a href="./README.html">README</a></li>
+        
+        </ul>
+      </div>
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class/Module Index
+          <span class="search-toggle"><img src="./images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <ul class="link-list">
+        
+          <li><a href="./AppControllerClient.html">AppControllerClient</a></li>
+        
+          <li><a href="./CommonFunctions.html">CommonFunctions</a></li>
+        
+          <li><a href="./Object.html">Object</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <div id="documentation">
+    <h1 class="module">CommonFunctions</h1>
+
+    <div id="description">
+      
+<p>A helper module that aggregates functions that are not part of Neptune’s
+core functionality. Specifically, this module contains methods to scp files
+to other machines and the ability to read YAML files, which are often
+needed to determine which machine should be used for computation or to copy
+over code and input files.</p>
+
+    </div>
+
+    <!-- Constants -->
+    
+
+    <!-- Attributes -->
+    
+
+    <!-- Methods -->
+    
+    <div id="public-class-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="get_from_yaml-method" class="method-detail ">
+        <a name="method-c-get_from_yaml"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">get_from_yaml</span><span
+            class="method-args">(keyname, tag, required=true)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Given the AppScale keyname, reads the associated YAML file and returns the
+contents of the given tag. The required flag (default value is true)
+indicates whether a value must exist for this tag: if set to true, this
+method aborts if the value doesn’t exist or the YAML file is malformed.
+If the required flag is set to false, it returns nil in either scenario
+instead.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="get_from_yaml-source">
+<pre>
+<span class="ruby-comment"># File lib/common_functions.rb, line 82</span>
+def self.get_from_yaml(keyname, tag, required=true)
+  location_file = <span class="ruby-constant">File</span>.expand_path(&quot;~/.appscale/locations-#{keyname}.yaml&quot;)
+
+  abort(&quot;An AppScale instance is not currently running with the provided keyname, \&quot;#{keyname}\&quot;.&quot;) unless <span class="ruby-constant">File</span>.exists?(location_file)  
+  
+  begin
+    tree = <span class="ruby-constant">YAML</span>.load_file(location_file)
+  rescue <span class="ruby-constant">ArgumentError</span>
+    if required
+      abort(<span class="ruby-string">&quot;The yaml file you provided was malformed. Please correct any errors in it and try again.&quot;</span>)
+    else
+      return nil
+    end
+  end
+  
+  value = tree[tag]
+  
+  bad_yaml_format_msg = &quot;The file #{location_file} is in the wrong format and doesn't contain a #{tag} tag. Please make sure the file is in the correct format and try again&quot;
+  abort(bad_yaml_format_msg) if value.nil? and required
+  return value
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="get_secret_key-method" class="method-detail ">
+        <a name="method-c-get_secret_key"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">get_secret_key</span><span
+            class="method-args">(keyname, required=true)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the secret key needed for communication with AppScale’s Shadow
+node. This method is a nice frontend to the <a
+href="CommonFunctions.html#method-c-get_from_yaml">get_from_yaml</a>
+function, as the secret is stored in a YAML file.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="get_secret_key-source">
+<pre>
+<span class="ruby-comment"># File lib/common_functions.rb, line 107</span>
+def self.get_secret_key(keyname, required=true)
+  return <span class="ruby-constant">CommonFunctions</span>.get_from_yaml(keyname, :secret)
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="scp_file-method" class="method-detail ">
+        <a name="method-c-scp_file"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">scp_file</span><span
+            class="method-args">(local_file_loc, remote_file_loc, target_ip, public_key_loc, is_dir=false)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Performs the actual remote copying of files: given the IP address and other
+information from <a
+href="CommonFunctions.html#method-c-scp_to_shadow">scp_to_shadow</a>,
+attempts to use scp to copy the file over. Aborts if the scp fails, which
+can occur if the network is down, if a bad keyname is provided, or if the 
+wrong IP is given. If the user specifies that the file to copy is actually
+a directory, we append the -r flag to scp as well.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="scp_file-source">
+<pre>
+<span class="ruby-comment"># File lib/common_functions.rb, line 37</span>
+def self.scp_file(local_file_loc, remote_file_loc, target_ip, public_key_loc, is_dir=false)
+  cmd = <span class="ruby-string">&quot;&quot;</span>
+  local_file_loc = <span class="ruby-constant">File</span>.expand_path(local_file_loc)
+
+  ssh_args = <span class="ruby-string">&quot;-o StrictHostkeyChecking=no 2&gt;&amp;1&quot;</span>
+  ssh_args &lt;&lt; <span class="ruby-string">&quot; -r &quot;</span> if is_dir
+
+  if public_key_loc.class == <span class="ruby-constant">Array</span>
+    public_key_loc.each { |key|
+      key = <span class="ruby-constant">File</span>.expand_path(key)
+    }
+    
+    cmd = &quot;scp -i #{public_key_loc.join(' -i ')} #{ssh_args} #{local_file_loc} root@#{target_ip}:#{remote_file_loc}&quot;
+  else
+    public_key_loc = <span class="ruby-constant">File</span>.expand_path(public_key_loc)
+    cmd = &quot;scp -i #{public_key_loc} #{ssh_args} #{local_file_loc} root@#{target_ip}:#{remote_file_loc}&quot;
+  end
+
+  cmd &lt;&lt; <span class="ruby-string">&quot;; echo $? &gt;&gt; ~/.appscale/retval&quot;</span>
+
+  retval_loc = <span class="ruby-constant">File</span>.expand_path(<span class="ruby-string">&quot;~/.appscale/retval&quot;</span>)
+  <span class="ruby-constant">FileUtils</span>.rm_f(retval_loc)
+
+  begin
+    <span class="ruby-constant">Timeout</span>::timeout(-1) { `#{cmd}` }
+  rescue <span class="ruby-constant">Timeout</span>::<span class="ruby-constant">Error</span>
+    abort(&quot;Remotely copying over files failed. Is the destination machine on and reachable from this computer? We tried the following command:\n\n#{cmd}&quot;)
+  end
+
+  loop {
+    break if <span class="ruby-constant">File</span>.exists?(retval_loc)
+    sleep(5)
+  }
+
+  retval = (<span class="ruby-constant">File</span>.open(retval_loc) { |f| f.read }).chomp
+  abort(&quot;\n\n[#{cmd}] returned #{retval} instead of 0 as expected. Is your environment set up properly?&quot;) if retval != <span class="ruby-string">&quot;0&quot;</span>
+  return cmd
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="scp_to_shadow-method" class="method-detail ">
+        <a name="method-c-scp_to_shadow"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">scp_to_shadow</span><span
+            class="method-args">(local_file_loc, remote_file_loc, keyname, is_dir=false)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Copies a file to the Shadow node (head node) within AppScale.  The caller
+specifies the local file location, the destination where the file should be
+placed, and the name of the key to use. The keyname is typically specified
+by the Neptune job given, but defaults to ”appscale” if not provided.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="scp_to_shadow-source">
+<pre>
+<span class="ruby-comment"># File lib/common_functions.rb, line 24</span>
+def self.scp_to_shadow(local_file_loc, remote_file_loc, keyname, is_dir=false)
+  shadow_ip = <span class="ruby-constant">CommonFunctions</span>.get_from_yaml(keyname, :shadow)
+  ssh_key = <span class="ruby-constant">File</span>.expand_path(&quot;~/.appscale/#{keyname}.key&quot;)
+
+  self.scp_file(local_file_loc, remote_file_loc, shadow_ip, ssh_key, is_dir)
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </div>
+  
+
+  </div>
+
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
+
+</body>
+</html>
+

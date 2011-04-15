@@ -1,0 +1,9 @@
+result = neptune :type => "compile",
+  :keyname => "booscale2",
+  :code => "ring",
+  :main => "Ring.c",
+  :output => "/baz",
+  :copy_to => "ring-compiled"
+
+puts "out = #{result[:out]}"
+puts "err = #{result[:err]}"

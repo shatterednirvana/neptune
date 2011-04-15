@@ -1,0 +1,13 @@
+
+output = neptune (
+  :type => "mpi",
+  :keyname => "booscale2",
+  :code => "ring-compiled/Ring",
+  :nodes_to_use => 1,
+  :procs_to_use => 1,
+  :output => "/baz/output",
+  :instance_type => "t1.micro"
+)
+
+puts "job started? #{output[:result]}"
+puts "message = #{output[:msg]}"
