@@ -6,13 +6,13 @@ Neptune provides programmers with a simple interface
 by which they can deploy MPI, X10, MapReduce, UPC, and Erlang jobs
 to without needing to know the particulars of the underlying
 cloud platform. You only need to give Neptune your code,
-tell it how many machines to run on and where to put the output:
+tell it how many machines to run on, and where to put the output:
 Neptune handles everything else. No more writing configuration
 files, having to start up NFS on all your machines, yada yada yada.
 Neptune works together with supported cloud platforms (currently
 AppScale is recommended) and can deploy over anything AppScale
 can - Xen or KVM virtual machines as well as Eucalyptus and
-Amazon EC2. There's nothing virtualization specific in there,
+Amazon EC2. There's nothing virtualization-specific in there,
 so in theory any machine installed with the AppScale software
 should work fine.
 
@@ -21,31 +21,33 @@ it also can be used to deploy other types of software. For example,
 Neptune has support for user-specified scaling of the underlying
 cloud platform: users can write Neptune jobs that manually add
 load balancers, application servers, or database servers to a running
-AppScale deployment. Additionally, as of version 0.0.2, remote
-compiling can also be performed: just give Neptune the path to
-the directory you want to compile and be sure to include a Makefile
-in it! Neptune will run 'make' on it (you can specify which target
-to make as well) and return to you a folder containing the standard
-out and standard error of the make command.
+AppScale deployment. Remote compiling can also be performed: just give
+Neptune the path to the directory you want to compile and be sure to
+include a Makefile in it! Neptune will run 'make' on it (you can specify
+which target to make as well) and return to you a folder containing the
+standard out and standard error of the make command.
 
 By default, Neptune jobs store their outputs in the underlying database
-that AppScale is running over. As of Neptune 0.0.5, job outputs can
-also be stored in Amazon S3, Eucalyptus Walrus, and Google Storage.
+that AppScale is running over. Job outputs can also be stored in anything
+that utilizes the Amazon S3 API. We have tested and confirmed compatibility
+with Amazon S3, Eucalyptus Walrus, and Google Storage.
 
-Sample Neptune job scripts can be found in samples. Test cases can
-be found in the test folder, with the standard naming convention
+Sample Neptune job scripts can be found in samples. Integration tests
+can be found in test/integration, with the standard naming convention
 - ts_neptune is the test suite runner, with tc_* containing test
 cases for each type of job that Neptune offers. Before running
 ts_neptune, you should export the environment variable APPSCALE_HEAD_NODE,
 which should be set to the IP address of the AppScale machine that runs
-the Shadow daemon (a.k.a. the Master AppController). Running
-generate_coverage.sh in the top-level directory will run rcov
-and generate the coverage reports automatically - currently this process
-takes about an hour.
+the Shadow daemon (a.k.a. the Master AppController).
 
-Developed by Chris Bunch as part of the AppScale project.
-See LICENSE for the specifics of the New BSD License
-by which Neptune is released.
+Running generate_coverage.sh in the top-level directory will run rcov
+and generate code coverage reports automatically via unit tests, found in
+test/unit. Running test/unit/ts_all.rb will execute all unit tests, and
+does not require AppScale to be running, or any special environment
+variables to be set.
+
+Developed by Chris Bunch as part of the AppScale project. See LICENSE for
+the specifics of the New BSD License by which Neptune is released.
 
 Check us out on the web:
 
@@ -57,14 +59,43 @@ http://appscale.cs.ucsb.edu
 Contributors welcome! We would love to add support for other
 cloud platforms and test out Neptune more on non-virtualized
 deployments, as well as adding capabilities for other types
-of computation. We would also like to refactor Neptune to use
-symbols instead of instance variables for running jobs: this
-will likely appear in a future release as well.
+of computation. 
 
-An academic paper describing Neptune is in the works - check
-in for a link to that as it becomes available.
+Our academic paper on Neptune won best paper at ACM ScienceCloud 2011!
+View the abstract of the paper and the PDF here:
+http://www.neptune-lang.org/2011/6/Neptune-Picks-up-Best-Paper-at-ScienceCloud-2011
 
 Version History:
+
+February 12, 2012 - 0.2.1 released, adding support for the babel() method on
+non-Babel job types (e.g., MPI, MapReduce), and removed the is_remote
+parameter for babel() calls (since it can always be inferred from :storage).
+Added more unit tests accordingly for babel() calls, and completed documentation
+per rdoc standards.
+
+February 11, 2012 - 0.2.0 released, adding support for Babel jobs (code that
+runs over multiple clouds, using their queues automatically) and the babel()
+method, to automatically upload code, run it, and retrieve the output.
+
+December 6, 2011 - 0.1.4 released, allowing MPI jobs (and by extension,
+UPC/X10/KDT jobs) to specify command-line arguments via :argv that should be
+passed to the executable.
+
+December 4, 2011 - 0.1.3 released, adding support for KDT (Knowledge Discovery
+Toolkit) and Cicero, a framework for automatic task execution over Google
+App Engine and AppScale.
+
+November 10, 2011 - 0.1.2 released, adding unit tests and
+refactoring all around.
+
+June 6, 2011 - 0.1.1 released, adding support for code
+written in Go and R
+
+June 4, 2011 - 0.1.0 released, adding verbose / quiet options
+for users wishing to suppress stdout from Neptune jobs.
+
+May 28, 2011 - 0.0.9 released, adding generic SSA support
+for users wanting to use StochKit and other SSA codes.
 
 April 8, 2011 - 0.0.8 released, fixing MapReduce support
 for both regular Hadoop and Hadoop Streaming. Also increased

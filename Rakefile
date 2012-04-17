@@ -3,7 +3,7 @@ require 'rake/gempackagetask'
 
 spec = Gem::Specification.new do |s|
   s.name = 'neptune'
-  s.version = '0.0.8'
+  s.version = '0.2.1'
 
   s.summary = "A domain specific language for deploying HPC apps to cloud platforms"
   s.description = <<-EOF
@@ -20,7 +20,7 @@ spec = Gem::Specification.new do |s|
   s.default_executable = 'neptune'
   s.platform = Gem::Platform::RUBY
 
-  candidates = Dir.glob("{bin,doc,lib,test}/**/*")
+  candidates = Dir.glob("{bin,doc,lib,test,samples}/**/*")
   s.files = candidates.delete_if do |item|
     item.include?(".bzr") || item.include?("rdoc")
   end
@@ -29,6 +29,9 @@ spec = Gem::Specification.new do |s|
 
   s.has_rdoc = true
   s.extra_rdoc_files = ["README", "LICENSE"]
+
+  # For Babel, which uses futures under the hood
+  s.add_dependency('promise', '>= 0.3.0')
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|
