@@ -28,17 +28,17 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="lib-neptune_rb.html">lib/neptune.rb</a></td>
-            <td class='right_align'><tt>298</tt></td>
-            <td class='right_align'><tt>185</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>97.32%</tt></div>
+            <td class='right_align'><tt>542</tt></td>
+            <td class='right_align'><tt>322</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>76.57%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:97px"></div>
-            <div class="uncovered" style="width:3px"></div>
+            <div class="covered" style="width:77px"></div>
+            <div class="uncovered" style="width:23px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>95.68%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>69.57%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:96px"></div>
-            <div class="uncovered" style="width:4px"></div>
+            <div class="covered" style="width:70px"></div>
+            <div class="uncovered" style="width:30px"></div>
           </div></td>
           </tr>
         </tbody>
@@ -63,115 +63,115 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line2">2</a> </pre></td>
+            <td><pre><a name="line2">2</a> # Programmer: Chris Bunch (cgb@cs.ucsb.edu)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line3">3</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line3">3</a> require 'app_controller_client'</pre></td>
+            <td><pre><a name="line4">4</a> require 'app_controller_client'</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line4">4</a> require 'common_functions'</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line5">5</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line6">6</a> # Setting verbose to nil here suppresses the otherwise</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line7">7</a> # excessive SSL cert warning messages that will pollute</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line8">8</a> # stderr and worry users unnecessarily.</pre></td>
+            <td><pre><a name="line5">5</a> require 'common_functions'</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line9">9</a> $VERBOSE = nil</pre></td>
+            <td><pre><a name="line6">6</a> require 'custom_exceptions'</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line10">10</a> </pre></td>
+            <td><pre><a name="line7">7</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line11">11</a> #MPI_RUN_JOB_REQUIRED = %w{ input output code filesystem }</pre></td>
+            <td><pre><a name="line8">8</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line12">12</a> #MPI_REQUIRED = %w{ output }</pre></td>
+            <td><pre><a name="line9">9</a> # Setting verbose to nil here suppresses the otherwise</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line13">13</a> #X10_RUN_JOB_REQUIRED = %w{ input output code filesystem }</pre></td>
+            <td><pre><a name="line10">10</a> # excessive SSL cert warning messages that will pollute</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line14">14</a> #X10_REQUIRED = %w{ output }</pre></td>
+            <td><pre><a name="line11">11</a> # stderr and worry users unnecessarily.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line12">12</a> $VERBOSE = nil</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line15">15</a> #DFSP_RUN_JOB_REQUIRED = %w{ output simulations }</pre></td>
+            <td><pre><a name="line13">13</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line16">16</a> #DFSP_REQUIRED = %w{ output }</pre></td>
+            <td><pre><a name="line14">14</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line17">17</a> #CEWSSA_RUN_JOB_REQUIRED = %w{ output simulations }</pre></td>
+            <td><pre><a name="line15">15</a> # A list of all the Neptune job types that we support</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line16">16</a> ALLOWED_JOB_TYPES = %w{acl cicero compile erlang mpi input output ssa babel upc x10}</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line18">18</a> #CEWSSA_REQUIRED = %w{ output }</pre></td>
+            <td><pre><a name="line17">17</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line19">19</a> #MR_RUN_JOB_REQUIRED = %w{ }</pre></td>
+            <td><pre><a name="line18">18</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line20">20</a> #MR_REQUIRED = %w{ output }</pre></td>
+            <td><pre><a name="line19">19</a> # The string to display for disallowed job types.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line20">20</a> JOB_TYPE_NOT_ALLOWED = &quot;The job type you specified is not supported.&quot;</pre></td>
           </tr>
         
           
@@ -183,91 +183,91 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line22">22</a> # A list of Neptune jobs that do not require nodes to be spawned</pre></td>
+            <td><pre><a name="line22">22</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line23">23</a> # up for computation</pre></td>
+            <td><pre><a name="line23">23</a> # A list of Neptune jobs that do not require nodes to be spawned</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line24">24</a> # up for computation</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line24">24</a> NO_NODES_NEEDED = [&quot;acl&quot;, &quot;input&quot;, &quot;output&quot;, &quot;compile&quot;]</pre></td>
+            <td><pre><a name="line25">25</a> NO_NODES_NEEDED = [&quot;acl&quot;, &quot;input&quot;, &quot;output&quot;, &quot;compile&quot;]</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line25">25</a> </pre></td>
+            <td><pre><a name="line26">26</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line26">26</a> # A list of Neptune jobs that do not require the output to be</pre></td>
+            <td><pre><a name="line27">27</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line27">27</a> # specified beforehand</pre></td>
+            <td><pre><a name="line28">28</a> # A list of Neptune jobs that do not require the output to be</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line29">29</a> # specified beforehand</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line28">28</a> NO_OUTPUT_NEEDED = [&quot;input&quot;]</pre></td>
+            <td><pre><a name="line30">30</a> NO_OUTPUT_NEEDED = [&quot;input&quot;]</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line29">29</a> </pre></td>
+            <td><pre><a name="line31">31</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line30">30</a> # A list of storage mechanisms that we can use to store and retrieve</pre></td>
+            <td><pre><a name="line32">32</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line31">31</a> # data to for Neptune jobs.</pre></td>
+            <td><pre><a name="line33">33</a> # A list of storage mechanisms that we can use to store and retrieve</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line34">34</a> # data to for Neptune jobs.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line32">32</a> ALLOWED_STORAGE_TYPES = [&quot;appdb&quot;, &quot;gstorage&quot;, &quot;s3&quot;, &quot;walrus&quot;]</pre></td>
+            <td><pre><a name="line35">35</a> ALLOWED_STORAGE_TYPES = [&quot;appdb&quot;, &quot;gstorage&quot;, &quot;s3&quot;, &quot;walrus&quot;]</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line33">33</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line34">34</a> # A list of jobs that require some kind of work to be done before</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line35">35</a> # the actual computation can be performed.</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line36">36</a> NEED_PREPROCESSING = [&quot;compile&quot;, &quot;erlang&quot;, &quot;mpi&quot;]</pre></td>
+            <td><pre><a name="line36">36</a> </pre></td>
           </tr>
         
           
@@ -279,85 +279,85 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line38">38</a> # A set of methods and constants that we've monkey-patched to enable Neptune</pre></td>
+            <td><pre><a name="line38">38</a> # A list of jobs that require some kind of work to be done before</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line39">39</a> # support. In the future, it is likely that the only exposed / monkey-patched</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line40">40</a> # method should be job, while the others could probably be folded into either</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line41">41</a> # a Neptune-specific class or into CommonFunctions.</pre></td>
+            <td><pre><a name="line39">39</a> # the actual computation can be performed.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line42">42</a> class Object</pre></td>
+            <td><pre><a name="line40">40</a> NEED_PREPROCESSING = [&quot;babel&quot;, &quot;compile&quot;, &quot;erlang&quot;, &quot;mpi&quot;, &quot;ssa&quot;]</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line43">43</a> end</pre></td>
+            <td><pre><a name="line41">41</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line44">44</a> </pre></td>
+            <td><pre><a name="line42">42</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line45">45</a> # Certain types of jobs need steps to be taken before they</pre></td>
+            <td><pre><a name="line43">43</a> # Since we're monkeypatching Object to add neptune() and babel(), a short</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line46">46</a> # can be started (e.g., copying input data or code over).</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line47">47</a> # This method dispatches the right method to use based</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line48">48</a> # on the type of the job that the user has asked to run.</pre></td>
+            <td><pre><a name="line44">44</a> # blurb is necessary here to make rdoc happy.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line49">49</a> def do_preprocessing(job_data)</pre></td>
+            <td><pre><a name="line45">45</a> class Object</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line46">46</a> end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line47">47</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line48">48</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line49">49</a> # Make neptune() public so that babel() can call it</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line50">50</a>   job_type = job_data[&quot;@type&quot;]</pre></td>
+            <td><pre><a name="line50">50</a> public</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line51">51</a>   return unless NEED_PREPROCESSING.include?(job_type)</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line51">51</a> </pre></td>
           </tr>
         
           
@@ -368,146 +368,146 @@
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line53">53</a>   preprocess = &quot;preprocess_#{job_type}&quot;.to_sym</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line54">54</a>   send(preprocess, job_data)</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line53">53</a> # This method is the heart of Neptune - here, we take blocks of code that the</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line55">55</a> end</pre></td>
+            <td><pre><a name="line54">54</a> # user has written and convert them into HPC job requests. At a high level, </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line56">56</a> </pre></td>
+            <td><pre><a name="line55">55</a> # the user can request to run a job, retrieve a job's output, or modify the </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line57">57</a> # This preprocessing method copies over the user's code to the</pre></td>
+            <td><pre><a name="line56">56</a> # access policy (ACL) for the output of a job. By default, job data is private,</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line58">58</a> # Shadow node so that it can be compiled there. A future version</pre></td>
+            <td><pre><a name="line57">57</a> # but a Neptune job can be used to set it to public later (and vice-versa).</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line58">58</a> def neptune(params)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line59">59</a> # of this method may also copy over libraries as well.</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line60">60</a> def preprocess_compile(job_data)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line61">61</a>   code = File.expand_path(job_data[&quot;@code&quot;])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line62">62</a>   unless File.exists?(code)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line63">63</a>     abort(&quot;The source file #{code} does not exist.&quot;)</pre></td>
+            <td><pre><a name="line59">59</a>   # Kernel.puts &quot;Received a request to run a job.&quot;</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line64">64</a>   end</pre></td>
+            <td><pre><a name="line60">60</a>   # Kernel.puts params[:type]</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line65">65</a> </pre></td>
+            <td><pre><a name="line61">61</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line66">66</a>   suffix = code.split('/')[-1]</pre></td>
+            <td><pre><a name="line62">62</a>   job_data = NeptuneHelper.get_job_data(params)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line67">67</a>   dest = &quot;/tmp/#{suffix}&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line68">68</a>   keyname = job_data[&quot;@keyname&quot;]</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line69">69</a>   shadow_ip = CommonFunctions.get_from_yaml(keyname, :shadow)</pre></td>
+            <td><pre><a name="line63">63</a>   NeptuneHelper.validate_storage_params(job_data)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line70">70</a> </pre></td>
+            <td><pre><a name="line64">64</a>   # Kernel.puts &quot;job data = #{job_data.inspect}&quot;</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line71">71</a>   ssh_args = &quot;-i ~/.appscale/#{keyname}.key -o StrictHostkeyChecking=no root@#{shadow_ip}&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line72">72</a>   remove_dir = &quot;ssh #{ssh_args} 'rm -rf #{dest}' 2&gt;&amp;1&quot;</pre></td>
+            <td><pre><a name="line65">65</a>   keyname = job_data[&quot;@keyname&quot;]</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line73">73</a>   #puts remove_dir</pre></td>
+            <td><pre><a name="line66">66</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line74">74</a>   `#{remove_dir}`</pre></td>
+            <td><pre><a name="line67">67</a>   shadow_ip = CommonFunctions.get_from_yaml(keyname, :shadow)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line68">68</a>   secret = CommonFunctions.get_secret_key(keyname)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line69">69</a>   ssh_key = File.expand_path(&quot;~/.appscale/#{keyname}.key&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line70">70</a>   ssh_args = &quot;-i ~/.appscale/#{keyname}.key -o StrictHostkeyChecking=no &quot;</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line75">75</a> </pre></td>
+            <td><pre><a name="line71">71</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line76">76</a>   CommonFunctions.scp_to_shadow(code, dest, keyname, is_dir=true)</pre></td>
+            <td><pre><a name="line72">72</a>   controller = AppControllerClient.new(shadow_ip, secret)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line73">73</a>   NeptuneHelper.do_preprocessing(job_data, controller) </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line74">74</a>   return NeptuneHelper.run_job(job_data, ssh_args, shadow_ip, secret)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line75">75</a> end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line76">76</a> </pre></td>
           </tr>
         
           
@@ -518,265 +518,265 @@
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line78">78</a>   job_data[&quot;@code&quot;] = dest</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line78">78</a> # NeptuneHelper provides methods that are used by neptune() and babel() to </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line79">79</a> end</pre></td>
+            <td><pre><a name="line79">79</a> # validate parameters and run the user's job.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line80">80</a> module NeptuneHelper</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line80">80</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line81">81</a> def preprocess_erlang(job_data)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line82">82</a>   source_code = File.expand_path(job_data[&quot;@code&quot;])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line83">83</a>   unless File.exists?(source_code)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line84">84</a>     file_not_found = &quot;The specified code, #{job_data['@code']},&quot; +</pre></td>
+            <td><pre><a name="line81">81</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line85">85</a>       &quot; didn't exist. Please specify one that exists and try again&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line86">86</a>     abort(file_not_found)</pre></td>
+            <td><pre><a name="line82">82</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line87">87</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line88">88</a>   dest_code = &quot;/tmp/&quot;</pre></td>
+            <td><pre><a name="line83">83</a>   # Certain types of jobs need steps to be taken before they</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line89">89</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line90">90</a>   keyname = job_data[&quot;@keyname&quot;]</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line91">91</a>   CommonFunctions.scp_to_shadow(source_code, dest_code, keyname)</pre></td>
+            <td><pre><a name="line84">84</a>   # can be started (e.g., copying input data or code over).</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line92">92</a> end</pre></td>
+            <td><pre><a name="line85">85</a>   # This method dispatches the right method to use based</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line93">93</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line94">94</a> # This preprocessing method copies over the user's MPI</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line95">95</a> # code to the master node in AppScale - this node will</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line96">96</a> # then copy it to whoever will run the MPI job.</pre></td>
+            <td><pre><a name="line86">86</a>   # on the type of the job that the user has asked to run.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line97">97</a> def preprocess_mpi(job_data)</pre></td>
+            <td><pre><a name="line87">87</a>   def self.do_preprocessing(job_data, controller)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line98">98</a>   if job_data[&quot;@procs_to_use&quot;]</pre></td>
+            <td><pre><a name="line88">88</a>     job_type = job_data[&quot;@type&quot;]</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line99">99</a>     p = job_data[&quot;@procs_to_use&quot;]</pre></td>
+            <td><pre><a name="line89">89</a>     if !NEED_PREPROCESSING.include?(job_type)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line100">100</a>     n = job_data[&quot;@nodes_to_use&quot;]</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line101">101</a>     if p &lt; n</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line102">102</a>       not_enough_procs = &quot;When specifying both :procs_to_use and :nodes_to_use&quot; +</pre></td>
+            <td><pre><a name="line90">90</a>       return</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line103">103</a>         &quot;, :procs_to_use must be at least as large as :nodes_to_use. Please &quot; +</pre></td>
+            <td><pre><a name="line91">91</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line104">104</a>         &quot;change this and try again. You specified :procs_to_use = #{p} and&quot; +</pre></td>
+            <td><pre><a name="line92">92</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line105">105</a>         &quot;:nodes_to_use = #{n}.&quot;</pre></td>
+            <td><pre><a name="line93">93</a>     # Don't worry about adding on the self. prefix - send will resolve</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line94">94</a>     # it the right way</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line106">106</a>       abort(not_enough_procs)</pre></td>
+            <td><pre><a name="line95">95</a>     preprocess = &quot;preprocess_#{job_type}&quot;.to_sym</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line96">96</a>     send(preprocess, job_data, controller)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
+            <td><pre><a name="line97">97</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line98">98</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line99">99</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line100">100</a>   # This preprocessing method copies over the user's code to the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line101">101</a>   # Shadow node so that it can be compiled there. A future version</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line102">102</a>   # of this method may also copy over libraries as well.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line103">103</a>   def self.preprocess_compile(job_data, controller)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line104">104</a>     code = File.expand_path(job_data[&quot;@code&quot;])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line105">105</a>     if !File.exists?(code)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line106">106</a>       raise BadConfigurationException.new(&quot;The source file #{code} does not exist.&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
             <td><pre><a name="line107">107</a>     end</pre></td>
           </tr>
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line108">108</a>   end</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line108">108</a> </pre></td>
           </tr>
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line109">109</a> </pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line109">109</a>     suffix = code.split('/')[-1]</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line110">110</a>   source_code = File.expand_path(job_data[&quot;@code&quot;])</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line110">110</a>     dest = &quot;/tmp/#{suffix}&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line111">111</a>   unless File.exists?(source_code)</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line111">111</a>     keyname = job_data[&quot;@keyname&quot;]</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line112">112</a>     file_not_found = &quot;The specified code, #{source_code},&quot; +</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line112">112</a>     shadow_ip = CommonFunctions.get_from_yaml(keyname, :shadow)</pre></td>
           </tr>
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line113">113</a>       &quot; didn't exist. Please specify one that exists and try again&quot;</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line113">113</a> </pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line114">114</a>     abort(file_not_found)</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line114">114</a>     ssh_args = &quot;-i ~/.appscale/#{keyname}.key -o StrictHostkeyChecking=no root@#{shadow_ip}&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line115">115</a>   end</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line115">115</a>     remove_dir = &quot;ssh #{ssh_args} 'rm -rf #{dest}' 2&gt;&amp;1&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line116">116</a> </pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line116">116</a>     # Kernel.puts remove_dir</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line117">117</a>   unless File.file?(source_code)</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line117">117</a>     CommonFunctions.shell(remove_dir)</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line118">118</a>     should_be_file = &quot;The specified code, #{source_code}, was not a file - &quot; +</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line118">118</a>     CommonFunctions.scp_to_shadow(code, dest, keyname, is_dir=true)</pre></td>
           </tr>
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line119">119</a>       &quot; it was a directory or symbolic link. Please specify a file and try again.&quot;</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line119">119</a> </pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line120">120</a>     abort(should_be_file)</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line120">120</a>     job_data[&quot;@code&quot;] = dest</pre></td>
           </tr>
         
           
           
-          <tr class="inferred">
+          <tr class="uncovered">
             <td><pre><a name="line121">121</a>   end</pre></td>
           </tr>
         
@@ -788,242 +788,242 @@
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line123">123</a>   dest_code = &quot;/tmp/thempicode&quot;</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line123">123</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line124">124</a> </pre></td>
+            <td><pre><a name="line124">124</a>   # This preprocessing method makes sure that the user's Erlang code exists</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line125">125</a>   keyname = job_data[&quot;@keyname&quot;]</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line126">126</a>   puts &quot;Copying over code...&quot;</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line125">125</a>   # and copies it over to the AppScale Shadow node.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line127">127</a>   CommonFunctions.scp_to_shadow(source_code, dest_code, keyname)</pre></td>
+            <td><pre><a name="line126">126</a>   def self.preprocess_erlang(job_data, controller)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line128">128</a>   puts &quot;Done copying code!&quot;</pre></td>
+            <td><pre><a name="line127">127</a>     self.require_param(&quot;@code&quot;, job_data)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line129">129</a> end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line130">130</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line131">131</a> # TODO: actually use me!</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line132">132</a> #def validate_args(list)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line133">133</a> #  list.each do |item|</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line134">134</a> #    val = instance_variable_get(&quot;@#{item}&quot;.to_sym)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line135">135</a> #    abort(&quot;FATAL: #{item} was not defined&quot;) if val.nil?</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line136">136</a> #  end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line137">137</a> #end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line138">138</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line139">139</a> # This method is the heart of Neptune - here, we take</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line140">140</a> # blocks of code that the user has written and convert them</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line141">141</a> # into HPC job requests. At a high level, the user can</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line142">142</a> # request to run a job, retrieve a job's output, or</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line143">143</a> # modify the access policy (ACL) for the output of a</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line144">144</a> # job. By default, job data is private, but a Neptune</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line145">145</a> # job can be used to set it to public later (and</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line146">146</a> # vice-versa).</pre></td>
+            <td><pre><a name="line128">128</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line147">147</a> def neptune(params)</pre></td>
+            <td><pre><a name="line129">129</a>     source_code = File.expand_path(job_data[&quot;@code&quot;])</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line148">148</a>   puts &quot;Received a request to run a job.&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line149">149</a>   puts params[:type]</pre></td>
+            <td><pre><a name="line130">130</a>     if !File.exists?(source_code)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line150">150</a> </pre></td>
+            <td><pre><a name="line131">131</a>       raise BadConfigurationException.new(&quot;The specified code, #{job_data['@code']},&quot; +</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line151">151</a>   keyname = params[:keyname] || &quot;appscale&quot;</pre></td>
+            <td><pre><a name="line132">132</a>         &quot; didn't exist. Please specify one that exists and try again&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line152">152</a> </pre></td>
+            <td><pre><a name="line133">133</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line153">153</a>   shadow_ip = CommonFunctions.get_from_yaml(keyname, :shadow)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line154">154</a>   secret = CommonFunctions.get_secret_key(keyname)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line155">155</a>   controller = AppControllerClient.new(shadow_ip, secret)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line156">156</a>   ssh_key = File.expand_path(&quot;~/.appscale/#{keyname}.key&quot;)</pre></td>
+            <td><pre><a name="line134">134</a>     dest_code = &quot;/tmp/&quot;</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line157">157</a> </pre></td>
+            <td><pre><a name="line135">135</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line158">158</a>   job_data = {}</pre></td>
+            <td><pre><a name="line136">136</a>     keyname = job_data[&quot;@keyname&quot;]</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line159">159</a>   params.each { |k, v|</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line160">160</a>     key = &quot;@#{k}&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line161">161</a>     job_data[key] = v</pre></td>
+            <td><pre><a name="line137">137</a>     CommonFunctions.scp_to_shadow(source_code, dest_code, keyname)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line162">162</a>   }</pre></td>
+            <td><pre><a name="line138">138</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line139">139</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line140">140</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line141">141</a>   # This preprocessing method verifies that the user specified the number of nodes</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line142">142</a>   # to use. If they also specified the number of processes to use, we also verify</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line143">143</a>   # that this value is at least as many as the number of nodes (that is, nodes</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line144">144</a>   # can't be underprovisioned in MPI).</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line145">145</a>   def self.preprocess_mpi(job_data, controller)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line146">146</a>     self.require_param(&quot;@nodes_to_use&quot;, job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line147">147</a>     self.require_param(&quot;@procs_to_use&quot;, job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line148">148</a>     self.require_param(&quot;@output&quot;, job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line149">149</a>     self.require_param(&quot;@error&quot;, job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line150">150</a>     self.require_param(&quot;@metadata&quot;, job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line151">151</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line152">152</a>     if job_data[&quot;@procs_to_use&quot;]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line153">153</a>       p = job_data[&quot;@procs_to_use&quot;]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line154">154</a>       n = job_data[&quot;@nodes_to_use&quot;]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line155">155</a>       if p &lt; n</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line156">156</a>         raise BadConfigurationException.new(&quot;:procs_to_use must be at least as &quot; +</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line157">157</a>           &quot;large as :nodes_to_use.&quot;) </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line158">158</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line159">159</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line160">160</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line161">161</a>     if job_data[&quot;@argv&quot;]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line162">162</a>       argv = job_data[&quot;@argv&quot;]</pre></td>
           </tr>
         
           
@@ -1035,49 +1035,49 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line164">164</a>   job_data[&quot;@job&quot;] = nil</pre></td>
+            <td><pre><a name="line164">164</a>       if argv.class == String</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line165">165</a>   job_data[&quot;@keyname&quot;] = keyname || &quot;appscale&quot;</pre></td>
+            <td><pre><a name="line165">165</a>         job_data[&quot;@argv&quot;] = argv</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line166">166</a>   type = job_data[&quot;@type&quot;]</pre></td>
+            <td><pre><a name="line166">166</a>       elsif argv.class == Array</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line167">167</a>         job_data[&quot;@argv&quot;] = argv.join(' ')</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line167">167</a> </pre></td>
+            <td><pre><a name="line168">168</a>       else</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line168">168</a>   if type == &quot;upc&quot; or type == &quot;x10&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line169">169</a>     job_data[&quot;@type&quot;] = &quot;mpi&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line170">170</a>     type = &quot;mpi&quot;</pre></td>
+            <td><pre><a name="line169">169</a>         raise BadConfigurationException.new(&quot;:argv must be either a String or Array&quot;) </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line171">171</a>   end</pre></td>
+            <td><pre><a name="line170">170</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line171">171</a>     end</pre></td>
           </tr>
         
           
@@ -1089,19 +1089,19 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line173">173</a>   if job_data[&quot;@nodes_to_use&quot;].class == Hash</pre></td>
+            <td><pre><a name="line173">173</a>     return job_data</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line174">174</a>     job_data[&quot;@nodes_to_use&quot;] = job_data[&quot;@nodes_to_use&quot;].to_a.flatten</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line174">174</a>   end</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line175">175</a>   end</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line175">175</a> </pre></td>
           </tr>
         
           
@@ -1112,56 +1112,56 @@
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line177">177</a>   if !NO_OUTPUT_NEEDED.include?(type)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line178">178</a>     if (job_data[&quot;@output&quot;].nil? or job_data[&quot;@output&quot;] == &quot;&quot;)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line179">179</a>       abort(&quot;Job output must be specified&quot;)</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line177">177</a>   # This preprocessing method verifies that the user specified the number of</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line180">180</a>     end</pre></td>
+            <td><pre><a name="line178">178</a>   # trajectories to run, via either :trajectories or :simulations. Both should</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line181">181</a> </pre></td>
+            <td><pre><a name="line179">179</a>   # not be specified - only one or the other, and regardless of which they</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line180">180</a>   # specify, convert it to be :trajectories.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line182">182</a>     if job_data[&quot;@output&quot;][0].chr != &quot;/&quot;</pre></td>
+            <td><pre><a name="line181">181</a>   def self.preprocess_ssa(job_data, controller)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line183">183</a>       abort(&quot;Job output must begin with a slash ('/')&quot;)</pre></td>
+            <td><pre><a name="line182">182</a>     if job_data[&quot;@simulations&quot;] and job_data[&quot;@trajectories&quot;]</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line184">184</a>     end</pre></td>
+            <td><pre><a name="line183">183</a>       raise BadConfigurationException.new(&quot;:simulations and :trajectories &quot; +</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line184">184</a>         &quot;not both be specified.&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line185">185</a>   end</pre></td>
+            <td><pre><a name="line185">185</a>     end</pre></td>
           </tr>
         
           
@@ -1173,247 +1173,247 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line187">187</a>   if job_data[&quot;@storage&quot;]</pre></td>
+            <td><pre><a name="line187">187</a>     if job_data[&quot;@simulations&quot;]</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line188">188</a>     storage = job_data[&quot;@storage&quot;]</pre></td>
+            <td><pre><a name="line188">188</a>       job_data[&quot;@trajectories&quot;] = job_data[&quot;@simulations&quot;]</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line189">189</a>     unless ALLOWED_STORAGE_TYPES.include?(storage)</pre></td>
+            <td><pre><a name="line189">189</a>       job_data.delete(&quot;@simulations&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line190">190</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line191">191</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line190">190</a>       msg = &quot;Supported storage types are #{ALLOWED_STORAGE_TYPES.join(', ')}&quot; +</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line191">191</a>         &quot; - we do not support #{storage}.&quot;</pre></td>
+            <td><pre><a name="line192">192</a>     self.require_param(&quot;@trajectories&quot;, job_data)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line192">192</a>       abort(msg)</pre></td>
+            <td><pre><a name="line193">193</a>     return job_data</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line193">193</a>     end</pre></td>
+            <td><pre><a name="line194">194</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line194">194</a> </pre></td>
+            <td><pre><a name="line195">195</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line195">195</a>     # Our implementation for storing / retrieving via Google Storage</pre></td>
+            <td><pre><a name="line196">196</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line196">196</a>     # and Walrus uses</pre></td>
+            <td><pre><a name="line197">197</a>   # This helper method aborts if the given parameter is not present in the</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line197">197</a>     # the same library as we do for S3 - so just tell it that it's S3</pre></td>
+            <td><pre><a name="line198">198</a>   # job data provided.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line198">198</a>     if storage == &quot;gstorage&quot; or storage == &quot;walrus&quot;</pre></td>
+            <td><pre><a name="line199">199</a>   def self.require_param(param, job_data)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line199">199</a>       storage = &quot;s3&quot;</pre></td>
+            <td><pre><a name="line200">200</a>     if !job_data[param]</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line200">200</a>       job_data[&quot;@storage&quot;] = &quot;s3&quot;</pre></td>
+            <td><pre><a name="line201">201</a>       raise BadConfigurationException.new(&quot;#{param} must be specified&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line201">201</a>     end</pre></td>
+            <td><pre><a name="line202">202</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line202">202</a> </pre></td>
+            <td><pre><a name="line203">203</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line204">204</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line205">205</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line206">206</a>   # This helper method asks the AppController if the named file exists,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line207">207</a>   # and if it does not, throws an exception.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line203">203</a>     if storage == &quot;s3&quot;</pre></td>
+            <td><pre><a name="line208">208</a>   def self.require_file_to_exist(file, job_data, controller)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line204">204</a>       [&quot;EC2_ACCESS_KEY&quot;, &quot;EC2_SECRET_KEY&quot;, &quot;S3_URL&quot;].each { |item|</pre></td>
+            <td><pre><a name="line209">209</a>     if controller.does_file_exist?(file, job_data)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line205">205</a>         unless job_data[&quot;@#{item}&quot;]</pre></td>
+            <td><pre><a name="line210">210</a>       return</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line211">211</a>     else</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line206">206</a>           if ENV[item]</pre></td>
+            <td><pre><a name="line212">212</a>       raise FileNotFoundException</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line213">213</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line214">214</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line215">215</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line216">216</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line217">217</a>   # This helper method performs the opposite function of require_file_to_exist,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line218">218</a>   # raising an exception if the named file does exist.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line207">207</a>             puts &quot;Using #{item} from environment&quot;</pre></td>
+            <td><pre><a name="line219">219</a>   def self.require_file_to_not_exist(file, job_data, controller)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line208">208</a>             job_data[&quot;@#{item}&quot;] = ENV[item]</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line209">209</a>           else</pre></td>
+            <td><pre><a name="line220">220</a>     begin</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line210">210</a>             msg = &quot;When storing data to S3, #{item} must be specified or be in &quot; + </pre></td>
+            <td><pre><a name="line221">221</a>       self.require_file_to_exist(file, job_data, controller)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line222">222</a>       # no exception thrown previously means that the output file exists</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line223">223</a>       raise BadConfigurationException.new('Output specified already exists')</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line211">211</a>               &quot;your environment. Please do so and try again.&quot;</pre></td>
+            <td><pre><a name="line224">224</a>     rescue FileNotFoundException</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line212">212</a>             abort(msg)</pre></td>
+            <td><pre><a name="line225">225</a>       return</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line213">213</a>           end</pre></td>
+            <td><pre><a name="line226">226</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line214">214</a>         end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line215">215</a>       }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line216">216</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line217">217</a>   else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line218">218</a>     job_data[&quot;@storage&quot;] = &quot;appdb&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line219">219</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line220">220</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line221">221</a>   #if job_data[&quot;@can_run_on&quot;].class == Range</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line222">222</a>   #  job_data[&quot;@can_run_on&quot;] = job_data[&quot;@can_run_on&quot;].to_a</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line223">223</a>   #elsif job_data[&quot;@can_run_on&quot;].class == Fixnum</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line224">224</a>   #  job_data[&quot;@can_run_on&quot;] = [job_data[&quot;@can_run_on&quot;]]</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line225">225</a>   #end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line226">226</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line227">227</a>   puts &quot;job data = #{job_data.inspect}&quot;</pre></td>
+            <td><pre><a name="line227">227</a>   end</pre></td>
           </tr>
         
           
@@ -1424,314 +1424,314 @@
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line229">229</a>   do_preprocessing(job_data) </pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line229">229</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line230">230</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line231">231</a>   ssh_args = &quot;-i ~/.appscale/#{keyname}.key -o StrictHostkeyChecking=no &quot;</pre></td>
+            <td><pre><a name="line230">230</a>   # This preprocessing method verifies that the user specified code that</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line232">232</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line233">233</a>   if type == &quot;input&quot;</pre></td>
+            <td><pre><a name="line231">231</a>   # should be run, where the output should be placed, and an engine to run over.</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line234">234</a>     # copy file to remote</pre></td>
+            <td><pre><a name="line232">232</a>   # It also verifies that all files to be used are actually reachable.</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line235">235</a>     # set location</pre></td>
+            <td><pre><a name="line233">233</a>   # Supported engines can be found by contacting an AppScale node.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line236">236</a>     local_file = File.expand_path(job_data[&quot;@local&quot;])</pre></td>
+            <td><pre><a name="line234">234</a>   def self.preprocess_babel(job_data, controller)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line237">237</a>     if !File.exists?(local_file)</pre></td>
+            <td><pre><a name="line235">235</a>     self.require_param(&quot;@code&quot;, job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line236">236</a>     self.require_param(&quot;@engine&quot;, job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line237">237</a>     self.require_param(&quot;@output&quot;, job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line238">238</a>     self.require_param(&quot;@error&quot;, job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line239">239</a>     self.require_param(&quot;@metadata&quot;, job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line240">240</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line241">241</a>     # For most code types, the file's name given is the thing to exec.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line242">242</a>     # For Java, the actual file to search for is whatever the user gives</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line243">243</a>     # us, with a .class extension.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line244">244</a>     code_file_name = job_data[&quot;@code&quot;]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line245">245</a>     if !job_data[&quot;@executable&quot;].nil? and job_data[&quot;@executable&quot;] == &quot;java&quot;</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line238">238</a>       msg = &quot;the file you specified to copy, #{local_file}, doesn't exist.&quot; + </pre></td>
+            <td><pre><a name="line246">246</a>       code_file_name += &quot;.class&quot;</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line239">239</a>         &quot; Please specify a file that exists and try again.&quot;</pre></td>
+            <td><pre><a name="line247">247</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line248">248</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line249">249</a>     self.require_file_to_exist(code_file_name, job_data, controller)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line250">250</a>     self.require_file_to_not_exist(job_data[&quot;@output&quot;], job_data, controller)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line251">251</a>     self.require_file_to_not_exist(job_data[&quot;@error&quot;], job_data, controller)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line252">252</a>     self.require_file_to_not_exist(job_data[&quot;@metadata&quot;], job_data, controller)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line253">253</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line254">254</a>     if job_data[&quot;@argv&quot;]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line255">255</a>       argv = job_data[&quot;@argv&quot;]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line256">256</a>       if argv.class != Array</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line240">240</a>       abort(msg)</pre></td>
+            <td><pre><a name="line257">257</a>         raise BadConfigurationException.new(&quot;argv must be an array&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line241">241</a>     end</pre></td>
+            <td><pre><a name="line258">258</a>       end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line242">242</a> </pre></td>
+            <td><pre><a name="line259">259</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line243">243</a>     remote = &quot;/tmp/neptune-input-#{rand(100000)}&quot;</pre></td>
+            <td><pre><a name="line260">260</a>       argv.each { |arg|</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line244">244</a>     scp_cmd = &quot;scp #{ssh_args} #{local_file} root@#{shadow_ip}:#{remote}&quot;</pre></td>
+            <td><pre><a name="line261">261</a>         if arg =~ /\/.*\/.*/</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line245">245</a>     puts scp_cmd</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line246">246</a>     `#{scp_cmd}`</pre></td>
+            <td><pre><a name="line262">262</a>           self.require_file_to_exist(arg, job_data, controller)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line247">247</a> </pre></td>
+            <td><pre><a name="line263">263</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line264">264</a>       }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line265">265</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line266">266</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line248">248</a>     job_data[&quot;@local&quot;] = remote</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line249">249</a>     puts &quot;job data = #{job_data.inspect}&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line250">250</a>     return controller.put_input(job_data)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line251">251</a>   elsif type == &quot;output&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line252">252</a>     return controller.get_output(job_data)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line253">253</a>   elsif type == &quot;get-acl&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line254">254</a>     job_data[&quot;@type&quot;] = &quot;acl&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line255">255</a>     return controller.get_acl(job_data)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line256">256</a>   elsif type == &quot;set-acl&quot;</pre></td>
+            <td><pre><a name="line267">267</a>     if job_data[&quot;@appcfg_cookies&quot;]</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line257">257</a>     job_data[&quot;@type&quot;] = &quot;acl&quot;</pre></td>
+            <td><pre><a name="line268">268</a>       self.require_file_to_exist(job_data[&quot;@appcfg_cookies&quot;], job_data, controller)</pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line258">258</a>     return controller.set_acl(job_data)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line259">259</a>   elsif type == &quot;compile&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line260">260</a>     compiled_location = controller.compile_code(job_data)</pre></td>
+            <td><pre><a name="line269">269</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line261">261</a> </pre></td>
+            <td><pre><a name="line270">270</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line262">262</a>     copy_to = job_data[&quot;@copy_to&quot;]</pre></td>
+            <td><pre><a name="line271">271</a>     user_specified_engine = job_data[&quot;@engine&quot;]</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line263">263</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line264">264</a>     loop {</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line265">265</a>       ssh_command = &quot;ssh #{ssh_args} root@#{shadow_ip} 'ls #{compiled_location}' 2&gt;&amp;1&quot;</pre></td>
+            <td><pre><a name="line272">272</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line266">266</a>       #puts ssh_command</pre></td>
+            <td><pre><a name="line273">273</a>     # validate the engine here</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line267">267</a>       result = `#{ssh_command}`</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line268">268</a>       #puts &quot;result was [#{result}]&quot;</pre></td>
+            <td><pre><a name="line274">274</a>     engines = controller.get_supported_babel_engines(job_data)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line269">269</a>       if result =~ /No such file or directory/</pre></td>
+            <td><pre><a name="line275">275</a>     if !engines.include?(user_specified_engine)</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line270">270</a>         puts &quot;Still waiting for code to be compiled...&quot;</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line276">276</a>       raise BadConfigurationException.new(&quot;The engine you specified, &quot; +</pre></td>
           </tr>
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line271">271</a>       else</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line277">277</a>         &quot;#{user_specified_engine}, is not a supported engine. Supported engines&quot; +</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line272">272</a>         puts &quot;compilation complete! Copying compiled code to #{copy_to}&quot;</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line278">278</a>         &quot; are: #{engines.join(', ')}&quot;)</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line273">273</a>         break</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line279">279</a>     end</pre></td>
           </tr>
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line274">274</a>       end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line275">275</a>       sleep(5)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line276">276</a>     }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line277">277</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line278">278</a>     rm_local = &quot;rm -rf #{copy_to}&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line279">279</a>     #puts rm_local</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line280">280</a>     `#{rm_local}`</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line280">280</a>   end</pre></td>
           </tr>
         
           
@@ -1742,98 +1742,98 @@
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line282">282</a>     scp_command = &quot;scp -r #{ssh_args} root@#{shadow_ip}:#{compiled_location} #{copy_to} 2&gt;&amp;1&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line283">283</a>     puts scp_command</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line284">284</a>     `#{scp_command}`</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line282">282</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line285">285</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line286">286</a>     out = File.open(&quot;#{copy_to}/compile_out&quot;) { |f| f.read.chomp! }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line287">287</a>     err = File.open(&quot;#{copy_to}/compile_err&quot;) { |f| f.read.chomp! }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line288">288</a>     return {:out =&gt; out, :err =&gt; err }</pre></td>
+            <td><pre><a name="line283">283</a>   # This method takes in a hash in the format that users write neptune/babel</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line289">289</a>   else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line290">290</a>     result = controller.start_neptune_job(job_data)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line291">291</a>     if result =~ /job is now running\Z/</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line292">292</a>       return {:result =&gt; :success, :msg =&gt; result}</pre></td>
+            <td><pre><a name="line284">284</a>   # jobs in {:a =&gt; &quot;b&quot;} and converts it to the legacy format that Neptune</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line293">293</a>     else</pre></td>
+            <td><pre><a name="line285">285</a>   # used to use {&quot;@a&quot; =&gt; &quot;b&quot;}, and is understood by the AppController.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line294">294</a>       return {:result =&gt; :failure, :msg =&gt; result}</pre></td>
+            <td><pre><a name="line286">286</a>   def self.get_job_data(params)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line287">287</a>     job_data = {}</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line288">288</a>     params.each { |k, v|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line289">289</a>       key = &quot;@#{k}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line290">290</a>       job_data[key] = v</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line295">295</a>     end</pre></td>
+            <td><pre><a name="line291">291</a>     }</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line296">296</a>   end</pre></td>
+            <td><pre><a name="line292">292</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line293">293</a>     job_data.delete(&quot;@job&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line294">294</a>     job_data[&quot;@keyname&quot;] = params[:keyname] || &quot;appscale&quot;</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line297">297</a> end</pre></td>
+            <td><pre><a name="line295">295</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line296">296</a>     job_data[&quot;@type&quot;] = job_data[&quot;@type&quot;].to_s</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line297">297</a>     type = job_data[&quot;@type&quot;]</pre></td>
           </tr>
         
           
@@ -1842,10 +1842,1474 @@
             <td><pre><a name="line298">298</a> </pre></td>
           </tr>
         
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line299">299</a>     if !ALLOWED_JOB_TYPES.include?(type)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line300">300</a>       raise BadConfigurationException.new(JOB_TYPE_NOT_ALLOWED)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line301">301</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line302">302</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line303">303</a>     if type == &quot;upc&quot; or type == &quot;x10&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line304">304</a>       job_data[&quot;@type&quot;] = &quot;mpi&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line305">305</a>       type = &quot;mpi&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line306">306</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line307">307</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line308">308</a>     # kdt jobs also run as mpi jobs, but need to pass along an executable</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line309">309</a>     # parameter to let mpiexec know to use python to exec it</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line310">310</a>     if type == &quot;kdt&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line311">311</a>       job_data[&quot;@type&quot;] = &quot;mpi&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line312">312</a>       type = &quot;mpi&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line313">313</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line314">314</a>       job_data[&quot;@executable&quot;] = &quot;python&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line315">315</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line316">316</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line317">317</a>     if job_data[&quot;@nodes_to_use&quot;].class == Hash</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line318">318</a>       job_data[&quot;@nodes_to_use&quot;] = job_data[&quot;@nodes_to_use&quot;].to_a.flatten</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line319">319</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line320">320</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line321">321</a>     if !NO_OUTPUT_NEEDED.include?(type)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line322">322</a>       if (job_data[&quot;@output&quot;].nil? or job_data[&quot;@output&quot;].empty?)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line323">323</a>         raise BadConfigurationException.new(&quot;Job output must be specified&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line324">324</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line325">325</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line326">326</a>       if job_data[&quot;@output&quot;][0].chr != &quot;/&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line327">327</a>         raise BadConfigurationException.new(&quot;Job output must begin with a slash ('/')&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line328">328</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line329">329</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line330">330</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line331">331</a>     return job_data</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line332">332</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line333">333</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line334">334</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line335">335</a>   # This method looks through the given job data and makes sure that the correct</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line336">336</a>   # parameters are present for the storage mechanism specified. It throws an</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line337">337</a>   # exception if there are errors in the job data or if a needed parameter is</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line338">338</a>   # missing.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line339">339</a>   def self.validate_storage_params(job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line340">340</a>     job_data[&quot;@storage&quot;] ||= &quot;appdb&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line341">341</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line342">342</a>     storage = job_data[&quot;@storage&quot;]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line343">343</a>     if !ALLOWED_STORAGE_TYPES.include?(storage)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line344">344</a>       raise BadConfigurationException.new(&quot;Supported storage types are &quot; +</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line345">345</a>         &quot;#{ALLOWED_STORAGE_TYPES.join(', ')} - #{storage} is not supported.&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line346">346</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line347">347</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line348">348</a>     # Our implementation for storing / retrieving via Google Storage</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line349">349</a>     # and Walrus uses</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line350">350</a>     # the same library as we do for S3 - so just tell it that it's S3</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line351">351</a>     if storage == &quot;gstorage&quot; or storage == &quot;walrus&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line352">352</a>       storage = &quot;s3&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line353">353</a>       job_data[&quot;@storage&quot;] = &quot;s3&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line354">354</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line355">355</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line356">356</a>     if storage == &quot;s3&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line357">357</a>       [&quot;EC2_ACCESS_KEY&quot;, &quot;EC2_SECRET_KEY&quot;, &quot;S3_URL&quot;].each { |item|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line358">358</a>         if job_data[&quot;@#{item}&quot;]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line359">359</a>           # Kernel.puts &quot;Using specified #{item}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line360">360</a>         else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line361">361</a>           if ENV[item]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line362">362</a>             # Kernel.puts &quot;Using #{item} from environment&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line363">363</a>             job_data[&quot;@#{item}&quot;] = ENV[item]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line364">364</a>           else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line365">365</a>             raise BadConfigurationException.new(&quot;When storing data to S3, #{item} must be specified or be in &quot; + </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line366">366</a>               &quot;your environment. Please do so and try again.&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line367">367</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line368">368</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line369">369</a>       }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line370">370</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line371">371</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line372">372</a>     return job_data</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line373">373</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line374">374</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line375">375</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line376">376</a>   # This method takes a file on the local user's computer and stores it remotely</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line377">377</a>   # via AppScale. It returns a hash map indicating whether or not the job</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line378">378</a>   # succeeded and if it failed, the reason for it.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line379">379</a>   def self.get_input(job_data, ssh_args, shadow_ip, controller)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line380">380</a>     result = {:result =&gt; :success}</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line381">381</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line382">382</a>     self.require_param(&quot;@local&quot;, job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line383">383</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line384">384</a>     local_file = File.expand_path(job_data[&quot;@local&quot;])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line385">385</a>     if !File.exists?(local_file)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line386">386</a>       reason = &quot;the file you specified to copy, #{local_file}, doesn't exist.&quot; + </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line387">387</a>           &quot; Please specify a file that exists and try again.&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line388">388</a>       return {:result =&gt; :failure, :reason =&gt; reason}  </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line389">389</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line390">390</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line391">391</a>     remote = &quot;/tmp/neptune-input-#{rand(100000)}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line392">392</a>     scp_cmd = &quot;scp -r #{ssh_args} #{local_file} root@#{shadow_ip}:#{remote}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line393">393</a>     # Kernel.puts scp_cmd</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line394">394</a>     CommonFunctions.shell(scp_cmd)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line395">395</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line396">396</a>     job_data[&quot;@local&quot;] = remote</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line397">397</a>     # Kernel.puts &quot;job data = #{job_data.inspect}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line398">398</a>     response = controller.put_input(job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line399">399</a>     if response</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line400">400</a>       return {:result =&gt; :success}</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line401">401</a>     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line402">402</a>       # TODO - expand this to include the reason why it failed</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line403">403</a>       return {:result =&gt; :failure}</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line404">404</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line405">405</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line406">406</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line407">407</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line408">408</a>   # This method waits for AppScale to finish compiling the user's code, indicated</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line409">409</a>   # by AppScale copying the finished code to a pre-determined location.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line410">410</a>   def self.wait_for_compilation_to_finish(ssh_args, shadow_ip, compiled_location)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line411">411</a>     loop {</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line412">412</a>       ssh_command = &quot;ssh #{ssh_args} root@#{shadow_ip} 'ls #{compiled_location}' 2&gt;&amp;1&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line413">413</a>       # Kernel.puts ssh_command</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line414">414</a>       ssh_result = CommonFunctions.shell(ssh_command)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line415">415</a>       # Kernel.puts &quot;result was [#{ssh_result}]&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line416">416</a>       if ssh_result =~ /No such file or directory/</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line417">417</a>         # Kernel.puts &quot;Still waiting for code to be compiled...&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line418">418</a>       else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line419">419</a>         # Kernel.puts &quot;compilation complete! Copying compiled code to #{copy_to}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line420">420</a>         return</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line421">421</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line422">422</a>       sleep(5)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line423">423</a>     }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line424">424</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line425">425</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line426">426</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line427">427</a>   # This method sends out a request to compile code, waits for it to finish, and</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line428">428</a>   # gets the standard out and error returned from the compilation. This method</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line429">429</a>   # returns a hash containing the standard out, error, and a result that indicates</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line430">430</a>   # whether or not the compilation was successful.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line431">431</a>   def self.compile_code(job_data, ssh_args, shadow_ip)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line432">432</a>     compiled_location = controller.compile_code(job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line433">433</a>     copy_to = job_data[&quot;@copy_to&quot;]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line434">434</a>     self.wait_for_compilation_to_finish(ssh_args, shadow_ip, compiled_location)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line435">435</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line436">436</a>     FileUtils.rm_rf(copy_to)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line437">437</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line438">438</a>     scp_command = &quot;scp -r #{ssh_args} root@#{shadow_ip}:#{compiled_location} #{copy_to} 2&gt;&amp;1&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line439">439</a>     # Kernel.puts scp_command</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line440">440</a>     CommonFunctions.shell(scp_command)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line441">441</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line442">442</a>     code = job_data[&quot;@code&quot;]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line443">443</a>     dirs = code.split(/\//)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line444">444</a>     remote_dir = &quot;/tmp/&quot; + dirs[-1] </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line445">445</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line446">446</a>     [remote_dir, compiled_location].each { |remote_files|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line447">447</a>       ssh_command = &quot;ssh #{ssh_args} root@#{shadow_ip} 'rm -rf #{remote_files}' 2&gt;&amp;1&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line448">448</a>       # Kernel.puts ssh_command</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line449">449</a>       CommonFunctions.shell(ssh_command)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line450">450</a>     }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line451">451</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line452">452</a>     return get_std_out_and_err(copy_to)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line453">453</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line454">454</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line455">455</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line456">456</a>   # This method returns a hash containing the standard out and standard error</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line457">457</a>   # from a completed job, as well as a result field that indicates whether or</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line458">458</a>   # not the job completed successfully (success = no errors).</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line459">459</a>   def self.get_std_out_and_err(location)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line460">460</a>     result = {}</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line461">461</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line462">462</a>     out = File.open(&quot;#{location}/compile_out&quot;) { |f| f.read.chomp! }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line463">463</a>     result[:out] = out</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line464">464</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line465">465</a>     err = File.open(&quot;#{location}/compile_err&quot;) { |f| f.read.chomp! }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line466">466</a>     result[:err] = err</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line467">467</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line468">468</a>     if result[:err]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line469">469</a>       result[:result] = :failure</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line470">470</a>     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line471">471</a>       result[:result] = :success</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line472">472</a>     end    </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line473">473</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line474">474</a>     return result</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line475">475</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line476">476</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line477">477</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line478">478</a>   # This method uploads a Google App Engine application into AppScale, for use</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line479">479</a>   # with Cicero jobs. It requires the AppScale tools to be installed.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line480">480</a>   def self.upload_app_for_cicero(job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line481">481</a>     if !job_data[&quot;@app&quot;]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line482">482</a>       # Kernel.puts &quot;No app specified, not uploading...&quot; </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line483">483</a>       return</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line484">484</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line485">485</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line486">486</a>     app_location = File.expand_path(job_data[&quot;@app&quot;])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line487">487</a>     if !File.exists?(app_location)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line488">488</a>       raise BadConfigurationException.new(&quot;The app you specified, #{app_location}, does not exist.&quot; + </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line489">489</a>         &quot;Please specify one that does and try again.&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line490">490</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line491">491</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line492">492</a>     keyname = job_data[&quot;@keyname&quot;] || &quot;appscale&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line493">493</a>     if job_data[&quot;@appscale_tools&quot;]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line494">494</a>       upload_app = File.expand_path(job_data[&quot;@appscale_tools&quot;]) +</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line495">495</a>         File::SEPARATOR + &quot;bin&quot; + File::SEPARATOR + &quot;appscale-upload-app&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line496">496</a>     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line497">497</a>       upload_app = &quot;appscale-upload-app&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line498">498</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line499">499</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line500">500</a>     # Kernel.puts &quot;Uploading AppEngine app at #{app_location}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line501">501</a>     upload_command = &quot;#{upload_app} --file #{app_location} --test --keyname #{keyname}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line502">502</a>     # Kernel.puts upload_command</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line503">503</a>     # Kernel.puts `#{upload_command}`</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line504">504</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line505">505</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line506">506</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line507">507</a>   # This method actually runs the Neptune job, given information about the job</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line508">508</a>   # as well as information about the node to send the request to.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line509">509</a>   def self.run_job(job_data, ssh_args, shadow_ip, secret)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line510">510</a>     controller = AppControllerClient.new(shadow_ip, secret)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line511">511</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line512">512</a>     # TODO - right now the job is assumed to succeed in many cases</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line513">513</a>     # need to investigate the various failure scenarios</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line514">514</a>     result = { :result =&gt; :success }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line515">515</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line516">516</a>     case job_data[&quot;@type&quot;]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line517">517</a>     when &quot;input&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line518">518</a>       result = self.get_input(job_data, ssh_args, shadow_ip, controller)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line519">519</a>     when &quot;output&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line520">520</a>       result[:output] = controller.get_output(job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line521">521</a>     when &quot;get-acl&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line522">522</a>       job_data[&quot;@type&quot;] = &quot;acl&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line523">523</a>       result[:acl] = controller.get_acl(job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line524">524</a>     when &quot;set-acl&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line525">525</a>       job_data[&quot;@type&quot;] = &quot;acl&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line526">526</a>       result[:acl] = controller.set_acl(job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line527">527</a>     when &quot;compile&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line528">528</a>       result = self.compile_code(job_data, ssh_args, shadow_ip)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line529">529</a>     when &quot;cicero&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line530">530</a>       self.upload_app_for_cicero(job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line531">531</a>       msg = controller.start_neptune_job(job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line532">532</a>       result[:msg] = msg</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line533">533</a>       result[:result] = :failure if result[:msg] !~ /job is now running\Z/</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line534">534</a>     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line535">535</a>       msg = controller.start_neptune_job(job_data)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line536">536</a>       result[:msg] = msg</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line537">537</a>       result[:result] = :failure if result[:msg] !~ /job is now running\Z/</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line538">538</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line539">539</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line540">540</a>     return result</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line541">541</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line542">542</a> end</pre></td>
+          </tr>
+        
       </tbody>
     </table>
 
-    <p>Generated on Thu Apr 07 13:05:20 -0700 2011 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
+    <p>Generated on Thu Mar 08 10:19:07 -0800 2012 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
 
   </body>
 </html>

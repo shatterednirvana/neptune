@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+
+  <title>Module: BabelHelper</title>
+
+  <link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+
+  <script src="./js/jquery.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/thickbox-compressed.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/quicksearch.js" type="text/javascript"
+    charset="utf-8"></script>
+  <script src="./js/darkfish.js" type="text/javascript"
+    charset="utf-8"></script>
+
+</head>
+<body class="module">
+
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+      </div>
+    </div>
+
+    <div id="file-metadata">
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li><a href="./lib/babel_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/babel.rb">lib/babel.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
+
+      
+    </div>
+
+    <div id="class-metadata">
+
+      <!-- Parent Class -->
+      
+
+      <!-- Namespace Contents -->
+      
+
+      <!-- Method Quickref -->
+      
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+          <li><a href="#method-c-check_output_files">::check_output_files</a></li>
+          
+          <li><a href="#method-c-convert_from_neptune_params">::convert_from_neptune_params</a></li>
+          
+          <li><a href="#method-c-convert_to_neptune_params">::convert_to_neptune_params</a></li>
+          
+          <li><a href="#method-c-ensure_output_does_not_exist">::ensure_output_does_not_exist</a></li>
+          
+          <li><a href="#method-c-generate_output_location">::generate_output_location</a></li>
+          
+          <li><a href="#method-c-get_appcontroller">::get_appcontroller</a></li>
+          
+          <li><a href="#method-c-get_bucket_for_local_data">::get_bucket_for_local_data</a></li>
+          
+          <li><a href="#method-c-put_code">::put_code</a></li>
+          
+          <li><a href="#method-c-put_file">::put_file</a></li>
+          
+          <li><a href="#method-c-put_inputs">::put_inputs</a></li>
+          
+          <li><a href="#method-c-run_job">::run_job</a></li>
+          
+          <li><a href="#method-c-validate_inputs">::validate_inputs</a></li>
+          
+          <li><a href="#method-c-wait_and_get_output">::wait_and_get_output</a></li>
+          
+        </ul>
+      </div>
+      
+
+      <!-- Included Modules -->
+      
+    </div>
+
+    <div id="project-metadata">
+      
+      
+
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class/Module Index
+          <span class="search-toggle"><img src="./images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
+
+        <ul class="link-list">
+        
+          <li><a href="./AppControllerClient.html">AppControllerClient</a></li>
+        
+          <li><a href="./AppControllerException.html">AppControllerException</a></li>
+        
+          <li><a href="./BabelHelper.html">BabelHelper</a></li>
+        
+          <li><a href="./BadConfigurationException.html">BadConfigurationException</a></li>
+        
+          <li><a href="./CommonFunctions.html">CommonFunctions</a></li>
+        
+          <li><a href="./FileNotFoundException.html">FileNotFoundException</a></li>
+        
+          <li><a href="./NeptuneHelper.html">NeptuneHelper</a></li>
+        
+          <li><a href="./Object.html">Object</a></li>
+        
+          <li><a href="./TaskInfo.html">TaskInfo</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <div id="documentation">
+    <h1 class="module">BabelHelper</h1>
+
+    <div id="description">
+      
+<p>This module provides convenience functions for babel().</p>
+
+    </div>
+
+    <!-- Constants -->
+    
+
+    <!-- Attributes -->
+    
+
+    <!-- Methods -->
+    
+    <div id="public-class-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="check_output_files-method" class="method-detail ">
+        <a name="method-c-check_output_files"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">check_output_files</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>babel() callers do not have to specify a location where the standard output
+and error the task produces should be placed. If they don’t, generate
+locations for them and make sure they don’t exist beforehand.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="check_output_files-source">
+<pre>
+<span class="ruby-comment"># File lib/babel.rb, line 125</span>
+def self.check_output_files(job_data)
+  [<span class="ruby-string">&quot;@output&quot;</span>, <span class="ruby-string">&quot;@error&quot;</span>, <span class="ruby-string">&quot;@metadata&quot;</span>].each { |item|
+    if job_data[item].nil? or job_data[item].empty?
+      job_data[item] = <span class="ruby-constant">BabelHelper</span>.generate_output_location(job_data)
+    end
+    <span class="ruby-constant">BabelHelper</span>.ensure_output_does_not_exist(job_data, job_data[item])
+  }
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="convert_from_neptune_params-method" class="method-detail ">
+        <a name="method-c-convert_from_neptune_params"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">convert_from_neptune_params</span><span
+            class="method-args">(params)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Neptune internally uses job_data with keys of the form @name, but since the
+user has given them to us in the form :name, we convert it here. TODO(cgb):
+It looks like this conversion to/from may be unnecessary since neptune()
+just re-converts it - how can we remove it?</p>
+          
+
+          
+          <div class="method-source-code"
+            id="convert_from_neptune_params-source">
+<pre>
+<span class="ruby-comment"># File lib/babel.rb, line 227</span>
+def self.convert_from_neptune_params(params)
+  job_data = {}
+  params.each { |k, v|
+    key = &quot;@#{k}&quot;
+    job_data[key] = v
+  }
+  return job_data
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="convert_to_neptune_params-method" class="method-detail ">
+        <a name="method-c-convert_to_neptune_params"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">convert_to_neptune_params</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Neptune input jobs expect keys of the form :name, but since we’ve already
+converted them to the form @name, this function reverses that conversion.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="convert_to_neptune_params-source">
+<pre>
+<span class="ruby-comment"># File lib/babel.rb, line 239</span>
+def self.convert_to_neptune_params(job_data)
+  neptune_params = {}
+
+  job_data.each { |k, v|
+    key = k.delete(<span class="ruby-string">&quot;@&quot;</span>).to_sym
+    neptune_params[key] = v
+  }
+
+  return neptune_params
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="ensure_output_does_not_exist-method" class="method-detail ">
+        <a name="method-c-ensure_output_does_not_exist"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">ensure_output_does_not_exist</span><span
+            class="method-args">(job_data, remote_file)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>To avoid accidentally overwriting outputs from previous jobs, we first
+check to make sure an output file doesn’t exist before starting a new job
+with the given name.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="ensure_output_does_not_exist-source">
+<pre>
+<span class="ruby-comment"># File lib/babel.rb, line 160</span>
+def self.ensure_output_does_not_exist(job_data, remote_file)
+  controller = self.get_appcontroller(job_data)
+  <span class="ruby-constant">NeptuneHelper</span>.require_file_to_not_exist(remote_file, job_data, controller)
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="generate_output_location-method" class="method-detail ">
+        <a name="method-c-generate_output_location"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">generate_output_location</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>If the user fails to give us an output location, this function will
+generate one for them, based on either the location of their code (for
+remotely specified code), or a babel parameter (for locally specified
+code).</p>
+          
+
+          
+          <div class="method-source-code"
+            id="generate_output_location-source">
+<pre>
+<span class="ruby-comment"># File lib/babel.rb, line 91</span>
+def self.generate_output_location(job_data)
+  if job_data[<span class="ruby-string">&quot;@storage&quot;</span>]
+    <span class="ruby-comment"># We already know the bucket name - the same one that the user</span>
+    <span class="ruby-comment"># has told us their code is located in.</span>
+    prefix = job_data[<span class="ruby-string">&quot;@code&quot;</span>].scan(<span class="ruby-regexp">/\/(.*?)\//</span>)[0].to_s
+  else
+    prefix = self.get_bucket_for_local_data(job_data)
+  end
+    
+  return &quot;/#{prefix}/babel/temp-#{CommonFunctions.get_random_alphanumeric()}&quot;
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="get_appcontroller-method" class="method-detail ">
+        <a name="method-c-get_appcontroller"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">get_appcontroller</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an <a href="AppControllerClient.html">AppControllerClient</a> for
+the given job data.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="get_appcontroller-source">
+<pre>
+<span class="ruby-comment"># File lib/babel.rb, line 167</span>
+def self.get_appcontroller(job_data)
+  keyname = job_data[<span class="ruby-string">&quot;@keyname&quot;</span>] || <span class="ruby-string">&quot;appscale&quot;</span>
+  shadow_ip = <span class="ruby-constant">CommonFunctions</span>.get_from_yaml(keyname, :shadow)
+  secret = <span class="ruby-constant">CommonFunctions</span>.get_secret_key(keyname)
+  return <span class="ruby-constant">AppControllerClient</span>.new(shadow_ip, secret)
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="get_bucket_for_local_data-method" class="method-detail ">
+        <a name="method-c-get_bucket_for_local_data"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">get_bucket_for_local_data</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Provides a common way for callers to get the name of the bucket that should
+be used for Neptune jobs where the code is stored locally.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="get_bucket_for_local_data-source">
+<pre>
+<span class="ruby-comment"># File lib/babel.rb, line 106</span>
+def self.get_bucket_for_local_data(job_data)
+  bucket_name = job_data[<span class="ruby-string">&quot;@bucket_name&quot;</span>] || <span class="ruby-constant">ENV</span>[<span class="ruby-string">'BABEL_BUCKET_NAME'</span>]
+
+  if bucket_name.nil?
+    raise <span class="ruby-constant">BadConfigurationException</span>.new(<span class="ruby-constant">NEEDS_BUCKET_INFO</span>)
+  end
+
+  <span class="ruby-comment"># If the bucket name starts with a slash, remove it</span>
+  if bucket_name[0].chr == <span class="ruby-string">&quot;/&quot;</span>
+    bucket_name = bucket_name[1, bucket_name.length]
+  end
+
+  return bucket_name
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="put_code-method" class="method-detail ">
+        <a name="method-c-put_code"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">put_code</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Stores the user’s code (and the directory it’s in, and directories in
+the same directory as the user’s code, since there could be libraries
+used) in the remote datastore.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="put_code-source">
+<pre>
+<span class="ruby-comment"># File lib/babel.rb, line 178</span>
+def self.put_code(job_data)
+  code_dir = <span class="ruby-constant">File</span>.dirname(job_data[<span class="ruby-string">&quot;@code&quot;</span>])
+  code = <span class="ruby-constant">File</span>.basename(job_data[<span class="ruby-string">&quot;@code&quot;</span>])
+  remote_code_dir = self.put_file(code_dir, job_data)
+  job_data[<span class="ruby-string">&quot;@code&quot;</span>] = remote_code_dir + <span class="ruby-string">&quot;/&quot;</span> + code
+  return job_data[<span class="ruby-string">&quot;@code&quot;</span>]
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="put_file-method" class="method-detail ">
+        <a name="method-c-put_file"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">put_file</span><span
+            class="method-args">(local_path, job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>If the user gives us local code or local inputs, this function will run a
+Neptune ‘input’ job to store the data remotely.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="put_file-source">
+<pre>
+<span class="ruby-comment"># File lib/babel.rb, line 209</span>
+def self.put_file(local_path, job_data)
+  input_data = self.convert_to_neptune_params(job_data)
+  input_data[:type] = <span class="ruby-string">&quot;input&quot;</span>
+  input_data[:local] = local_path
+
+  bucket_name = self.get_bucket_for_local_data(job_data)
+  input_data[:remote] = &quot;/#{bucket_name}/babel#{local_path}&quot;
+
+  <span class="ruby-constant">Kernel</span>.neptune(input_data)
+
+  return input_data[:remote]
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="put_inputs-method" class="method-detail ">
+        <a name="method-c-put_inputs"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">put_inputs</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>If any input files are specified, they are copied to the remote datastore
+via Neptune ‘input’ jobs. Inputs are assumed to be files on the local
+filesystem if they begin with a slash, and job_data gets updated with the
+remote location of these files.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="put_inputs-source">
+<pre>
+<span class="ruby-comment"># File lib/babel.rb, line 191</span>
+def self.put_inputs(job_data)
+  if job_data[<span class="ruby-string">&quot;@argv&quot;</span>].nil? or job_data[<span class="ruby-string">&quot;@argv&quot;</span>].empty?
+    return job_data
+  end
+
+  job_data[<span class="ruby-string">&quot;@argv&quot;</span>].each_index { |i|
+    arg = job_data[<span class="ruby-string">&quot;@argv&quot;</span>][i]
+    if arg[0].chr == <span class="ruby-string">&quot;/&quot;</span>
+      job_data[<span class="ruby-string">&quot;@argv&quot;</span>][i] = self.put_file(arg, job_data)
+    end
+  }
+
+  return job_data
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="run_job-method" class="method-detail ">
+        <a name="method-c-run_job"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">run_job</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Constructs a Neptune job to run the user’s code as a Babel job (task
+queue) from the given parameters.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="run_job-source">
+<pre>
+<span class="ruby-comment"># File lib/babel.rb, line 253</span>
+def self.run_job(job_data)
+  run_data = self.convert_to_neptune_params(job_data)
+
+  <span class="ruby-comment"># Default to babel as the job type, if the user doesn't specify one.</span>
+  if run_data[:type].nil? or run_data[:type].empty?
+    run_data[:type] = <span class="ruby-string">&quot;babel&quot;</span>
+  end
+
+  <span class="ruby-comment"># TODO(cgb): Once AppScale+Babel gets support for RabbitMQ, change this to</span>
+  <span class="ruby-comment"># exec tasks over it, instead of locally.</span>
+  if job_data[<span class="ruby-string">&quot;@run_local&quot;</span>].nil?
+    run_data[:run_local] = true
+    run_data[:engine] = <span class="ruby-string">&quot;executor-sqs&quot;</span>
+  end
+
+  run_data[:failed_attempts] = 0
+  loop {
+    run_job = <span class="ruby-constant">Kernel</span>.neptune(run_data)
+    if run_job[:result] == :success
+      return run_job
+    else
+      run_data[:failed_attempts] += 1
+      <span class="ruby-constant">Kernel</span>.sleep(<span class="ruby-constant">SLEEP_TIME</span>)  <span class="ruby-comment"># TODO(cgb): this should exponentially backoff</span>
+    end
+  }
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="validate_inputs-method" class="method-detail ">
+        <a name="method-c-validate_inputs"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">validate_inputs</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>For jobs where the code is stored remotely, this method ensures that  the
+code and any possible inputs actually do exist, before attempting to use
+them for computation.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="validate_inputs-source">
+<pre>
+<span class="ruby-comment"># File lib/babel.rb, line 138</span>
+def self.validate_inputs(job_data)
+  controller = self.get_appcontroller(job_data)
+
+  <span class="ruby-comment"># First, make sure the code exists</span>
+  <span class="ruby-constant">NeptuneHelper</span>.require_file_to_exist(job_data[<span class="ruby-string">&quot;@code&quot;</span>], job_data, controller)
+
+  if job_data[<span class="ruby-string">&quot;@argv&quot;</span>].nil? or job_data[<span class="ruby-string">&quot;@argv&quot;</span>].empty?
+    return
+  end
+
+  <span class="ruby-comment"># We assume anything that begins with a slash is a remote file</span>
+  job_data[<span class="ruby-string">&quot;@argv&quot;</span>].each { |arg|
+    if arg[0].chr == <span class="ruby-string">&quot;/&quot;</span>
+      <span class="ruby-constant">NeptuneHelper</span>.require_file_to_exist(arg, job_data, controller)
+    end
+  }
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="wait_and_get_output-method" class="method-detail ">
+        <a name="method-c-wait_and_get_output"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">wait_and_get_output</span><span
+            class="method-args">(job_data, output_location)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Constructs a Neptune job to get the output of a Babel job. If the job is
+not yet finished, this function waits until it does, and then returns the
+output of the job.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="wait_and_get_output-source">
+<pre>
+<span class="ruby-comment"># File lib/babel.rb, line 284</span>
+def self.wait_and_get_output(job_data, output_location)
+  output_data = self.convert_to_neptune_params(job_data)
+  output_data[:type] = <span class="ruby-string">&quot;output&quot;</span>
+  output_data[:output] = output_location
+
+  output = <span class="ruby-string">&quot;&quot;</span>
+  time_to_sleep = <span class="ruby-constant">SLEEP_TIME</span>
+  loop {
+    output = <span class="ruby-constant">Kernel</span>.neptune(output_data)[:output]
+    if output == <span class="ruby-constant">DOES_NOT_EXIST</span>
+      <span class="ruby-comment"># Exponentially back off, up to a limit of MAX_SLEEP_TIME</span>
+      <span class="ruby-constant">Kernel</span>.sleep(time_to_sleep)
+      if time_to_sleep &lt; <span class="ruby-constant">MAX_SLEEP_TIME</span>
+        time_to_sleep *= 2
+      end
+    else
+      break
+    end
+  }
+
+  return output
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </div>
+  
+
+  </div>
+
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
+
+</body>
+</html>
+

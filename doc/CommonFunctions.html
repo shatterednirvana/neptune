@@ -64,11 +64,15 @@
           
           <li><a href="#method-c-get_from_yaml">::get_from_yaml</a></li>
           
+          <li><a href="#method-c-get_random_alphanumeric">::get_random_alphanumeric</a></li>
+          
           <li><a href="#method-c-get_secret_key">::get_secret_key</a></li>
           
           <li><a href="#method-c-scp_file">::scp_file</a></li>
           
           <li><a href="#method-c-scp_to_shadow">::scp_to_shadow</a></li>
+          
+          <li><a href="#method-c-shell">::shell</a></li>
           
         </ul>
       </div>
@@ -80,17 +84,6 @@
 
     <div id="project-metadata">
       
-      
-      <div id="fileindex-section" class="section project-section">
-        <h3 class="section-header">Files</h3>
-        <ul>
-        
-          <li class="file"><a href="./LICENSE.html">LICENSE</a></li>
-        
-          <li class="file"><a href="./README.html">README</a></li>
-        
-        </ul>
-      </div>
       
 
       <div id="classindex-section" class="section project-section">
@@ -110,9 +103,21 @@
         
           <li><a href="./AppControllerClient.html">AppControllerClient</a></li>
         
+          <li><a href="./AppControllerException.html">AppControllerException</a></li>
+        
+          <li><a href="./BabelHelper.html">BabelHelper</a></li>
+        
+          <li><a href="./BadConfigurationException.html">BadConfigurationException</a></li>
+        
           <li><a href="./CommonFunctions.html">CommonFunctions</a></li>
         
+          <li><a href="./FileNotFoundException.html">FileNotFoundException</a></li>
+        
+          <li><a href="./NeptuneHelper.html">NeptuneHelper</a></li>
+        
           <li><a href="./Object.html">Object</a></li>
+        
+          <li><a href="./TaskInfo.html">TaskInfo</a></li>
         
         </ul>
         <div id="no-class-search-results" style="display: none;">No matching classes.</div>
@@ -172,17 +177,21 @@ instead.</p>
           <div class="method-source-code"
             id="get_from_yaml-source">
 <pre>
-<span class="ruby-comment"># File lib/common_functions.rb, line 82</span>
+<span class="ruby-comment"># File lib/common_functions.rb, line 108</span>
 def self.get_from_yaml(keyname, tag, required=true)
   location_file = <span class="ruby-constant">File</span>.expand_path(&quot;~/.appscale/locations-#{keyname}.yaml&quot;)
 
-  abort(&quot;An AppScale instance is not currently running with the provided keyname, \&quot;#{keyname}\&quot;.&quot;) unless <span class="ruby-constant">File</span>.exists?(location_file)  
+  if !<span class="ruby-constant">File</span>.exists?(location_file)
+    raise <span class="ruby-constant">BadConfigurationException</span>.new(<span class="ruby-string">&quot;An AppScale instance is not &quot;</span> +
+      &quot;currently running with the provided keyname, \&quot;#{keyname}\&quot;.&quot;)
+  end
   
   begin
     tree = <span class="ruby-constant">YAML</span>.load_file(location_file)
   rescue <span class="ruby-constant">ArgumentError</span>
     if required
-      abort(<span class="ruby-string">&quot;The yaml file you provided was malformed. Please correct any errors in it and try again.&quot;</span>)
+      abort(<span class="ruby-string">&quot;The yaml file you provided was malformed. Please correct any&quot;</span> +
+        <span class="ruby-string">&quot; errors in it and try again.&quot;</span>)
     else
       return nil
     end
@@ -190,9 +199,56 @@ def self.get_from_yaml(keyname, tag, required=true)
   
   value = tree[tag]
   
-  bad_yaml_format_msg = &quot;The file #{location_file} is in the wrong format and doesn't contain a #{tag} tag. Please make sure the file is in the correct format and try again&quot;
-  abort(bad_yaml_format_msg) if value.nil? and required
+  if value.nil? and required
+    abort(&quot;The file #{location_file} is in the wrong format and doesn't&quot; +
+      &quot; contain a #{tag} tag. Please make sure the file is in the correct&quot; +
+      <span class="ruby-string">&quot; format and try again.&quot;</span>)
+  end
+
   return value
+end</pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="get_random_alphanumeric-method" class="method-detail ">
+        <a name="method-c-get_random_alphanumeric"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">get_random_alphanumeric</span><span
+            class="method-args">(length=10)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a random string composed of alphanumeric characters, as long as the
+user requests.</p>
+          
+
+          
+          <div class="method-source-code"
+            id="get_random_alphanumeric-source">
+<pre>
+<span class="ruby-comment"># File lib/common_functions.rb, line 33</span>
+def self.get_random_alphanumeric(length=10)
+  random = <span class="ruby-string">&quot;&quot;</span>
+  possible = <span class="ruby-string">&quot;0123456789abcdefghijklmnopqrstuvxwyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>
+  possibleLength = possible.length
+  
+  length.times { |index|
+    random &lt;&lt; possible[<span class="ruby-constant">Kernel</span>.rand(possibleLength)]
+  }
+   
+  return random
 end</pre>
           </div>
           
@@ -227,9 +283,9 @@ function, as the secret is stored in a YAML file.</p>
           <div class="method-source-code"
             id="get_secret_key-source">
 <pre>
-<span class="ruby-comment"># File lib/common_functions.rb, line 107</span>
+<span class="ruby-comment"># File lib/common_functions.rb, line 142</span>
 def self.get_secret_key(keyname, required=true)
-  return <span class="ruby-constant">CommonFunctions</span>.get_from_yaml(keyname, :secret)
+  return <span class="ruby-constant">CommonFunctions</span>.get_from_yaml(keyname, :secret, required)
 end</pre>
           </div>
           
@@ -267,43 +323,39 @@ a directory, we append the -r flag to scp as well.</p>
           <div class="method-source-code"
             id="scp_file-source">
 <pre>
-<span class="ruby-comment"># File lib/common_functions.rb, line 37</span>
-def self.scp_file(local_file_loc, remote_file_loc, target_ip, public_key_loc, is_dir=false)
-  cmd = <span class="ruby-string">&quot;&quot;</span>
-  local_file_loc = <span class="ruby-constant">File</span>.expand_path(local_file_loc)
+<span class="ruby-comment"># File lib/common_functions.rb, line 66</span>
+def self.scp_file(local_file_loc, remote_file_loc, target_ip, public_key_loc,
+  is_dir=false)
 
+  local_file_loc = <span class="ruby-constant">File</span>.expand_path(local_file_loc)
   ssh_args = <span class="ruby-string">&quot;-o StrictHostkeyChecking=no 2&gt;&amp;1&quot;</span>
   ssh_args &lt;&lt; <span class="ruby-string">&quot; -r &quot;</span> if is_dir
 
-  if public_key_loc.class == <span class="ruby-constant">Array</span>
-    public_key_loc.each { |key|
-      key = <span class="ruby-constant">File</span>.expand_path(key)
-    }
-    
-    cmd = &quot;scp -i #{public_key_loc.join(' -i ')} #{ssh_args} #{local_file_loc} root@#{target_ip}:#{remote_file_loc}&quot;
-  else
-    public_key_loc = <span class="ruby-constant">File</span>.expand_path(public_key_loc)
-    cmd = &quot;scp -i #{public_key_loc} #{ssh_args} #{local_file_loc} root@#{target_ip}:#{remote_file_loc}&quot;
-  end
-
+  public_key_loc = <span class="ruby-constant">File</span>.expand_path(public_key_loc)
+  cmd = &quot;scp -i #{public_key_loc} #{ssh_args} #{local_file_loc} root@#{target_ip}:#{remote_file_loc}&quot;
   cmd &lt;&lt; <span class="ruby-string">&quot;; echo $? &gt;&gt; ~/.appscale/retval&quot;</span>
 
   retval_loc = <span class="ruby-constant">File</span>.expand_path(<span class="ruby-string">&quot;~/.appscale/retval&quot;</span>)
   <span class="ruby-constant">FileUtils</span>.rm_f(retval_loc)
 
   begin
-    <span class="ruby-constant">Timeout</span>::timeout(-1) { `#{cmd}` }
+    <span class="ruby-constant">Timeout</span>::timeout(-1) { <span class="ruby-constant">CommonFunctions</span>.shell(&quot;#{cmd}&quot;) }
   rescue <span class="ruby-constant">Timeout</span>::<span class="ruby-constant">Error</span>
-    abort(&quot;Remotely copying over files failed. Is the destination machine on and reachable from this computer? We tried the following command:\n\n#{cmd}&quot;)
+    abort(<span class="ruby-string">&quot;Remotely copying over files failed. Is the destination machine&quot;</span> +
+      <span class="ruby-string">&quot; on and reachable from this computer? We tried the following&quot;</span> +
+      &quot; command:\n\n#{cmd}&quot;)
   end
 
   loop {
     break if <span class="ruby-constant">File</span>.exists?(retval_loc)
-    sleep(5)
+    <span class="ruby-constant">Kernel</span>.sleep(5)
   }
 
   retval = (<span class="ruby-constant">File</span>.open(retval_loc) { |f| f.read }).chomp
-  abort(&quot;\n\n[#{cmd}] returned #{retval} instead of 0 as expected. Is your environment set up properly?&quot;) if retval != <span class="ruby-string">&quot;0&quot;</span>
+  if retval != <span class="ruby-string">&quot;0&quot;</span>
+    abort(&quot;\n\n[#{cmd}] returned #{retval} instead of 0 as expected. Is &quot; +
+      <span class="ruby-string">&quot;your environment set up properly?&quot;</span>)
+  end
   return cmd
 end</pre>
           </div>
@@ -339,12 +391,48 @@ by the Neptune job given, but defaults to ”appscale” if not provided.</p>
           <div class="method-source-code"
             id="scp_to_shadow-source">
 <pre>
-<span class="ruby-comment"># File lib/common_functions.rb, line 24</span>
+<span class="ruby-comment"># File lib/common_functions.rb, line 52</span>
 def self.scp_to_shadow(local_file_loc, remote_file_loc, keyname, is_dir=false)
   shadow_ip = <span class="ruby-constant">CommonFunctions</span>.get_from_yaml(keyname, :shadow)
   ssh_key = <span class="ruby-constant">File</span>.expand_path(&quot;~/.appscale/#{keyname}.key&quot;)
+  <span class="ruby-constant">CommonFunctions</span>.scp_file(local_file_loc, remote_file_loc, shadow_ip,
+    ssh_key, is_dir)
+end</pre>
+          </div>
+          
+        </div>
 
-  self.scp_file(local_file_loc, remote_file_loc, shadow_ip, ssh_key, is_dir)
+        
+
+        
+      </div>
+
+    
+      <div id="shell-method" class="method-detail ">
+        <a name="method-c-shell"></a>
+
+        
+        <div class="method-heading">
+          <span class="method-name">shell</span><span
+            class="method-args">(cmd)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Executes a command and returns the result. Is needed to get around
+Flexmock’s inability to mock out Kernel:` (the standard shell exec
+method).</p>
+          
+
+          
+          <div class="method-source-code"
+            id="shell-source">
+<pre>
+<span class="ruby-comment"># File lib/common_functions.rb, line 26</span>
+def self.shell(cmd)
+  return `#{cmd}`
 end</pre>
           </div>
           
