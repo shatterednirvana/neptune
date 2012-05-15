@@ -66,7 +66,7 @@ class TestBabel < Test::Unit::TestCase
     kernel.should_receive(:rand).and_return(0,1,2,3,4,5,6,7,8,9,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2)
     kernel.should_receive(:sleep).and_return()
 
-    flexmock(AppControllerClient).new_instances { |instance|
+    flexmock(NeptuneManagerClient).new_instances { |instance|
       instance.should_receive(:does_file_exist?).with(file, job_data).
         and_return(true)
       instance.should_receive(:does_file_exist?).with(output, job_data_no_err).
@@ -352,7 +352,7 @@ class TestBabel < Test::Unit::TestCase
       and_return(["executor-sqs"])
     appcontroller.should_receive(:start_neptune_job).
       and_return("babel job is now running")
-    flexmock(AppControllerClient).should_receive(:new).and_return(appcontroller)
+    flexmock(NeptuneManagerClient).should_receive(:new).and_return(appcontroller)
 
     flexmock(TaskInfo).new_instances { |instance|
       instance.should_receive(:stdout).and_return("output")

@@ -1,9 +1,9 @@
 #!/usr/bin/ruby
 # Programmer: Chris Bunch (cgb@cs.ucsb.edu)
 
-require 'app_controller_client'
 require 'common_functions'
 require 'custom_exceptions'
+require 'neptune_manager_client'
 
 
 # Setting verbose to nil here suppresses the otherwise
@@ -13,7 +13,7 @@ $VERBOSE = nil
 
 
 # A list of all the Neptune job types that we support
-ALLOWED_JOB_TYPES = %w{acl cicero compile erlang mpi input output ssa babel upc x10}
+ALLOWED_JOB_TYPES = %w{acl cicero compile erlang mpi input output ssa babel upc x10 mapreduce}
 
 
 # The string to display for disallowed job types.
@@ -79,7 +79,7 @@ def neptune(jobs)
     ssh_key = File.expand_path("~/.appscale/#{keyname}.key")
     ssh_args = "-i ~/.appscale/#{keyname}.key -o StrictHostkeyChecking=no "
 
-    controller = AppControllerClient.new(shadow_ip, secret)
+    controller = NeptuneManagerClient.new(shadow_ip, secret)
     NeptuneHelper.do_preprocessing(job_data, controller)
     job_data_list << job_data
   }
@@ -230,7 +230,7 @@ module NeptuneHelper
   end
 
 
-  # This helper method asks the AppController if the named file exists,
+  # This helper method asks the NeptuneManager if the named file exists,
   # and if it does not, throws an exception.
   def self.require_file_to_exist(file, job_data, controller)
     if controller.does_file_exist?(file, job_data)
@@ -309,7 +309,7 @@ module NeptuneHelper
 
   # This method takes in a hash in the format that users write neptune/babel
   # jobs in {:a => "b"} and converts it to the legacy format that Neptune
-  # used to use {"@a" => "b"}, and is understood by the AppController.
+  # used to use {"@a" => "b"}, and is understood by the NeptuneManager.
   def self.get_job_data(params)
     job_data = {}
     params.each { |k, v|
@@ -534,7 +534,7 @@ module NeptuneHelper
   # This method actually runs the Neptune job, given information about the job
   # as well as information about the node to send the request to.
   def self.run_job(job_data, ssh_args, shadow_ip, secret)
-    controller = AppControllerClient.new(shadow_ip, secret)
+    controller = NeptuneManagerClient.new(shadow_ip, secret)
 
     # TODO - right now the job is assumed to succeed in many cases
     # need to investigate the various failure scenarios

@@ -1,8 +1,8 @@
 # Programmer: Chris Bunch
 
-# A special class of exceptions that are thrown whenever the AppController
+# A special class of exceptions that are thrown whenever the NeptuneManager
 # experiences an unexpected result.
-class AppControllerException < Exception
+class NeptuneManagerException < Exception
 end
 
 

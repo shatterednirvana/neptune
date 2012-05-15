@@ -1,10 +1,10 @@
 #!/usr/bin/ruby
 # Programmer: Chris Bunch (cgb@cs.ucsb.edu)
 
-require 'app_controller_client'
 require 'common_functions'
 require 'custom_exceptions'
 require 'neptune'
+require 'neptune_manager_client'
 require 'task_info'
 
 
@@ -181,12 +181,12 @@ module BabelHelper
   end
 
 
-  # Returns an AppControllerClient for the given job data.
+  # Returns an NeptuneManagerClient for the given job data.
   def self.get_appcontroller(job_data)
     keyname = job_data["@keyname"] || "appscale"
     shadow_ip = CommonFunctions.get_from_yaml(keyname, :shadow)
     secret = CommonFunctions.get_secret_key(keyname)
-    return AppControllerClient.new(shadow_ip, secret)
+    return NeptuneManagerClient.new(shadow_ip, secret)
   end
 
 

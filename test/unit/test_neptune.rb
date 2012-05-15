@@ -229,7 +229,7 @@ class TestNeptune < Test::Unit::TestCase
     }
 
     @file.should_receive(:exists?).and_return(false)
-    flexmock(AppControllerClient).new_instances { |instance|
+    flexmock(NeptuneManagerClient).new_instances { |instance|
       instance.should_receive(:put_input).and_return(true)
     }
 
@@ -243,7 +243,7 @@ class TestNeptune < Test::Unit::TestCase
     shadow_ip = "localhost?"
     secret = "abcdefg"
 
-    flexmock(AppControllerClient).new_instances { |instance|
+    flexmock(NeptuneManagerClient).new_instances { |instance|
       instance.should_receive(:put_input).and_return(true)
     }
 
@@ -277,7 +277,7 @@ class TestNeptune < Test::Unit::TestCase
     @commonfunctions.should_receive(:get_from_yaml).and_return("127.0.0.1")
     @commonfunctions.should_receive(:get_secret_key).and_return("secret")
 
-    flexmock(AppControllerClient).new_instances { |instance|
+    flexmock(NeptuneManagerClient).new_instances { |instance|
       instance.should_receive(:start_neptune_job).and_return("babel job is now running")
       instance.should_receive(:get_supported_babel_engines).and_return(all_engines)
       # code exists - output, error, metadata do not - something else does
@@ -318,7 +318,7 @@ class TestNeptune < Test::Unit::TestCase
     @commonfunctions.should_receive(:get_from_yaml).and_return("127.0.0.1")
     @commonfunctions.should_receive(:get_secret_key).and_return("secret")
 
-    flexmock(AppControllerClient).new_instances { |instance|
+    flexmock(NeptuneManagerClient).new_instances { |instance|
       instance.should_receive(:start_neptune_job).and_return("babel job is now running")
       instance.should_receive(:get_supported_babel_engines).and_return(all_engines)
       instance.should_receive(:does_file_exist?).and_return(false)
