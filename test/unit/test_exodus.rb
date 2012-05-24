@@ -31,6 +31,26 @@ class TestExodus < Test::Unit::TestCase
     assert_raises(BadConfigurationException) {
       exodus([2])
     }
+
+    # calling exodus without specifying :clouds should fail
+    assert_raises(BadConfigurationException) {
+      exodus({})
+    }
+
+    # calling exodus with invalid clouds specified should fail
+    assert_raises(BadConfigurationException) {
+      exodus({:clouds_to_use => "not an acceptable value"})
+    }
+
+    # doing the same but with an array should also fail
+    assert_raises(BadConfigurationException) {
+      exodus({:clouds_to_use => ["not an acceptable value"]})
+    }
+
+    # giving an array of not strings should fail
+    assert_raises(BadConfigurationException) {
+      exodus({:clouds_to_use => [1, 2, 3]})
+    }
   end
 
   def test_exodus_batch_params
