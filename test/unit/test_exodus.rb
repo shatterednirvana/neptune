@@ -27,6 +27,10 @@ class TestExodus < Test::Unit::TestCase
       exodus(2)
     }
 
+    # also, if we give exodus an Array, it had better be an array of Hashes
+    assert_raises(BadConfigurationException) {
+      exodus([2])
+    }
   end
 
   def test_exodus_batch_params
