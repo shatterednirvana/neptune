@@ -56,6 +56,38 @@ class TestExodus < Test::Unit::TestCase
     assert_raises(BadConfigurationException) {
       exodus({:clouds_to_use => 1})
     }
+
+    # giving an acceptable cloud but with no credentials should fail
+    assert_raises(BadConfigurationException) {
+      exodus({:clouds_to_use => ExodusHelper::GoogleAppEngine})
+    }
+
+    # similarly, specifying credentials in a non-Hash format should fail
+    assert_raises(BadConfigurationException) {
+      exodus({:clouds_to_use => ExodusHelper::GoogleAppEngine,
+        :credentials => 1})
+    }
+
+    # if a credential is nil or empty, it should fail
+    assert_raises(BadConfigurationException) {
+      exodus({
+        :clouds_to_use => ExodusHelper::AmazonEC2,
+        :credentials => {
+          :EC2_ACCESS_KEY => nil,
+          :EC2_SECRET_KEY => "baz"
+        }
+      })
+    }
+
+    assert_raises(BadConfigurationException) {
+      exodus({
+        :clouds_to_use => ExodusHelper::AmazonEC2,
+        :credentials => {
+          :EC2_ACCESS_KEY => "",
+          :EC2_SECRET_KEY => "baz"
+        }
+      })
+    }
   end
 
   def test_exodus_batch_params

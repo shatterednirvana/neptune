@@ -31,8 +31,24 @@ end
 module ExodusHelper
 
 
+  AmazonEC2 = "amazon-ec2"
+
+
+  GoogleAppEngine = "google-app-engine"
+
+  
+  MicrosoftAzure = "microsoft-azure"
+
+
   # A list of clouds that users can run tasks on via Exodus.
-  SUPPORTED_CLOUDS = %w{amazon-ec2 microsoft-azure google-app-engine}
+  SUPPORTED_CLOUDS = [AmazonEC2, GoogleAppEngine, MicrosoftAzure]
+
+
+  CLOUD_CREDENTIALS = {
+    AmazonEC2 => [:EC2_ACCESS_KEY, :EC2_SECRET_KEY],
+    GoogleAppEngine => [],
+    MicrosoftAzure => []
+  }
 
 
   # Given an Array of jobs to run, ensures that they are all Hashes, the
@@ -85,14 +101,40 @@ module ExodusHelper
   # it in this version of Neptune, and that the user has given us all the 
   # credentials needed to use that cloud.
   def self.validate_clouds_to_use(job)
+    self.ensure_credentials_are_in_correct_format(job)
+    self.propogate_credentials_from_environment(job)
+
     job[:clouds_to_use].each { |cloud|
       if SUPPORTED_CLOUDS.include?(cloud)
-        #self.ensure_credentials_are_present_for_cloud(job)
+        CLOUD_CREDENTIALS[cloud].each { |required_credential|
+          val_for_credential = job[:credentials][required_credential]
+          if val_for_credential.nil? or val_for_credential.empty?
+            raise BadConfigurationException.new("To use #{cloud}, " +
+              "#{required_credential} must be specified.")
+          end
+        }
       else
         raise BadConfigurationException.new("#{cloud} was specified as in " +
           ":clouds_to_use, which is not a supported cloud.")
       end
     }
+  end
+
+
+  def self.ensure_credentials_are_in_correct_format(job)
+    if job[:credentials].nil?
+      raise BadConfigurationException.new("No credentials were specified.")
+    end
+
+    if job[:credentials].class != Hash
+      raise BadConfigurationException.new("Credentials given were not a " +
+        "Hash, but were a #{job[:credentials].class}")
+    end
+  end
+
+
+  def self.propogate_credentials_from_environment(job)
+
   end
 
 

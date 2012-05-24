@@ -70,6 +70,10 @@
     
     <li><a href="#method-c-ensure_all_params_are_present">::ensure_all_params_are_present</a>
     
+    <li><a href="#method-c-ensure_credentials_are_in_correct_format">::ensure_credentials_are_in_correct_format</a>
+    
+    <li><a href="#method-c-propogate_credentials_from_environment">::propogate_credentials_from_environment</a>
+    
     <li><a href="#method-c-validate_clouds_to_use">::validate_clouds_to_use</a>
     
   </ul>
@@ -134,6 +138,26 @@ cluttering up <a href="Object.html">Object</a> or Kernel’s namespace.</p>
       <h3 class="section-header">Constants</h3>
       <dl>
       
+        <dt id="AmazonEC2">AmazonEC2
+        
+        <dd class="description">
+        
+      
+        <dt id="CLOUD_CREDENTIALS">CLOUD_CREDENTIALS
+        
+        <dd class="description">
+        
+      
+        <dt id="GoogleAppEngine">GoogleAppEngine
+        
+        <dd class="description">
+        
+      
+        <dt id="MicrosoftAzure">MicrosoftAzure
+        
+        <dd class="description">
+        
+      
         <dt id="SUPPORTED_CLOUDS">SUPPORTED_CLOUDS
         
         <dd class="description"><p>A list of clouds that users can run tasks on via Exodus.</p>
@@ -171,7 +195,7 @@ href="BadConfigurationException.html">BadConfigurationException</a> if
 
           
           <div class="method-source-code" id="convert_clouds_to_use_to_array-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 66</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">convert_clouds_to_use_to_array</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-identifier">clouds_class</span> = <span class="ruby-identifier">job</span>[<span class="ruby-value">:clouds_to_use</span>].<span class="ruby-identifier">class</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">clouds_class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">String</span>
@@ -215,7 +239,7 @@ standard format for Neptune jobs.</p>
 
           
           <div class="method-source-code" id="ensure_all_jobs_are_hashes-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 40</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ensure_all_jobs_are_hashes</span>(<span class="ruby-identifier">jobs</span>)
   <span class="ruby-identifier">jobs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">job</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">Hash</span>
@@ -252,7 +276,7 @@ missing params.</p>
 
           
           <div class="method-source-code" id="ensure_all_params_are_present-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 52</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ensure_all_params_are_present</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>[<span class="ruby-value">:clouds_to_use</span>].<span class="ruby-identifier">nil?</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;:clouds_to_use was not specified&quot;</span>)
@@ -269,6 +293,73 @@ missing params.</p>
 
         
       </div><!-- ensure_all_params_are_present-method -->
+
+    
+      <div id="method-c-ensure_credentials_are_in_correct_format" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ensure_credentials_are_in_correct_format</span><span
+            class="method-args">(job)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="ensure_credentials_are_in_correct_format-source">
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ensure_credentials_are_in_correct_format</span>(<span class="ruby-identifier">job</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>[<span class="ruby-value">:credentials</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;No credentials were specified.&quot;</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>[<span class="ruby-value">:credentials</span>].<span class="ruby-identifier">class</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Credentials given were not a &quot;</span> <span class="ruby-operator">+</span>
+      <span class="ruby-node">&quot;Hash, but were a #{job[:credentials].class}&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- ensure_credentials_are_in_correct_format-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- ensure_credentials_are_in_correct_format-method -->
+
+    
+      <div id="method-c-propogate_credentials_from_environment" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">propogate_credentials_from_environment</span><span
+            class="method-args">(job)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="propogate_credentials_from_environment-source">
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 136</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">propogate_credentials_from_environment</span>(<span class="ruby-identifier">job</span>)
+
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- propogate_credentials_from_environment-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- propogate_credentials_from_environment-method -->
 
     
       <div id="method-c-validate_clouds_to_use" class="method-detail ">
@@ -289,11 +380,20 @@ credentials needed to use that cloud.</p>
 
           
           <div class="method-source-code" id="validate_clouds_to_use-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 87</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">validate_clouds_to_use</span>(<span class="ruby-identifier">job</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ensure_credentials_are_in_correct_format</span>(<span class="ruby-identifier">job</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">propogate_credentials_from_environment</span>(<span class="ruby-identifier">job</span>)
+
   <span class="ruby-identifier">job</span>[<span class="ruby-value">:clouds_to_use</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cloud</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-constant">SUPPORTED_CLOUDS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">cloud</span>)
-      <span class="ruby-comment">#self.ensure_credentials_are_present_for_cloud(job)</span>
+      <span class="ruby-constant">CLOUD_CREDENTIALS</span>[<span class="ruby-identifier">cloud</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">required_credential</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">val_for_credential</span> = <span class="ruby-identifier">job</span>[<span class="ruby-value">:credentials</span>][<span class="ruby-identifier">required_credential</span>]
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">val_for_credential</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">val_for_credential</span>.<span class="ruby-identifier">empty?</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;To use #{cloud}, &quot;</span> <span class="ruby-operator">+</span>
+            <span class="ruby-node">&quot;#{required_credential} must be specified.&quot;</span>)
+        <span class="ruby-keyword">end</span>
+      }
     <span class="ruby-keyword">else</span>
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{cloud} was specified as in &quot;</span> <span class="ruby-operator">+</span>
         <span class="ruby-string">&quot;:clouds_to_use, which is not a supported cloud.&quot;</span>)

@@ -28,17 +28,17 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="lib-exodus_rb.html">lib/exodus.rb</a></td>
-            <td class='right_align'><tt>99</tt></td>
-            <td class='right_align'><tt>58</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
+            <td class='right_align'><tt>141</tt></td>
+            <td class='right_align'><tt>86</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>95.74%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:100px"></div>
-            <div class="uncovered" style="width:0px"></div>
+            <div class="covered" style="width:96px"></div>
+            <div class="uncovered" style="width:4px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>93.02%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:100px"></div>
-            <div class="uncovered" style="width:0px"></div>
+            <div class="covered" style="width:93px"></div>
+            <div class="uncovered" style="width:7px"></div>
           </div></td>
           </tr>
         </tbody>
@@ -254,14 +254,14 @@
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line34">34</a>   # A list of clouds that users can run tasks on via Exodus.</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line34">34</a>   AmazonEC2 = &quot;amazon-ec2&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line35">35</a>   SUPPORTED_CLOUDS = %w{amazon-ec2 microsoft-azure google-app-engine}</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line35">35</a> </pre></td>
           </tr>
         
           
@@ -272,368 +272,368 @@
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line37">37</a> </pre></td>
+          <tr class="marked">
+            <td><pre><a name="line37">37</a>   GoogleAppEngine = &quot;google-app-engine&quot;</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line38">38</a>   # Given an Array of jobs to run, ensures that they are all Hashes, the</pre></td>
+            <td><pre><a name="line38">38</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line39">39</a>   # standard format for Neptune jobs.</pre></td>
+            <td><pre><a name="line39">39</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line40">40</a>   def self.ensure_all_jobs_are_hashes(jobs)</pre></td>
+            <td><pre><a name="line40">40</a>   MicrosoftAzure = &quot;microsoft-azure&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line41">41</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line42">42</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line43">43</a>   # A list of clouds that users can run tasks on via Exodus.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line41">41</a>     jobs.each { |job|</pre></td>
+            <td><pre><a name="line44">44</a>   SUPPORTED_CLOUDS = [AmazonEC2, GoogleAppEngine, MicrosoftAzure]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line45">45</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line46">46</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line42">42</a>       if job.class != Hash</pre></td>
+            <td><pre><a name="line47">47</a>   CLOUD_CREDENTIALS = {</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line43">43</a>         raise BadConfigurationException.new(&quot;A job passed to exodus() was &quot; +</pre></td>
+            <td><pre><a name="line48">48</a>     AmazonEC2 =&gt; [:EC2_ACCESS_KEY, :EC2_SECRET_KEY],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line49">49</a>     GoogleAppEngine =&gt; [],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line50">50</a>     MicrosoftAzure =&gt; []</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line51">51</a>   }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line52">52</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line53">53</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line54">54</a>   # Given an Array of jobs to run, ensures that they are all Hashes, the</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line55">55</a>   # standard format for Neptune jobs.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line44">44</a>           &quot;not a Hash, but was a #{job.class}&quot;)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line45">45</a>       end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line46">46</a>     }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line47">47</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line48">48</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line49">49</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line50">50</a>   # Given an Exodus job, validates its parameters, raising a </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line51">51</a>   # BadConfigurationException for any missing params.</pre></td>
+            <td><pre><a name="line56">56</a>   def self.ensure_all_jobs_are_hashes(jobs)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line52">52</a>   def self.ensure_all_params_are_present(job)</pre></td>
+            <td><pre><a name="line57">57</a>     jobs.each { |job|</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line53">53</a>     if job[:clouds_to_use].nil?</pre></td>
+            <td><pre><a name="line58">58</a>       if job.class != Hash</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line59">59</a>         raise BadConfigurationException.new(&quot;A job passed to exodus() was &quot; +</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line54">54</a>       raise BadConfigurationException.new(&quot;:clouds_to_use was not specified&quot;)</pre></td>
+            <td><pre><a name="line60">60</a>           &quot;not a Hash, but was a #{job.class}&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line55">55</a>     else</pre></td>
+            <td><pre><a name="line61">61</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line62">62</a>     }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line63">63</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line64">64</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line65">65</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line66">66</a>   # Given an Exodus job, validates its parameters, raising a </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line67">67</a>   # BadConfigurationException for any missing params.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line56">56</a>       self.convert_clouds_to_use_to_array(job)</pre></td>
+            <td><pre><a name="line68">68</a>   def self.ensure_all_params_are_present(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line57">57</a>       self.validate_clouds_to_use(job)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line58">58</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line59">59</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line60">60</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line61">61</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line62">62</a>   # Given a single Exodus job, checks to make sure it has either an Array</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line63">63</a>   # of Strings or a single String listing the clouds that a given task can</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line64">64</a>   # run on. Raises a BadConfigurationException if :clouds_to_use is not in</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line65">65</a>   # the right format.</pre></td>
+            <td><pre><a name="line69">69</a>     if job[:clouds_to_use].nil?</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line66">66</a>   def self.convert_clouds_to_use_to_array(job)</pre></td>
+            <td><pre><a name="line70">70</a>       raise BadConfigurationException.new(&quot;:clouds_to_use was not specified&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line71">71</a>     else</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line67">67</a>     clouds_class = job[:clouds_to_use].class</pre></td>
+            <td><pre><a name="line72">72</a>       self.convert_clouds_to_use_to_array(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line68">68</a>     if clouds_class == String</pre></td>
+            <td><pre><a name="line73">73</a>       self.validate_clouds_to_use(job)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line74">74</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line75">75</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line76">76</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line77">77</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line78">78</a>   # Given a single Exodus job, checks to make sure it has either an Array</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line79">79</a>   # of Strings or a single String listing the clouds that a given task can</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line80">80</a>   # run on. Raises a BadConfigurationException if :clouds_to_use is not in</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line81">81</a>   # the right format.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line69">69</a>       job[:clouds_to_use] = [job[:clouds_to_use]]</pre></td>
+            <td><pre><a name="line82">82</a>   def self.convert_clouds_to_use_to_array(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line70">70</a>     elsif clouds_class == Array</pre></td>
+            <td><pre><a name="line83">83</a>     clouds_class = job[:clouds_to_use].class</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line71">71</a>       job[:clouds_to_use].each { |cloud|</pre></td>
+            <td><pre><a name="line84">84</a>     if clouds_class == String</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line72">72</a>         if cloud.class != String</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line73">73</a>           raise BadConfigurationException.new(&quot;#{cloud} was not a String, &quot; +</pre></td>
+            <td><pre><a name="line85">85</a>       job[:clouds_to_use] = [job[:clouds_to_use]]</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line74">74</a>             &quot;but was a #{cloud.class}&quot;)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line75">75</a>         end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line76">76</a>       }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line77">77</a>     else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line78">78</a>       raise BadConfigurationException.new(&quot;#{job[:clouds_to_use]} was not &quot; +</pre></td>
+            <td><pre><a name="line86">86</a>     elsif clouds_class == Array</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line79">79</a>         &quot;a String or Array, but was a #{clouds_class}&quot;)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line80">80</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line81">81</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line82">82</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line83">83</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line84">84</a>   # Given a single Exodus job, checks to make sure that we can actually run</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line85">85</a>   # it in this version of Neptune, and that the user has given us all the </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line86">86</a>   # credentials needed to use that cloud.</pre></td>
+            <td><pre><a name="line87">87</a>       job[:clouds_to_use].each { |cloud|</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line87">87</a>   def self.validate_clouds_to_use(job)</pre></td>
+            <td><pre><a name="line88">88</a>         if cloud.class != String</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line89">89</a>           raise BadConfigurationException.new(&quot;#{cloud} was not a String, &quot; +</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line88">88</a>     job[:clouds_to_use].each { |cloud|</pre></td>
+            <td><pre><a name="line90">90</a>             &quot;but was a #{cloud.class}&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line91">91</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line92">92</a>       }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line93">93</a>     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line94">94</a>       raise BadConfigurationException.new(&quot;#{job[:clouds_to_use]} was not &quot; +</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line89">89</a>       if SUPPORTED_CLOUDS.include?(cloud)</pre></td>
+            <td><pre><a name="line95">95</a>         &quot;a String or Array, but was a #{clouds_class}&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line90">90</a>         #self.ensure_credentials_are_present_for_cloud(job)</pre></td>
+            <td><pre><a name="line96">96</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line91">91</a>       else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line92">92</a>         raise BadConfigurationException.new(&quot;#{cloud} was specified as in &quot; +</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line93">93</a>           &quot;:clouds_to_use, which is not a supported cloud.&quot;)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line94">94</a>       end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line95">95</a>     }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line96">96</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line97">97</a> </pre></td>
+            <td><pre><a name="line97">97</a>   end</pre></td>
           </tr>
         
           
@@ -645,13 +645,265 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line99">99</a> end</pre></td>
+            <td><pre><a name="line99">99</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line100">100</a>   # Given a single Exodus job, checks to make sure that we can actually run</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line101">101</a>   # it in this version of Neptune, and that the user has given us all the </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line102">102</a>   # credentials needed to use that cloud.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line103">103</a>   def self.validate_clouds_to_use(job)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line104">104</a>     self.ensure_credentials_are_in_correct_format(job)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line105">105</a>     self.propogate_credentials_from_environment(job)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line106">106</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line107">107</a>     job[:clouds_to_use].each { |cloud|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line108">108</a>       if SUPPORTED_CLOUDS.include?(cloud)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line109">109</a>         CLOUD_CREDENTIALS[cloud].each { |required_credential|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line110">110</a>           val_for_credential = job[:credentials][required_credential]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line111">111</a>           if val_for_credential.nil? or val_for_credential.empty?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line112">112</a>             raise BadConfigurationException.new(&quot;To use #{cloud}, &quot; +</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line113">113</a>               &quot;#{required_credential} must be specified.&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line114">114</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line115">115</a>         }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line116">116</a>       else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line117">117</a>         raise BadConfigurationException.new(&quot;#{cloud} was specified as in &quot; +</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line118">118</a>           &quot;:clouds_to_use, which is not a supported cloud.&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line119">119</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line120">120</a>     }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line121">121</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line122">122</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line123">123</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line124">124</a>   def self.ensure_credentials_are_in_correct_format(job)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line125">125</a>     if job[:credentials].nil?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line126">126</a>       raise BadConfigurationException.new(&quot;No credentials were specified.&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line127">127</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line128">128</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line129">129</a>     if job[:credentials].class != Hash</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line130">130</a>       raise BadConfigurationException.new(&quot;Credentials given were not a &quot; +</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line131">131</a>         &quot;Hash, but were a #{job[:credentials].class}&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line132">132</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line133">133</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line134">134</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line135">135</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line136">136</a>   def self.propogate_credentials_from_environment(job)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line137">137</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line138">138</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line139">139</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line140">140</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line141">141</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Wed May 23 23:23:28 -0700 2012 with <a href="http://github.com/relevance/rcov">rcov 1.0.0</a></p>
+    <p>Generated on Thu May 24 10:04:21 -0700 2012 with <a href="http://github.com/relevance/rcov">rcov 1.0.0</a></p>
 
   </body>
 </html>
