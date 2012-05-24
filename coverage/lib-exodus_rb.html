@@ -28,17 +28,17 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="lib-exodus_rb.html">lib/exodus.rb</a></td>
-            <td class='right_align'><tt>77</tt></td>
-            <td class='right_align'><tt>54</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>94.81%</tt></div>
+            <td class='right_align'><tt>79</tt></td>
+            <td class='right_align'><tt>57</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:95px"></div>
-            <div class="uncovered" style="width:5px"></div>
+            <div class="covered" style="width:100px"></div>
+            <div class="uncovered" style="width:0px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>94.44%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:94px"></div>
-            <div class="uncovered" style="width:6px"></div>
+            <div class="covered" style="width:100px"></div>
+            <div class="uncovered" style="width:0px"></div>
           </div></td>
           </tr>
         </tbody>
@@ -363,163 +363,175 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line52">52</a>     if job[:clouds_to_use].class == String</pre></td>
+            <td><pre><a name="line52">52</a>     clouds_class = job[:clouds_to_use].class</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line53">53</a>       job[:clouds_to_use] = [job[:clouds_to_use]]</pre></td>
+            <td><pre><a name="line53">53</a>     if clouds_class == String</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line54">54</a>     elsif job[:clouds_to_use].class == Array</pre></td>
+            <td><pre><a name="line54">54</a>       job[:clouds_to_use] = [job[:clouds_to_use]]</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line55">55</a>       job[:clouds_to_use].each { |cloud|</pre></td>
+            <td><pre><a name="line55">55</a>     elsif clouds_class == Array</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line56">56</a>         if cloud.class != String</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line57">57</a>           raise BadConfigurationException.new(&quot;#{cloud} was not a String, &quot; +</pre></td>
+            <td><pre><a name="line56">56</a>       job[:clouds_to_use].each { |cloud|</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line58">58</a>             &quot;but was a #{cloud.class}&quot;)</pre></td>
+            <td><pre><a name="line57">57</a>         if cloud.class != String</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line59">59</a>         end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line60">60</a>       }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line61">61</a>     else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line62">62</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line63">63</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line64">64</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line65">65</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line66">66</a> </pre></td>
+            <td><pre><a name="line58">58</a>           raise BadConfigurationException.new(&quot;#{cloud} was not a String, &quot; +</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line67">67</a>   def self.validate_clouds_to_use(job)</pre></td>
+            <td><pre><a name="line59">59</a>             &quot;but was a #{cloud.class}&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line60">60</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line61">61</a>       }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line62">62</a>     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line63">63</a>       raise BadConfigurationException.new(&quot;#{job[:clouds_to_use]} was not &quot; +</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line68">68</a>     job[:clouds_to_use].each { |cloud|</pre></td>
+            <td><pre><a name="line64">64</a>         &quot;a String or Array, but was a #{clouds_class}&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line65">65</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line66">66</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line67">67</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line68">68</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line69">69</a>       if !SUPPORTED_CLOUDS.include?(cloud)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line70">70</a>         raise BadConfigurationException.new(&quot;#{cloud} was specified as in &quot; +</pre></td>
+            <td><pre><a name="line69">69</a>   def self.validate_clouds_to_use(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line71">71</a>           &quot;:clouds_to_use, which is not a supported cloud.&quot;)</pre></td>
+            <td><pre><a name="line70">70</a>     job[:clouds_to_use].each { |cloud|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line71">71</a>       if !SUPPORTED_CLOUDS.include?(cloud)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line72">72</a>       end</pre></td>
+            <td><pre><a name="line72">72</a>         raise BadConfigurationException.new(&quot;#{cloud} was specified as in &quot; +</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line73">73</a>           &quot;:clouds_to_use, which is not a supported cloud.&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line73">73</a>     }</pre></td>
+            <td><pre><a name="line74">74</a>       end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line74">74</a>   end</pre></td>
+            <td><pre><a name="line75">75</a>     }</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line75">75</a> </pre></td>
+            <td><pre><a name="line76">76</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line76">76</a> </pre></td>
+            <td><pre><a name="line77">77</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line77">77</a> end</pre></td>
+            <td><pre><a name="line78">78</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line79">79</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Wed May 23 22:43:12 -0700 2012 with <a href="http://github.com/relevance/rcov">rcov 1.0.0</a></p>
+    <p>Generated on Wed May 23 22:52:11 -0700 2012 with <a href="http://github.com/relevance/rcov">rcov 1.0.0</a></p>
 
   </body>
 </html>

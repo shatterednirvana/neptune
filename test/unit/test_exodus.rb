@@ -51,6 +51,11 @@ class TestExodus < Test::Unit::TestCase
     assert_raises(BadConfigurationException) {
       exodus({:clouds_to_use => [1, 2, 3]})
     }
+
+    # giving not a string should fail
+    assert_raises(BadConfigurationException) {
+      exodus({:clouds_to_use => 1})
+    }
   end
 
   def test_exodus_batch_params

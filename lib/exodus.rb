@@ -49,9 +49,10 @@ module ExodusHelper
 
 
   def self.convert_clouds_to_use_to_array(job)
-    if job[:clouds_to_use].class == String
+    clouds_class = job[:clouds_to_use].class
+    if clouds_class == String
       job[:clouds_to_use] = [job[:clouds_to_use]]
-    elsif job[:clouds_to_use].class == Array
+    elsif clouds_class == Array
       job[:clouds_to_use].each { |cloud|
         if cloud.class != String
           raise BadConfigurationException.new("#{cloud} was not a String, " +
@@ -59,7 +60,8 @@ module ExodusHelper
         end
       }
     else
-
+      raise BadConfigurationException.new("#{job[:clouds_to_use]} was not " +
+        "a String or Array, but was a #{clouds_class}")
     end
   end
 
