@@ -1,180 +1,171 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+
+<html>
 <head>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-  <title>Module: NeptuneHelper</title>
+<title>module NeptuneHelper - RDoc Documentation</title>
 
-  <link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
-  <script src="./js/jquery.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="./js/thickbox-compressed.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="./js/quicksearch.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="./js/darkfish.js" type="text/javascript"
-    charset="utf-8"></script>
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
 
-</head>
-<body class="module">
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
 
-  <div id="metadata">
-    <div id="home-metadata">
-      <div id="home-section" class="section">
-        <h3 class="section-header">
-          <a href="./index.html">Home</a>
-          <a href="./index.html#classes">Classes</a>
-          <a href="./index.html#methods">Methods</a>
-        </h3>
-      </div>
-    </div>
 
-    <div id="file-metadata">
-      <div id="file-list-section" class="section">
-        <h3 class="section-header">In Files</h3>
-        <div class="section-body">
-          <ul>
-          
-            <li><a href="./lib/neptune_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-              class="thickbox" title="lib/neptune.rb">lib/neptune.rb</a></li>
-          
-          </ul>
-        </div>
-      </div>
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
 
-      
-    </div>
 
-    <div id="class-metadata">
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
 
-      <!-- Parent Class -->
-      
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
 
-      <!-- Namespace Contents -->
-      
 
-      <!-- Method Quickref -->
-      
-      <div id="method-list-section" class="section">
-        <h3 class="section-header">Methods</h3>
-        <ul class="link-list">
-          
-          <li><a href="#method-c-compile_code">::compile_code</a></li>
-          
-          <li><a href="#method-c-do_preprocessing">::do_preprocessing</a></li>
-          
-          <li><a href="#method-c-get_input">::get_input</a></li>
-          
-          <li><a href="#method-c-get_job_data">::get_job_data</a></li>
-          
-          <li><a href="#method-c-get_std_out_and_err">::get_std_out_and_err</a></li>
-          
-          <li><a href="#method-c-preprocess_babel">::preprocess_babel</a></li>
-          
-          <li><a href="#method-c-preprocess_compile">::preprocess_compile</a></li>
-          
-          <li><a href="#method-c-preprocess_erlang">::preprocess_erlang</a></li>
-          
-          <li><a href="#method-c-preprocess_mpi">::preprocess_mpi</a></li>
-          
-          <li><a href="#method-c-preprocess_ssa">::preprocess_ssa</a></li>
-          
-          <li><a href="#method-c-require_file_to_exist">::require_file_to_exist</a></li>
-          
-          <li><a href="#method-c-require_file_to_not_exist">::require_file_to_not_exist</a></li>
-          
-          <li><a href="#method-c-require_param">::require_param</a></li>
-          
-          <li><a href="#method-c-run_job">::run_job</a></li>
-          
-          <li><a href="#method-c-upload_app_for_cicero">::upload_app_for_cicero</a></li>
-          
-          <li><a href="#method-c-validate_storage_params">::validate_storage_params</a></li>
-          
-          <li><a href="#method-c-wait_for_compilation_to_finish">::wait_for_compilation_to_finish</a></li>
-          
-        </ul>
-      </div>
-      
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/neptune.rb
+  </ul>
+</nav>
 
-      <!-- Included Modules -->
-      
-    </div>
-
-    <div id="project-metadata">
-      
-      
-
-      <div id="classindex-section" class="section project-section">
-        <h3 class="section-header">Class/Module Index
-          <span class="search-toggle"><img src="./images/find.png"
-            height="16" width="16" alt="[+]"
-            title="show/hide quicksearch" /></span></h3>
-        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
-        <fieldset>
-          <legend>Quicksearch</legend>
-          <input type="text" name="quicksearch" value=""
-            class="quicksearch-field" />
-        </fieldset>
-        </form>
-
-        <ul class="link-list">
-        
-          <li><a href="./AppControllerClient.html">AppControllerClient</a></li>
-        
-          <li><a href="./AppControllerException.html">AppControllerException</a></li>
-        
-          <li><a href="./BabelHelper.html">BabelHelper</a></li>
-        
-          <li><a href="./BadConfigurationException.html">BadConfigurationException</a></li>
-        
-          <li><a href="./CommonFunctions.html">CommonFunctions</a></li>
-        
-          <li><a href="./FileNotFoundException.html">FileNotFoundException</a></li>
-        
-          <li><a href="./NeptuneHelper.html">NeptuneHelper</a></li>
-        
-          <li><a href="./Object.html">Object</a></li>
-        
-          <li><a href="./TaskInfo.html">TaskInfo</a></li>
-        
-        </ul>
-        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
-      </div>
-
-      
-    </div>
+    
   </div>
 
-  <div id="documentation">
-    <h1 class="module">NeptuneHelper</h1>
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
 
-    <div id="description">
-      
+  <ul class="link-list">
+    
+    <li><a href="#method-c-compile_code">::compile_code</a>
+    
+    <li><a href="#method-c-do_preprocessing">::do_preprocessing</a>
+    
+    <li><a href="#method-c-get_input">::get_input</a>
+    
+    <li><a href="#method-c-get_job_data">::get_job_data</a>
+    
+    <li><a href="#method-c-get_std_out_and_err">::get_std_out_and_err</a>
+    
+    <li><a href="#method-c-preprocess_babel">::preprocess_babel</a>
+    
+    <li><a href="#method-c-preprocess_compile">::preprocess_compile</a>
+    
+    <li><a href="#method-c-preprocess_erlang">::preprocess_erlang</a>
+    
+    <li><a href="#method-c-preprocess_mpi">::preprocess_mpi</a>
+    
+    <li><a href="#method-c-preprocess_ssa">::preprocess_ssa</a>
+    
+    <li><a href="#method-c-require_file_to_exist">::require_file_to_exist</a>
+    
+    <li><a href="#method-c-require_file_to_not_exist">::require_file_to_not_exist</a>
+    
+    <li><a href="#method-c-require_param">::require_param</a>
+    
+    <li><a href="#method-c-run_job">::run_job</a>
+    
+    <li><a href="#method-c-upload_app_for_cicero">::upload_app_for_cicero</a>
+    
+    <li><a href="#method-c-validate_storage_params">::validate_storage_params</a>
+    
+    <li><a href="#method-c-wait_for_compilation_to_finish">::wait_for_compilation_to_finish</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./BabelHelper.html">BabelHelper</a>
+  
+    <li><a href="./BadConfigurationException.html">BadConfigurationException</a>
+  
+    <li><a href="./CommonFunctions.html">CommonFunctions</a>
+  
+    <li><a href="./ExodusHelper.html">ExodusHelper</a>
+  
+    <li><a href="./FileNotFoundException.html">FileNotFoundException</a>
+  
+    <li><a href="./NeptuneHelper.html">NeptuneHelper</a>
+  
+    <li><a href="./NeptuneManagerClient.html">NeptuneManagerClient</a>
+  
+    <li><a href="./NeptuneManagerException.html">NeptuneManagerException</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./TaskInfo.html">TaskInfo</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module NeptuneHelper</h1>
+
+  <div id="description" class="description">
+    
 <p><a href="NeptuneHelper.html">NeptuneHelper</a> provides methods that are
 used by neptune() and babel() to  validate parameters and run the user’s
 job.</p>
 
-    </div>
+  </div><!-- description -->
 
-    <!-- Constants -->
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
     
 
-    <!-- Attributes -->
+    
+
+    
+
     
 
     <!-- Methods -->
     
-    <div id="public-class-method-details" class="method-section section">
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
       <h3 class="section-header">Public Class Methods</h3>
 
     
-      <div id="compile_code-method" class="method-detail ">
-        <a name="method-c-compile_code"></a>
-
+      <div id="method-c-compile_code" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">compile_code</span><span
@@ -192,46 +183,42 @@ indicates whether or not the compilation was successful.</p>
           
 
           
-          <div class="method-source-code"
-            id="compile_code-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 431</span>
-def self.compile_code(job_data, ssh_args, shadow_ip)
-  compiled_location = controller.compile_code(job_data)
-  copy_to = job_data[<span class="ruby-string">&quot;@copy_to&quot;</span>]
-  self.wait_for_compilation_to_finish(ssh_args, shadow_ip, compiled_location)
+          <div class="method-source-code" id="compile_code-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 458</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">compile_code</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">ssh_args</span>, <span class="ruby-identifier">shadow_ip</span>)
+  <span class="ruby-identifier">compiled_location</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">compile_code</span>(<span class="ruby-identifier">job_data</span>)
+  <span class="ruby-identifier">copy_to</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@copy_to&quot;</span>]
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">wait_for_compilation_to_finish</span>(<span class="ruby-identifier">ssh_args</span>, <span class="ruby-identifier">shadow_ip</span>, <span class="ruby-identifier">compiled_location</span>)
 
-  <span class="ruby-constant">FileUtils</span>.rm_rf(copy_to)
+  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm_rf</span>(<span class="ruby-identifier">copy_to</span>)
 
-  scp_command = &quot;scp -r #{ssh_args} root@#{shadow_ip}:#{compiled_location} #{copy_to} 2&gt;&amp;1&quot;
+  <span class="ruby-identifier">scp_command</span> = <span class="ruby-node">&quot;scp -r #{ssh_args} root@#{shadow_ip}:#{compiled_location} #{copy_to} 2&gt;&amp;1&quot;</span>
   <span class="ruby-comment"># Kernel.puts scp_command</span>
-  <span class="ruby-constant">CommonFunctions</span>.shell(scp_command)
+  <span class="ruby-constant">CommonFunctions</span>.<span class="ruby-identifier">shell</span>(<span class="ruby-identifier">scp_command</span>)
 
-  code = job_data[<span class="ruby-string">&quot;@code&quot;</span>]
-  dirs = code.split(<span class="ruby-regexp">/\//</span>)
-  remote_dir = <span class="ruby-string">&quot;/tmp/&quot;</span> + dirs[-1] 
+  <span class="ruby-identifier">code</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@code&quot;</span>]
+  <span class="ruby-identifier">dirs</span> = <span class="ruby-identifier">code</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">%r\//</span>)
+  <span class="ruby-identifier">remote_dir</span> = <span class="ruby-string">&quot;/tmp/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">dirs</span>[<span class="ruby-value">-1</span>] 
 
-  [remote_dir, compiled_location].each { |remote_files|
-    ssh_command = &quot;ssh #{ssh_args} root@#{shadow_ip} 'rm -rf #{remote_files}' 2&gt;&amp;1&quot;
+  [<span class="ruby-identifier">remote_dir</span>, <span class="ruby-identifier">compiled_location</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">remote_files</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">ssh_command</span> = <span class="ruby-node">&quot;ssh #{ssh_args} root@#{shadow_ip} 'rm -rf #{remote_files}' 2&gt;&amp;1&quot;</span>
     <span class="ruby-comment"># Kernel.puts ssh_command</span>
-    <span class="ruby-constant">CommonFunctions</span>.shell(ssh_command)
+    <span class="ruby-constant">CommonFunctions</span>.<span class="ruby-identifier">shell</span>(<span class="ruby-identifier">ssh_command</span>)
   }
 
-  return get_std_out_and_err(copy_to)
-end</pre>
-          </div>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">get_std_out_and_err</span>(<span class="ruby-identifier">copy_to</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- compile_code-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- compile_code-method -->
 
     
-      <div id="do_preprocessing-method" class="method-detail ">
-        <a name="method-c-do_preprocessing"></a>
-
+      <div id="method-c-do_preprocessing" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">do_preprocessing</span><span
@@ -248,34 +235,30 @@ method to use based on the type of the job that the user has asked to run.</p>
           
 
           
-          <div class="method-source-code"
-            id="do_preprocessing-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 87</span>
-def self.do_preprocessing(job_data, controller)
-  job_type = job_data[<span class="ruby-string">&quot;@type&quot;</span>]
-  if !<span class="ruby-constant">NEED_PREPROCESSING</span>.include?(job_type)
-    return
-  end
+          <div class="method-source-code" id="do_preprocessing-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">do_preprocessing</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
+  <span class="ruby-identifier">job_type</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@type&quot;</span>]
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">NEED_PREPROCESSING</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">job_type</span>)
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Don't worry about adding on the self. prefix - send will resolve</span>
   <span class="ruby-comment"># it the right way</span>
-  preprocess = &quot;preprocess_#{job_type}&quot;.to_sym
-  send(preprocess, job_data, controller)
-end</pre>
-          </div>
+  <span class="ruby-identifier">preprocess</span> = <span class="ruby-node">&quot;preprocess_#{job_type}&quot;</span>.<span class="ruby-identifier">to_sym</span>
+  <span class="ruby-identifier">send</span>(<span class="ruby-identifier">preprocess</span>, <span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- do_preprocessing-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- do_preprocessing-method -->
 
     
-      <div id="get_input-method" class="method-detail ">
-        <a name="method-c-get_input"></a>
-
+      <div id="method-c-get_input" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">get_input</span><span
@@ -292,50 +275,46 @@ job succeeded and if it failed, the reason for it.</p>
           
 
           
-          <div class="method-source-code"
-            id="get_input-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 379</span>
-def self.get_input(job_data, ssh_args, shadow_ip, controller)
-  result = {:result =&gt; :success}
+          <div class="method-source-code" id="get_input-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 406</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_input</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">ssh_args</span>, <span class="ruby-identifier">shadow_ip</span>, <span class="ruby-identifier">controller</span>)
+  <span class="ruby-identifier">result</span> = {<span class="ruby-value">:result</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:success</span>}
 
-  self.require_param(<span class="ruby-string">&quot;@local&quot;</span>, job_data)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-string">&quot;@local&quot;</span>, <span class="ruby-identifier">job_data</span>)
 
-  local_file = <span class="ruby-constant">File</span>.expand_path(job_data[<span class="ruby-string">&quot;@local&quot;</span>])
-  if !<span class="ruby-constant">File</span>.exists?(local_file)
-    reason = &quot;the file you specified to copy, #{local_file}, doesn't exist.&quot; + 
+  <span class="ruby-identifier">local_file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@local&quot;</span>])
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">local_file</span>)
+    <span class="ruby-identifier">reason</span> = <span class="ruby-node">&quot;the file you specified to copy, #{local_file}, doesn't exist.&quot;</span> <span class="ruby-operator">+</span> 
         <span class="ruby-string">&quot; Please specify a file that exists and try again.&quot;</span>
-    return {:result =&gt; :failure, :reason =&gt; reason}  
-  end
+    <span class="ruby-keyword">return</span> {<span class="ruby-value">:result</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:failure</span>, <span class="ruby-value">:reason</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">reason</span>}  
+  <span class="ruby-keyword">end</span>
 
-  remote = &quot;/tmp/neptune-input-#{rand(100000)}&quot;
-  scp_cmd = &quot;scp -r #{ssh_args} #{local_file} root@#{shadow_ip}:#{remote}&quot;
+  <span class="ruby-identifier">remote</span> = <span class="ruby-node">&quot;/tmp/neptune-input-#{rand(100000)}&quot;</span>
+  <span class="ruby-identifier">scp_cmd</span> = <span class="ruby-node">&quot;scp -r #{ssh_args} #{local_file} root@#{shadow_ip}:#{remote}&quot;</span>
   <span class="ruby-comment"># Kernel.puts scp_cmd</span>
-  <span class="ruby-constant">CommonFunctions</span>.shell(scp_cmd)
+  <span class="ruby-constant">CommonFunctions</span>.<span class="ruby-identifier">shell</span>(<span class="ruby-identifier">scp_cmd</span>)
 
-  job_data[<span class="ruby-string">&quot;@local&quot;</span>] = remote
+  <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@local&quot;</span>] = <span class="ruby-identifier">remote</span>
   <span class="ruby-comment"># Kernel.puts &quot;job data = #{job_data.inspect}&quot;</span>
-  response = controller.put_input(job_data)
-  if response
-    return {:result =&gt; :success}
-  else
+  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">put_input</span>(<span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>
+    <span class="ruby-keyword">return</span> {<span class="ruby-value">:result</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:success</span>}
+  <span class="ruby-keyword">else</span>
     <span class="ruby-comment"># TODO - expand this to include the reason why it failed</span>
-    return {:result =&gt; :failure}
-  end
-end</pre>
-          </div>
+    <span class="ruby-keyword">return</span> {<span class="ruby-value">:result</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:failure</span>}
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_input-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- get_input-method -->
 
     
-      <div id="get_job_data-method" class="method-detail ">
-        <a name="method-c-get_job_data"></a>
-
+      <div id="method-c-get_job_data" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">get_job_data</span><span
@@ -349,74 +328,70 @@ end</pre>
           <p>This method takes in a hash in the format that users write neptune/babel
 jobs in {:a =&gt; “b”} and converts it to the legacy format that
 Neptune used to use {“@a” =&gt; “b”}, and is understood by the
-AppController.</p>
+NeptuneManager.</p>
           
 
           
-          <div class="method-source-code"
-            id="get_job_data-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 286</span>
-def self.get_job_data(params)
-  job_data = {}
-  params.each { |k, v|
-    key = &quot;@#{k}&quot;
-    job_data[key] = v
+          <div class="method-source-code" id="get_job_data-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 313</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_job_data</span>(<span class="ruby-identifier">params</span>)
+  <span class="ruby-identifier">job_data</span> = {}
+  <span class="ruby-identifier">params</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">key</span> = <span class="ruby-node">&quot;@#{k}&quot;</span>
+    <span class="ruby-identifier">job_data</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">v</span>
   }
 
-  job_data.delete(<span class="ruby-string">&quot;@job&quot;</span>)
-  job_data[<span class="ruby-string">&quot;@keyname&quot;</span>] = params[:keyname] || <span class="ruby-string">&quot;appscale&quot;</span>
+  <span class="ruby-identifier">job_data</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&quot;@job&quot;</span>)
+  <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@keyname&quot;</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-value">:keyname</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&quot;appscale&quot;</span>
 
-  job_data[<span class="ruby-string">&quot;@type&quot;</span>] = job_data[<span class="ruby-string">&quot;@type&quot;</span>].to_s
-  type = job_data[<span class="ruby-string">&quot;@type&quot;</span>]
+  <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@type&quot;</span>] = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@type&quot;</span>].<span class="ruby-identifier">to_s</span>
+  <span class="ruby-identifier">type</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@type&quot;</span>]
 
-  if !<span class="ruby-constant">ALLOWED_JOB_TYPES</span>.include?(type)
-    raise <span class="ruby-constant">BadConfigurationException</span>.new(<span class="ruby-constant">JOB_TYPE_NOT_ALLOWED</span>)
-  end
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">ALLOWED_JOB_TYPES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">JOB_TYPE_NOT_ALLOWED</span>)
+  <span class="ruby-keyword">end</span>
 
-  if type == <span class="ruby-string">&quot;upc&quot;</span> or type == <span class="ruby-string">&quot;x10&quot;</span>
-    job_data[<span class="ruby-string">&quot;@type&quot;</span>] = <span class="ruby-string">&quot;mpi&quot;</span>
-    type = <span class="ruby-string">&quot;mpi&quot;</span>
-  end
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;upc&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;x10&quot;</span>
+    <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@type&quot;</span>] = <span class="ruby-string">&quot;mpi&quot;</span>
+    <span class="ruby-identifier">type</span> = <span class="ruby-string">&quot;mpi&quot;</span>
+  <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># kdt jobs also run as mpi jobs, but need to pass along an executable</span>
   <span class="ruby-comment"># parameter to let mpiexec know to use python to exec it</span>
-  if type == <span class="ruby-string">&quot;kdt&quot;</span>
-    job_data[<span class="ruby-string">&quot;@type&quot;</span>] = <span class="ruby-string">&quot;mpi&quot;</span>
-    type = <span class="ruby-string">&quot;mpi&quot;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;kdt&quot;</span>
+    <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@type&quot;</span>] = <span class="ruby-string">&quot;mpi&quot;</span>
+    <span class="ruby-identifier">type</span> = <span class="ruby-string">&quot;mpi&quot;</span>
 
-    job_data[<span class="ruby-string">&quot;@executable&quot;</span>] = <span class="ruby-string">&quot;python&quot;</span>
-  end
+    <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@executable&quot;</span>] = <span class="ruby-string">&quot;python&quot;</span>
+  <span class="ruby-keyword">end</span>
 
-  if job_data[<span class="ruby-string">&quot;@nodes_to_use&quot;</span>].class == <span class="ruby-constant">Hash</span>
-    job_data[<span class="ruby-string">&quot;@nodes_to_use&quot;</span>] = job_data[<span class="ruby-string">&quot;@nodes_to_use&quot;</span>].to_a.flatten
-  end
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@nodes_to_use&quot;</span>].<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@nodes_to_use&quot;</span>] = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@nodes_to_use&quot;</span>].<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">flatten</span>
+  <span class="ruby-keyword">end</span>
 
-  if !<span class="ruby-constant">NO_OUTPUT_NEEDED</span>.include?(type)
-    if (job_data[<span class="ruby-string">&quot;@output&quot;</span>].nil? or job_data[<span class="ruby-string">&quot;@output&quot;</span>].empty?)
-      raise <span class="ruby-constant">BadConfigurationException</span>.new(<span class="ruby-string">&quot;Job output must be specified&quot;</span>)
-    end
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">NO_OUTPUT_NEEDED</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@output&quot;</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@output&quot;</span>].<span class="ruby-identifier">empty?</span>)
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Job output must be specified&quot;</span>)
+    <span class="ruby-keyword">end</span>
 
-    if job_data[<span class="ruby-string">&quot;@output&quot;</span>][0].chr != <span class="ruby-string">&quot;/&quot;</span>
-      raise <span class="ruby-constant">BadConfigurationException</span>.new(<span class="ruby-string">&quot;Job output must begin with a slash ('/')&quot;</span>)
-    end
-  end
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@output&quot;</span>][<span class="ruby-value">0</span>].<span class="ruby-identifier">chr</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;/&quot;</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Job output must begin with a slash ('/')&quot;</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
 
-  return job_data
-end</pre>
-          </div>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">job_data</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_job_data-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- get_job_data-method -->
 
     
-      <div id="get_std_out_and_err-method" class="method-detail ">
-        <a name="method-c-get_std_out_and_err"></a>
-
+      <div id="method-c-get_std_out_and_err" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">get_std_out_and_err</span><span
@@ -433,40 +408,36 @@ not the job completed successfully (success = no errors).</p>
           
 
           
-          <div class="method-source-code"
-            id="get_std_out_and_err-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 459</span>
-def self.get_std_out_and_err(location)
-  result = {}
+          <div class="method-source-code" id="get_std_out_and_err-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 486</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_std_out_and_err</span>(<span class="ruby-identifier">location</span>)
+  <span class="ruby-identifier">result</span> = {}
 
-  out = <span class="ruby-constant">File</span>.open(&quot;#{location}/compile_out&quot;) { |f| f.read.chomp! }
-  result[:out] = out
+  <span class="ruby-identifier">out</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;#{location}/compile_out&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">read</span>.<span class="ruby-identifier">chomp!</span> }
+  <span class="ruby-identifier">result</span>[<span class="ruby-value">:out</span>] = <span class="ruby-identifier">out</span>
 
-  err = <span class="ruby-constant">File</span>.open(&quot;#{location}/compile_err&quot;) { |f| f.read.chomp! }
-  result[:err] = err
+  <span class="ruby-identifier">err</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;#{location}/compile_err&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">read</span>.<span class="ruby-identifier">chomp!</span> }
+  <span class="ruby-identifier">result</span>[<span class="ruby-value">:err</span>] = <span class="ruby-identifier">err</span>
 
-  if result[:err]
-    result[:result] = :failure
-  else
-    result[:result] = :success
-  end    
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span>[<span class="ruby-value">:err</span>]
+    <span class="ruby-identifier">result</span>[<span class="ruby-value">:result</span>] = <span class="ruby-value">:failure</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">result</span>[<span class="ruby-value">:result</span>] = <span class="ruby-value">:success</span>
+  <span class="ruby-keyword">end</span>    
 
-  return result
-end</pre>
-          </div>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_std_out_and_err-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- get_std_out_and_err-method -->
 
     
-      <div id="preprocess_babel-method" class="method-detail ">
-        <a name="method-c-preprocess_babel"></a>
-
+      <div id="method-c-preprocess_babel" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">preprocess_babel</span><span
@@ -484,70 +455,66 @@ engines can be found by contacting an AppScale node.</p>
           
 
           
-          <div class="method-source-code"
-            id="preprocess_babel-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 234</span>
-def self.preprocess_babel(job_data, controller)
-  self.require_param(<span class="ruby-string">&quot;@code&quot;</span>, job_data)
-  self.require_param(<span class="ruby-string">&quot;@engine&quot;</span>, job_data)
-  self.require_param(<span class="ruby-string">&quot;@output&quot;</span>, job_data)
-  self.require_param(<span class="ruby-string">&quot;@error&quot;</span>, job_data)
-  self.require_param(<span class="ruby-string">&quot;@metadata&quot;</span>, job_data)
+          <div class="method-source-code" id="preprocess_babel-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 261</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">preprocess_babel</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-string">&quot;@code&quot;</span>, <span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-string">&quot;@engine&quot;</span>, <span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-string">&quot;@output&quot;</span>, <span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-string">&quot;@error&quot;</span>, <span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-string">&quot;@metadata&quot;</span>, <span class="ruby-identifier">job_data</span>)
 
   <span class="ruby-comment"># For most code types, the file's name given is the thing to exec.</span>
   <span class="ruby-comment"># For Java, the actual file to search for is whatever the user gives</span>
   <span class="ruby-comment"># us, with a .class extension.</span>
-  code_file_name = job_data[<span class="ruby-string">&quot;@code&quot;</span>]
-  if !job_data[<span class="ruby-string">&quot;@executable&quot;</span>].nil? and job_data[<span class="ruby-string">&quot;@executable&quot;</span>] == <span class="ruby-string">&quot;java&quot;</span>
-    code_file_name += <span class="ruby-string">&quot;.class&quot;</span>
-  end
+  <span class="ruby-identifier">code_file_name</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@code&quot;</span>]
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@executable&quot;</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@executable&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;java&quot;</span>
+    <span class="ruby-identifier">code_file_name</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;.class&quot;</span>
+  <span class="ruby-keyword">end</span>
 
-  self.require_file_to_exist(code_file_name, job_data, controller)
-  self.require_file_to_not_exist(job_data[<span class="ruby-string">&quot;@output&quot;</span>], job_data, controller)
-  self.require_file_to_not_exist(job_data[<span class="ruby-string">&quot;@error&quot;</span>], job_data, controller)
-  self.require_file_to_not_exist(job_data[<span class="ruby-string">&quot;@metadata&quot;</span>], job_data, controller)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_file_to_exist</span>(<span class="ruby-identifier">code_file_name</span>, <span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_file_to_not_exist</span>(<span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@output&quot;</span>], <span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_file_to_not_exist</span>(<span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@error&quot;</span>], <span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_file_to_not_exist</span>(<span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@metadata&quot;</span>], <span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
 
-  if job_data[<span class="ruby-string">&quot;@argv&quot;</span>]
-    argv = job_data[<span class="ruby-string">&quot;@argv&quot;</span>]
-    if argv.class != <span class="ruby-constant">Array</span>
-      raise <span class="ruby-constant">BadConfigurationException</span>.new(<span class="ruby-string">&quot;argv must be an array&quot;</span>)
-    end
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@argv&quot;</span>]
+    <span class="ruby-identifier">argv</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@argv&quot;</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">Array</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;argv must be an array&quot;</span>)
+    <span class="ruby-keyword">end</span>
 
-    argv.each { |arg|
-      if arg =~ <span class="ruby-regexp">/\/.*\/.*/</span>
-        self.require_file_to_exist(arg, job_data, controller)
-      end
+    <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">arg</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r\/.*\/.*/</span>
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_file_to_exist</span>(<span class="ruby-identifier">arg</span>, <span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
+      <span class="ruby-keyword">end</span>
     }
-  end
+  <span class="ruby-keyword">end</span>
 
-  if job_data[<span class="ruby-string">&quot;@appcfg_cookies&quot;</span>]
-    self.require_file_to_exist(job_data[<span class="ruby-string">&quot;@appcfg_cookies&quot;</span>], job_data, controller)
-  end
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@appcfg_cookies&quot;</span>]
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_file_to_exist</span>(<span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@appcfg_cookies&quot;</span>], <span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
+  <span class="ruby-keyword">end</span>
 
-  user_specified_engine = job_data[<span class="ruby-string">&quot;@engine&quot;</span>]
+  <span class="ruby-identifier">user_specified_engine</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@engine&quot;</span>]
 
   <span class="ruby-comment"># validate the engine here</span>
-  engines = controller.get_supported_babel_engines(job_data)
-  if !engines.include?(user_specified_engine)
-    raise <span class="ruby-constant">BadConfigurationException</span>.new(<span class="ruby-string">&quot;The engine you specified, &quot;</span> +
-      &quot;#{user_specified_engine}, is not a supported engine. Supported engines&quot; +
-      &quot; are: #{engines.join(', ')}&quot;)
-  end
-end</pre>
-          </div>
+  <span class="ruby-identifier">engines</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">get_supported_babel_engines</span>(<span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">engines</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">user_specified_engine</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;The engine you specified, &quot;</span> <span class="ruby-operator">+</span>
+      <span class="ruby-node">&quot;#{user_specified_engine}, is not a supported engine. Supported engines&quot;</span> <span class="ruby-operator">+</span>
+      <span class="ruby-node">&quot; are: #{engines.join(', ')}&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- preprocess_babel-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- preprocess_babel-method -->
 
     
-      <div id="preprocess_compile-method" class="method-detail ">
-        <a name="method-c-preprocess_compile"></a>
-
+      <div id="method-c-preprocess_compile" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">preprocess_compile</span><span
@@ -564,42 +531,38 @@ copy over libraries as well.</p>
           
 
           
-          <div class="method-source-code"
-            id="preprocess_compile-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 103</span>
-def self.preprocess_compile(job_data, controller)
-  code = <span class="ruby-constant">File</span>.expand_path(job_data[<span class="ruby-string">&quot;@code&quot;</span>])
-  if !<span class="ruby-constant">File</span>.exists?(code)
-    raise <span class="ruby-constant">BadConfigurationException</span>.new(&quot;The source file #{code} does not exist.&quot;)
-  end
+          <div class="method-source-code" id="preprocess_compile-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">preprocess_compile</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
+  <span class="ruby-identifier">code</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@code&quot;</span>])
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">code</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;The source file #{code} does not exist.&quot;</span>)
+  <span class="ruby-keyword">end</span>
 
-  suffix = code.split(<span class="ruby-string">'/'</span>)[-1]
-  dest = &quot;/tmp/#{suffix}&quot;
-  keyname = job_data[<span class="ruby-string">&quot;@keyname&quot;</span>]
-  shadow_ip = <span class="ruby-constant">CommonFunctions</span>.get_from_yaml(keyname, :shadow)
+  <span class="ruby-identifier">suffix</span> = <span class="ruby-identifier">code</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">'/'</span>)[<span class="ruby-value">-1</span>]
+  <span class="ruby-identifier">dest</span> = <span class="ruby-node">&quot;/tmp/#{suffix}&quot;</span>
+  <span class="ruby-identifier">keyname</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@keyname&quot;</span>]
+  <span class="ruby-identifier">shadow_ip</span> = <span class="ruby-constant">CommonFunctions</span>.<span class="ruby-identifier">get_from_yaml</span>(<span class="ruby-identifier">keyname</span>, <span class="ruby-value">:shadow</span>)
 
-  ssh_args = &quot;-i ~/.appscale/#{keyname}.key -o StrictHostkeyChecking=no root@#{shadow_ip}&quot;
-  remove_dir = &quot;ssh #{ssh_args} 'rm -rf #{dest}' 2&gt;&amp;1&quot;
+  <span class="ruby-identifier">ssh_args</span> = <span class="ruby-node">&quot;-i ~/.appscale/#{keyname}.key -o StrictHostkeyChecking=no root@#{shadow_ip}&quot;</span>
+  <span class="ruby-identifier">remove_dir</span> = <span class="ruby-node">&quot;ssh #{ssh_args} 'rm -rf #{dest}' 2&gt;&amp;1&quot;</span>
   <span class="ruby-comment"># Kernel.puts remove_dir</span>
-  <span class="ruby-constant">CommonFunctions</span>.shell(remove_dir)
-  <span class="ruby-constant">CommonFunctions</span>.scp_to_shadow(code, dest, keyname, is_dir=true)
+  <span class="ruby-constant">CommonFunctions</span>.<span class="ruby-identifier">shell</span>(<span class="ruby-identifier">remove_dir</span>)
+  <span class="ruby-constant">CommonFunctions</span>.<span class="ruby-identifier">scp_to_shadow</span>(<span class="ruby-identifier">code</span>, <span class="ruby-identifier">dest</span>, <span class="ruby-identifier">keyname</span>, <span class="ruby-identifier">is_dir</span>=<span class="ruby-keyword">true</span>)
 
-  job_data[<span class="ruby-string">&quot;@code&quot;</span>] = dest
-end</pre>
-          </div>
+  <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@code&quot;</span>] = <span class="ruby-identifier">dest</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- preprocess_compile-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- preprocess_compile-method -->
 
     
-      <div id="preprocess_erlang-method" class="method-detail ">
-        <a name="method-c-preprocess_erlang"></a>
-
+      <div id="method-c-preprocess_erlang" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">preprocess_erlang</span><span
@@ -615,36 +578,32 @@ and copies it over to the AppScale Shadow node.</p>
           
 
           
-          <div class="method-source-code"
-            id="preprocess_erlang-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 126</span>
-def self.preprocess_erlang(job_data, controller)
-  self.require_param(<span class="ruby-string">&quot;@code&quot;</span>, job_data)
+          <div class="method-source-code" id="preprocess_erlang-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">preprocess_erlang</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-string">&quot;@code&quot;</span>, <span class="ruby-identifier">job_data</span>)
 
-  source_code = <span class="ruby-constant">File</span>.expand_path(job_data[<span class="ruby-string">&quot;@code&quot;</span>])
-  if !<span class="ruby-constant">File</span>.exists?(source_code)
-    raise <span class="ruby-constant">BadConfigurationException</span>.new(&quot;The specified code, #{job_data['@code']},&quot; +
+  <span class="ruby-identifier">source_code</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@code&quot;</span>])
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">source_code</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;The specified code, #{job_data['@code']},&quot;</span> <span class="ruby-operator">+</span>
       <span class="ruby-string">&quot; didn't exist. Please specify one that exists and try again&quot;</span>)
-  end
-  dest_code = <span class="ruby-string">&quot;/tmp/&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">dest_code</span> = <span class="ruby-string">&quot;/tmp/&quot;</span>
 
-  keyname = job_data[<span class="ruby-string">&quot;@keyname&quot;</span>]
-  <span class="ruby-constant">CommonFunctions</span>.scp_to_shadow(source_code, dest_code, keyname)
-end</pre>
-          </div>
+  <span class="ruby-identifier">keyname</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@keyname&quot;</span>]
+  <span class="ruby-constant">CommonFunctions</span>.<span class="ruby-identifier">scp_to_shadow</span>(<span class="ruby-identifier">source_code</span>, <span class="ruby-identifier">dest_code</span>, <span class="ruby-identifier">keyname</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- preprocess_erlang-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- preprocess_erlang-method -->
 
     
-      <div id="preprocess_mpi-method" class="method-detail ">
-        <a name="method-c-preprocess_mpi"></a>
-
+      <div id="method-c-preprocess_mpi" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">preprocess_mpi</span><span
@@ -662,53 +621,49 @@ also verify that this value is at least as many as the number of nodes
           
 
           
-          <div class="method-source-code"
-            id="preprocess_mpi-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 145</span>
-def self.preprocess_mpi(job_data, controller)
-  self.require_param(<span class="ruby-string">&quot;@nodes_to_use&quot;</span>, job_data)
-  self.require_param(<span class="ruby-string">&quot;@procs_to_use&quot;</span>, job_data)
-  self.require_param(<span class="ruby-string">&quot;@output&quot;</span>, job_data)
-  self.require_param(<span class="ruby-string">&quot;@error&quot;</span>, job_data)
-  self.require_param(<span class="ruby-string">&quot;@metadata&quot;</span>, job_data)
+          <div class="method-source-code" id="preprocess_mpi-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 172</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">preprocess_mpi</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-string">&quot;@nodes_to_use&quot;</span>, <span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-string">&quot;@procs_to_use&quot;</span>, <span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-string">&quot;@output&quot;</span>, <span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-string">&quot;@error&quot;</span>, <span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-string">&quot;@metadata&quot;</span>, <span class="ruby-identifier">job_data</span>)
 
-  if job_data[<span class="ruby-string">&quot;@procs_to_use&quot;</span>]
-    p = job_data[<span class="ruby-string">&quot;@procs_to_use&quot;</span>]
-    n = job_data[<span class="ruby-string">&quot;@nodes_to_use&quot;</span>]
-    if p &lt; n
-      raise <span class="ruby-constant">BadConfigurationException</span>.new(<span class="ruby-string">&quot;:procs_to_use must be at least as &quot;</span> +
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@procs_to_use&quot;</span>]
+    <span class="ruby-identifier">p</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@procs_to_use&quot;</span>]
+    <span class="ruby-identifier">n</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@nodes_to_use&quot;</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">p</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">n</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;:procs_to_use must be at least as &quot;</span> <span class="ruby-operator">+</span>
         <span class="ruby-string">&quot;large as :nodes_to_use.&quot;</span>) 
-    end
-  end
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
 
-  if job_data[<span class="ruby-string">&quot;@argv&quot;</span>]
-    argv = job_data[<span class="ruby-string">&quot;@argv&quot;</span>]
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@argv&quot;</span>]
+    <span class="ruby-identifier">argv</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@argv&quot;</span>]
 
-    if argv.class == <span class="ruby-constant">String</span>
-      job_data[<span class="ruby-string">&quot;@argv&quot;</span>] = argv
-    elsif argv.class == <span class="ruby-constant">Array</span>
-      job_data[<span class="ruby-string">&quot;@argv&quot;</span>] = argv.join(<span class="ruby-string">' '</span>)
-    else
-      raise <span class="ruby-constant">BadConfigurationException</span>.new(<span class="ruby-string">&quot;:argv must be either a String or Array&quot;</span>) 
-    end
-  end
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">String</span>
+      <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@argv&quot;</span>] = <span class="ruby-identifier">argv</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Array</span>
+      <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@argv&quot;</span>] = <span class="ruby-identifier">argv</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">' '</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;:argv must be either a String or Array&quot;</span>) 
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
 
-  return job_data
-end</pre>
-          </div>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">job_data</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- preprocess_mpi-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- preprocess_mpi-method -->
 
     
-      <div id="preprocess_ssa-method" class="method-detail ">
-        <a name="method-c-preprocess_ssa"></a>
-
+      <div id="method-c-preprocess_ssa" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">preprocess_ssa</span><span
@@ -726,37 +681,33 @@ specify, convert it to be :trajectories.</p>
           
 
           
-          <div class="method-source-code"
-            id="preprocess_ssa-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 181</span>
-def self.preprocess_ssa(job_data, controller)
-  if job_data[<span class="ruby-string">&quot;@simulations&quot;</span>] and job_data[<span class="ruby-string">&quot;@trajectories&quot;</span>]
-    raise <span class="ruby-constant">BadConfigurationException</span>.new(<span class="ruby-string">&quot;:simulations and :trajectories &quot;</span> +
+          <div class="method-source-code" id="preprocess_ssa-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 208</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">preprocess_ssa</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@simulations&quot;</span>] <span class="ruby-keyword">and</span> <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@trajectories&quot;</span>]
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;:simulations and :trajectories &quot;</span> <span class="ruby-operator">+</span>
       <span class="ruby-string">&quot;not both be specified.&quot;</span>)
-  end
+  <span class="ruby-keyword">end</span>
 
-  if job_data[<span class="ruby-string">&quot;@simulations&quot;</span>]
-    job_data[<span class="ruby-string">&quot;@trajectories&quot;</span>] = job_data[<span class="ruby-string">&quot;@simulations&quot;</span>]
-    job_data.delete(<span class="ruby-string">&quot;@simulations&quot;</span>)
-  end
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@simulations&quot;</span>]
+    <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@trajectories&quot;</span>] = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@simulations&quot;</span>]
+    <span class="ruby-identifier">job_data</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&quot;@simulations&quot;</span>)
+  <span class="ruby-keyword">end</span>
 
-  self.require_param(<span class="ruby-string">&quot;@trajectories&quot;</span>, job_data)
-  return job_data
-end</pre>
-          </div>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-string">&quot;@trajectories&quot;</span>, <span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">job_data</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- preprocess_ssa-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- preprocess_ssa-method -->
 
     
-      <div id="require_file_to_exist-method" class="method-detail ">
-        <a name="method-c-require_file_to_exist"></a>
-
+      <div id="method-c-require_file_to_exist" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">require_file_to_exist</span><span
@@ -767,35 +718,31 @@ end</pre>
 
         <div class="method-description">
           
-          <p>This helper method asks the AppController if the named file exists, and if
+          <p>This helper method asks the NeptuneManager if the named file exists, and if
 it does not, throws an exception.</p>
           
 
           
-          <div class="method-source-code"
-            id="require_file_to_exist-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 208</span>
-def self.require_file_to_exist(file, job_data, controller)
-  if controller.does_file_exist?(file, job_data)
-    return
-  else
-    raise <span class="ruby-constant">FileNotFoundException</span>
-  end
-end</pre>
-          </div>
+          <div class="method-source-code" id="require_file_to_exist-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 235</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_file_to_exist</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">does_file_exist?</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">job_data</span>)
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">FileNotFoundException</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- require_file_to_exist-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- require_file_to_exist-method -->
 
     
-      <div id="require_file_to_not_exist-method" class="method-detail ">
-        <a name="method-c-require_file_to_not_exist"></a>
-
+      <div id="method-c-require_file_to_not_exist" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">require_file_to_not_exist</span><span
@@ -807,37 +754,33 @@ end</pre>
         <div class="method-description">
           
           <p>This helper method performs the opposite function of <a
-href="NeptuneHelper.html#method-c-require_file_to_exist">require_file_to_exist</a>,
+href="NeptuneHelper.html#method-c-require_file_to_exist">::require_file_to_exist</a>,
 raising an exception if the named file does exist.</p>
           
 
           
-          <div class="method-source-code"
-            id="require_file_to_not_exist-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 219</span>
-def self.require_file_to_not_exist(file, job_data, controller)
-  begin
-    self.require_file_to_exist(file, job_data, controller)
+          <div class="method-source-code" id="require_file_to_not_exist-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 246</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_file_to_not_exist</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_file_to_exist</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
     <span class="ruby-comment"># no exception thrown previously means that the output file exists</span>
-    raise <span class="ruby-constant">BadConfigurationException</span>.new(<span class="ruby-string">'Output specified already exists'</span>)
-  rescue <span class="ruby-constant">FileNotFoundException</span>
-    return
-  end
-end</pre>
-          </div>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">'Output specified already exists'</span>)
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">FileNotFoundException</span>
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- require_file_to_not_exist-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- require_file_to_not_exist-method -->
 
     
-      <div id="require_param-method" class="method-detail ">
-        <a name="method-c-require_param"></a>
-
+      <div id="method-c-require_param" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">require_param</span><span
@@ -853,28 +796,24 @@ data provided.</p>
           
 
           
-          <div class="method-source-code"
-            id="require_param-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 199</span>
-def self.require_param(param, job_data)
-  if !job_data[param]
-    raise <span class="ruby-constant">BadConfigurationException</span>.new(&quot;#{param} must be specified&quot;)
-  end
-end</pre>
-          </div>
+          <div class="method-source-code" id="require_param-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 226</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-identifier">param</span>, <span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">job_data</span>[<span class="ruby-identifier">param</span>]
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{param} must be specified&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- require_param-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- require_param-method -->
 
     
-      <div id="run_job-method" class="method-detail ">
-        <a name="method-c-run_job"></a>
-
+      <div id="method-c-run_job" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">run_job</span><span
@@ -890,56 +829,52 @@ as well as information about the node to send the request to.</p>
           
 
           
-          <div class="method-source-code"
-            id="run_job-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 509</span>
-def self.run_job(job_data, ssh_args, shadow_ip, secret)
-  controller = <span class="ruby-constant">AppControllerClient</span>.new(shadow_ip, secret)
+          <div class="method-source-code" id="run_job-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 536</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">run_job</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">ssh_args</span>, <span class="ruby-identifier">shadow_ip</span>, <span class="ruby-identifier">secret</span>)
+  <span class="ruby-identifier">controller</span> = <span class="ruby-constant">NeptuneManagerClient</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">shadow_ip</span>, <span class="ruby-identifier">secret</span>)
 
   <span class="ruby-comment"># TODO - right now the job is assumed to succeed in many cases</span>
   <span class="ruby-comment"># need to investigate the various failure scenarios</span>
-  result = { :result =&gt; :success }
+  <span class="ruby-identifier">result</span> = { <span class="ruby-value">:result</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:success</span> }
 
-  case job_data[<span class="ruby-string">&quot;@type&quot;</span>]
-  when <span class="ruby-string">&quot;input&quot;</span>
-    result = self.get_input(job_data, ssh_args, shadow_ip, controller)
-  when <span class="ruby-string">&quot;output&quot;</span>
-    result[:output] = controller.get_output(job_data)
-  when <span class="ruby-string">&quot;get-acl&quot;</span>
-    job_data[<span class="ruby-string">&quot;@type&quot;</span>] = <span class="ruby-string">&quot;acl&quot;</span>
-    result[:acl] = controller.get_acl(job_data)
-  when <span class="ruby-string">&quot;set-acl&quot;</span>
-    job_data[<span class="ruby-string">&quot;@type&quot;</span>] = <span class="ruby-string">&quot;acl&quot;</span>
-    result[:acl] = controller.set_acl(job_data)
-  when <span class="ruby-string">&quot;compile&quot;</span>
-    result = self.compile_code(job_data, ssh_args, shadow_ip)
-  when <span class="ruby-string">&quot;cicero&quot;</span>
-    self.upload_app_for_cicero(job_data)
-    msg = controller.start_neptune_job(job_data)
-    result[:msg] = msg
-    result[:result] = :failure if result[:msg] !~ <span class="ruby-regexp">/job is now running\Z/</span>
-  else
-    msg = controller.start_neptune_job(job_data)
-    result[:msg] = msg
-    result[:result] = :failure if result[:msg] !~ <span class="ruby-regexp">/job is now running\Z/</span>
-  end
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@type&quot;</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;input&quot;</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_input</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">ssh_args</span>, <span class="ruby-identifier">shadow_ip</span>, <span class="ruby-identifier">controller</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;output&quot;</span>
+    <span class="ruby-identifier">result</span>[<span class="ruby-value">:output</span>] = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">get_output</span>(<span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;get-acl&quot;</span>
+    <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@type&quot;</span>] = <span class="ruby-string">&quot;acl&quot;</span>
+    <span class="ruby-identifier">result</span>[<span class="ruby-value">:acl</span>] = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">get_acl</span>(<span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;set-acl&quot;</span>
+    <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@type&quot;</span>] = <span class="ruby-string">&quot;acl&quot;</span>
+    <span class="ruby-identifier">result</span>[<span class="ruby-value">:acl</span>] = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">set_acl</span>(<span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;compile&quot;</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">compile_code</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">ssh_args</span>, <span class="ruby-identifier">shadow_ip</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;cicero&quot;</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">upload_app_for_cicero</span>(<span class="ruby-identifier">job_data</span>)
+    <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">start_neptune_job</span>(<span class="ruby-identifier">job_data</span>)
+    <span class="ruby-identifier">result</span>[<span class="ruby-value">:msg</span>] = <span class="ruby-identifier">msg</span>
+    <span class="ruby-identifier">result</span>[<span class="ruby-value">:result</span>] = <span class="ruby-value">:failure</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span>[<span class="ruby-value">:msg</span>] <span class="ruby-operator">!~</span> <span class="ruby-regexp">%rjob is now running\Z/</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">start_neptune_job</span>(<span class="ruby-identifier">job_data</span>)
+    <span class="ruby-identifier">result</span>[<span class="ruby-value">:msg</span>] = <span class="ruby-identifier">msg</span>
+    <span class="ruby-identifier">result</span>[<span class="ruby-value">:result</span>] = <span class="ruby-value">:failure</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span>[<span class="ruby-value">:msg</span>] <span class="ruby-operator">!~</span> <span class="ruby-regexp">%rjob is now running\Z/</span>
+  <span class="ruby-keyword">end</span>
 
-  return result
-end</pre>
-          </div>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- run_job-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- run_job-method -->
 
     
-      <div id="upload_app_for_cicero-method" class="method-detail ">
-        <a name="method-c-upload_app_for_cicero"></a>
-
+      <div id="method-c-upload_app_for_cicero" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">upload_app_for_cicero</span><span
@@ -955,48 +890,44 @@ with Cicero jobs. It requires the AppScale tools to be installed.</p>
           
 
           
-          <div class="method-source-code"
-            id="upload_app_for_cicero-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 480</span>
-def self.upload_app_for_cicero(job_data)
-  if !job_data[<span class="ruby-string">&quot;@app&quot;</span>]
+          <div class="method-source-code" id="upload_app_for_cicero-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 507</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">upload_app_for_cicero</span>(<span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@app&quot;</span>]
     <span class="ruby-comment"># Kernel.puts &quot;No app specified, not uploading...&quot; </span>
-    return
-  end
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
 
-  app_location = <span class="ruby-constant">File</span>.expand_path(job_data[<span class="ruby-string">&quot;@app&quot;</span>])
-  if !<span class="ruby-constant">File</span>.exists?(app_location)
-    raise <span class="ruby-constant">BadConfigurationException</span>.new(&quot;The app you specified, #{app_location}, does not exist.&quot; + 
+  <span class="ruby-identifier">app_location</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@app&quot;</span>])
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">app_location</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;The app you specified, #{app_location}, does not exist.&quot;</span> <span class="ruby-operator">+</span> 
       <span class="ruby-string">&quot;Please specify one that does and try again.&quot;</span>)
-  end
+  <span class="ruby-keyword">end</span>
 
-  keyname = job_data[<span class="ruby-string">&quot;@keyname&quot;</span>] || <span class="ruby-string">&quot;appscale&quot;</span>
-  if job_data[<span class="ruby-string">&quot;@appscale_tools&quot;</span>]
-    upload_app = <span class="ruby-constant">File</span>.expand_path(job_data[<span class="ruby-string">&quot;@appscale_tools&quot;</span>]) +
-      <span class="ruby-constant">File</span>::<span class="ruby-constant">SEPARATOR</span> + <span class="ruby-string">&quot;bin&quot;</span> + <span class="ruby-constant">File</span>::<span class="ruby-constant">SEPARATOR</span> + <span class="ruby-string">&quot;appscale-upload-app&quot;</span>
-  else
-    upload_app = <span class="ruby-string">&quot;appscale-upload-app&quot;</span>
-  end
+  <span class="ruby-identifier">keyname</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@keyname&quot;</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&quot;appscale&quot;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@appscale_tools&quot;</span>]
+    <span class="ruby-identifier">upload_app</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@appscale_tools&quot;</span>]) <span class="ruby-operator">+</span>
+      <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEPARATOR</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;bin&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEPARATOR</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;appscale-upload-app&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">upload_app</span> = <span class="ruby-string">&quot;appscale-upload-app&quot;</span>
+  <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Kernel.puts &quot;Uploading AppEngine app at #{app_location}&quot;</span>
-  upload_command = &quot;#{upload_app} --file #{app_location} --test --keyname #{keyname}&quot;
+  <span class="ruby-identifier">upload_command</span> = <span class="ruby-node">&quot;#{upload_app} --file #{app_location} --test --keyname #{keyname}&quot;</span>
   <span class="ruby-comment"># Kernel.puts upload_command</span>
   <span class="ruby-comment"># Kernel.puts `#{upload_command}`</span>
-end</pre>
-          </div>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- upload_app_for_cicero-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- upload_app_for_cicero-method -->
 
     
-      <div id="validate_storage_params-method" class="method-detail ">
-        <a name="method-c-validate_storage_params"></a>
-
+      <div id="method-c-validate_storage_params" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">validate_storage_params</span><span
@@ -1014,58 +945,54 @@ parameter is missing.</p>
           
 
           
-          <div class="method-source-code"
-            id="validate_storage_params-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 339</span>
-def self.validate_storage_params(job_data)
-  job_data[<span class="ruby-string">&quot;@storage&quot;</span>] ||= <span class="ruby-string">&quot;appdb&quot;</span>
+          <div class="method-source-code" id="validate_storage_params-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 366</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">validate_storage_params</span>(<span class="ruby-identifier">job_data</span>)
+  <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@storage&quot;</span>] <span class="ruby-operator">||=</span> <span class="ruby-string">&quot;appdb&quot;</span>
 
-  storage = job_data[<span class="ruby-string">&quot;@storage&quot;</span>]
-  if !<span class="ruby-constant">ALLOWED_STORAGE_TYPES</span>.include?(storage)
-    raise <span class="ruby-constant">BadConfigurationException</span>.new(<span class="ruby-string">&quot;Supported storage types are &quot;</span> +
-      &quot;#{ALLOWED_STORAGE_TYPES.join(', ')} - #{storage} is not supported.&quot;)
-  end
+  <span class="ruby-identifier">storage</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@storage&quot;</span>]
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">ALLOWED_STORAGE_TYPES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">storage</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Supported storage types are &quot;</span> <span class="ruby-operator">+</span>
+      <span class="ruby-node">&quot;#{ALLOWED_STORAGE_TYPES.join(', ')} - #{storage} is not supported.&quot;</span>)
+  <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Our implementation for storing / retrieving via Google Storage</span>
   <span class="ruby-comment"># and Walrus uses</span>
   <span class="ruby-comment"># the same library as we do for S3 - so just tell it that it's S3</span>
-  if storage == <span class="ruby-string">&quot;gstorage&quot;</span> or storage == <span class="ruby-string">&quot;walrus&quot;</span>
-    storage = <span class="ruby-string">&quot;s3&quot;</span>
-    job_data[<span class="ruby-string">&quot;@storage&quot;</span>] = <span class="ruby-string">&quot;s3&quot;</span>
-  end
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">storage</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;gstorage&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">storage</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;walrus&quot;</span>
+    <span class="ruby-identifier">storage</span> = <span class="ruby-string">&quot;s3&quot;</span>
+    <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@storage&quot;</span>] = <span class="ruby-string">&quot;s3&quot;</span>
+  <span class="ruby-keyword">end</span>
 
-  if storage == <span class="ruby-string">&quot;s3&quot;</span>
-    [<span class="ruby-string">&quot;EC2_ACCESS_KEY&quot;</span>, <span class="ruby-string">&quot;EC2_SECRET_KEY&quot;</span>, <span class="ruby-string">&quot;S3_URL&quot;</span>].each { |item|
-      if job_data[&quot;@#{item}&quot;]
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">storage</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;s3&quot;</span>
+    [<span class="ruby-string">&quot;EC2_ACCESS_KEY&quot;</span>, <span class="ruby-string">&quot;EC2_SECRET_KEY&quot;</span>, <span class="ruby-string">&quot;S3_URL&quot;</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_data</span>[<span class="ruby-node">&quot;@#{item}&quot;</span>]
         <span class="ruby-comment"># Kernel.puts &quot;Using specified #{item}&quot;</span>
-      else
-        if <span class="ruby-constant">ENV</span>[item]
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-constant">ENV</span>[<span class="ruby-identifier">item</span>]
           <span class="ruby-comment"># Kernel.puts &quot;Using #{item} from environment&quot;</span>
-          job_data[&quot;@#{item}&quot;] = <span class="ruby-constant">ENV</span>[item]
-        else
-          raise <span class="ruby-constant">BadConfigurationException</span>.new(&quot;When storing data to S3, #{item} must be specified or be in &quot; + 
+          <span class="ruby-identifier">job_data</span>[<span class="ruby-node">&quot;@#{item}&quot;</span>] = <span class="ruby-constant">ENV</span>[<span class="ruby-identifier">item</span>]
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;When storing data to S3, #{item} must be specified or be in &quot;</span> <span class="ruby-operator">+</span> 
             <span class="ruby-string">&quot;your environment. Please do so and try again.&quot;</span>)
-        end
-      end
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
     }
-  end
+  <span class="ruby-keyword">end</span>
 
-  return job_data
-end</pre>
-          </div>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">job_data</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- validate_storage_params-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- validate_storage_params-method -->
 
     
-      <div id="wait_for_compilation_to_finish-method" class="method-detail ">
-        <a name="method-c-wait_for_compilation_to_finish"></a>
-
+      <div id="method-c-wait_for_compilation_to_finish" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">wait_for_compilation_to_finish</span><span
@@ -1082,46 +1009,43 @@ location.</p>
           
 
           
-          <div class="method-source-code"
-            id="wait_for_compilation_to_finish-source">
-<pre>
-<span class="ruby-comment"># File lib/neptune.rb, line 410</span>
-def self.wait_for_compilation_to_finish(ssh_args, shadow_ip, compiled_location)
-  loop {
-    ssh_command = &quot;ssh #{ssh_args} root@#{shadow_ip} 'ls #{compiled_location}' 2&gt;&amp;1&quot;
+          <div class="method-source-code" id="wait_for_compilation_to_finish-source">
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 437</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">wait_for_compilation_to_finish</span>(<span class="ruby-identifier">ssh_args</span>, <span class="ruby-identifier">shadow_ip</span>, <span class="ruby-identifier">compiled_location</span>)
+  <span class="ruby-identifier">loop</span> {
+    <span class="ruby-identifier">ssh_command</span> = <span class="ruby-node">&quot;ssh #{ssh_args} root@#{shadow_ip} 'ls #{compiled_location}' 2&gt;&amp;1&quot;</span>
     <span class="ruby-comment"># Kernel.puts ssh_command</span>
-    ssh_result = <span class="ruby-constant">CommonFunctions</span>.shell(ssh_command)
+    <span class="ruby-identifier">ssh_result</span> = <span class="ruby-constant">CommonFunctions</span>.<span class="ruby-identifier">shell</span>(<span class="ruby-identifier">ssh_command</span>)
     <span class="ruby-comment"># Kernel.puts &quot;result was [#{ssh_result}]&quot;</span>
-    if ssh_result =~ <span class="ruby-regexp">/No such file or directory/</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">ssh_result</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%rNo such file or directory/</span>
       <span class="ruby-comment"># Kernel.puts &quot;Still waiting for code to be compiled...&quot;</span>
-    else
+    <span class="ruby-keyword">else</span>
       <span class="ruby-comment"># Kernel.puts &quot;compilation complete! Copying compiled code to #{copy_to}&quot;</span>
-      return
-    end
-    sleep(5)
+      <span class="ruby-keyword">return</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">sleep</span>(<span class="ruby-value">5</span>)
   }
-end</pre>
-          </div>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- wait_for_compilation_to_finish-source -->
           
         </div>
 
         
 
         
-      </div>
+      </div><!-- wait_for_compilation_to_finish-method -->
 
     
-    </div>
+    </section><!-- public-class-method-details -->
   
+  </section><!-- 5Buntitled-5D -->
 
-  </div>
+</div><!-- documentation -->
 
-  <div id="validator-badges">
-    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
-    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
-      Rdoc Generator</a> 2</small>.</p>
-  </div>
 
-</body>
-</html>
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
 

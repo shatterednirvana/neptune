@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>module ExodusHelper - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/exodus.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-convert_clouds_to_use_to_array">::convert_clouds_to_use_to_array</a>
+    
+    <li><a href="#method-c-ensure_all_jobs_are_hashes">::ensure_all_jobs_are_hashes</a>
+    
+    <li><a href="#method-c-ensure_all_params_are_present">::ensure_all_params_are_present</a>
+    
+    <li><a href="#method-c-validate_clouds_to_use">::validate_clouds_to_use</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./BabelHelper.html">BabelHelper</a>
+  
+    <li><a href="./BadConfigurationException.html">BadConfigurationException</a>
+  
+    <li><a href="./CommonFunctions.html">CommonFunctions</a>
+  
+    <li><a href="./ExodusHelper.html">ExodusHelper</a>
+  
+    <li><a href="./FileNotFoundException.html">FileNotFoundException</a>
+  
+    <li><a href="./NeptuneHelper.html">NeptuneHelper</a>
+  
+    <li><a href="./NeptuneManagerClient.html">NeptuneManagerClient</a>
+  
+    <li><a href="./NeptuneManagerException.html">NeptuneManagerException</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./TaskInfo.html">TaskInfo</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module ExodusHelper</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="SUPPORTED_CLOUDS">SUPPORTED_CLOUDS
+        
+        <dd class="description">
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-convert_clouds_to_use_to_array" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">convert_clouds_to_use_to_array</span><span
+            class="method-args">(job)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="convert_clouds_to_use_to_array-source">
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">convert_clouds_to_use_to_array</span>(<span class="ruby-identifier">job</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>[<span class="ruby-value">:clouds_to_use</span>].<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">String</span>
+    <span class="ruby-identifier">job</span>[<span class="ruby-value">:clouds_to_use</span>] = [<span class="ruby-identifier">job</span>[<span class="ruby-value">:clouds_to_use</span>]]
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">job</span>[<span class="ruby-value">:clouds_to_use</span>].<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Array</span>
+    <span class="ruby-identifier">job</span>[<span class="ruby-value">:clouds_to_use</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cloud</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">cloud</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">String</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{cloud} was not a String, &quot;</span> <span class="ruby-operator">+</span>
+          <span class="ruby-node">&quot;but was a #{cloud.class}&quot;</span>)
+      <span class="ruby-keyword">end</span>
+    }
+  <span class="ruby-keyword">else</span>
+
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- convert_clouds_to_use_to_array-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- convert_clouds_to_use_to_array-method -->
+
+    
+      <div id="method-c-ensure_all_jobs_are_hashes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ensure_all_jobs_are_hashes</span><span
+            class="method-args">(jobs)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="ensure_all_jobs_are_hashes-source">
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ensure_all_jobs_are_hashes</span>(<span class="ruby-identifier">jobs</span>)
+  <span class="ruby-identifier">jobs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">job</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">Hash</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;A job passed to exodus() was &quot;</span> <span class="ruby-operator">+</span>
+        <span class="ruby-node">&quot;not a Hash, but was a #{job.class}&quot;</span>)
+    <span class="ruby-keyword">end</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- ensure_all_jobs_are_hashes-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- ensure_all_jobs_are_hashes-method -->
+
+    
+      <div id="method-c-ensure_all_params_are_present" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ensure_all_params_are_present</span><span
+            class="method-args">(job)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="ensure_all_params_are_present-source">
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ensure_all_params_are_present</span>(<span class="ruby-identifier">job</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>[<span class="ruby-value">:clouds_to_use</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;:clouds_to_use was not specified&quot;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">convert_clouds_to_use_to_array</span>(<span class="ruby-identifier">job</span>)
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">validate_clouds_to_use</span>(<span class="ruby-identifier">job</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- ensure_all_params_are_present-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- ensure_all_params_are_present-method -->
+
+    
+      <div id="method-c-validate_clouds_to_use" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">validate_clouds_to_use</span><span
+            class="method-args">(job)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="validate_clouds_to_use-source">
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">validate_clouds_to_use</span>(<span class="ruby-identifier">job</span>)
+  <span class="ruby-identifier">job</span>[<span class="ruby-value">:clouds_to_use</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cloud</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">SUPPORTED_CLOUDS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">cloud</span>)
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{cloud} was specified as in &quot;</span> <span class="ruby-operator">+</span>
+        <span class="ruby-string">&quot;:clouds_to_use, which is not a supported cloud.&quot;</span>)
+    <span class="ruby-keyword">end</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- validate_clouds_to_use-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- validate_clouds_to_use-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
