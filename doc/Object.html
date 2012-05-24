@@ -318,12 +318,16 @@ handles this.</p>
 
         <div class="method-description">
           
-          
+          <p>Exodus provides further improvements to Babel. Instead of making users tell
+us what compute, storage, and queue services they want to use (required for
+babel calls), Exodus will automatically handle this for us. Callers need to
+specify what clouds their job can run over, and Exodus will automatically
+select the best cloud for their job and run it there.</p>
           
 
           
           <div class="method-source-code" id="exodus-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 8</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">exodus</span>(<span class="ruby-identifier">jobs</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">jobs</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Hash</span>
     <span class="ruby-identifier">jobs</span> = [<span class="ruby-identifier">jobs</span>]
@@ -337,7 +341,6 @@ handles this.</p>
   <span class="ruby-identifier">jobs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">job</span><span class="ruby-operator">|</span>
     <span class="ruby-constant">ExodusHelper</span>.<span class="ruby-identifier">ensure_all_params_are_present</span>(<span class="ruby-identifier">job</span>)
   }
-
 <span class="ruby-keyword">end</span></pre>
           </div><!-- exodus-source -->
           

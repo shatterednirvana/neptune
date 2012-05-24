@@ -214,58 +214,6 @@ can be found on the machine that ran that tool, or on any AppScale machine.</p>
 
     <!-- Methods -->
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Class Methods</h3>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(ip, secret)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>A constructor that requires both the IP address of the machine to
-communicate with as well as the secret (string) needed to perform
-communication. NeptuneManagers will reject SOAP calls if this secret
-(basically a password) is not present - it can be found in the user’s
-.appscale directory, and a helper method is usually present to fetch this
-for us.</p>
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 45</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">ip</span>, <span class="ruby-identifier">secret</span>)
-  <span class="ruby-ivar">@ip</span> = <span class="ruby-identifier">ip</span>
-  <span class="ruby-ivar">@secret</span> = <span class="ruby-identifier">secret</span>
-  
-  <span class="ruby-ivar">@conn</span> = <span class="ruby-constant">SOAP</span><span class="ruby-operator">::</span><span class="ruby-constant">RPC</span><span class="ruby-operator">::</span><span class="ruby-constant">Driver</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;https://#{@ip}:#{SERVER_PORT}&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;start_job&quot;</span>, <span class="ruby-string">&quot;jobs&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;put_input&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;get_output&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;get_acl&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;set_acl&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;compile_code&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;get_supported_babel_engines&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;does_file_exist&quot;</span>, <span class="ruby-string">&quot;file&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- new-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- new-method -->
-
-    
-    </section><!-- public-class-method-details -->
-  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
       <h3 class="section-header">Public Instance Methods</h3>
 
@@ -643,6 +591,58 @@ NeptuneManager.</p>
 
     
     </section><!-- public-instance-method-details -->
+  
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(ip, secret)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>A constructor that requires both the IP address of the machine to
+communicate with as well as the secret (string) needed to perform
+communication. NeptuneManagers will reject SOAP calls if this secret
+(basically a password) is not present - it can be found in the user’s
+.appscale directory, and a helper method is usually present to fetch this
+for us.</p>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">ip</span>, <span class="ruby-identifier">secret</span>)
+  <span class="ruby-ivar">@ip</span> = <span class="ruby-identifier">ip</span>
+  <span class="ruby-ivar">@secret</span> = <span class="ruby-identifier">secret</span>
+  
+  <span class="ruby-ivar">@conn</span> = <span class="ruby-constant">SOAP</span><span class="ruby-operator">::</span><span class="ruby-constant">RPC</span><span class="ruby-operator">::</span><span class="ruby-constant">Driver</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;https://#{@ip}:#{SERVER_PORT}&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;start_job&quot;</span>, <span class="ruby-string">&quot;jobs&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;put_input&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;get_output&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;get_acl&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;set_acl&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;compile_code&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;get_supported_babel_engines&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;does_file_exist&quot;</span>, <span class="ruby-string">&quot;file&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 
