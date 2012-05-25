@@ -44,7 +44,10 @@ class TestExodus < Test::Unit::TestCase
 
     # doing the same but with an array should also fail
     assert_raises(BadConfigurationException) {
-      exodus({:clouds_to_use => ["not an acceptable value"]})
+      exodus({
+        :clouds_to_use => ["not an acceptable value"],
+        :credentials => {}
+      })
     }
 
     # giving an array of not strings should fail
@@ -64,8 +67,10 @@ class TestExodus < Test::Unit::TestCase
 
     # similarly, specifying credentials in a non-Hash format should fail
     assert_raises(BadConfigurationException) {
-      exodus({:clouds_to_use => ExodusHelper::GoogleAppEngine,
-        :credentials => 1})
+      exodus({
+        :clouds_to_use => ExodusHelper::GoogleAppEngine,
+        :credentials => 1
+      })
     }
 
     # if a credential is nil or empty, it should fail

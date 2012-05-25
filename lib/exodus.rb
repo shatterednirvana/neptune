@@ -46,7 +46,7 @@ module ExodusHelper
 
   CLOUD_CREDENTIALS = {
     AmazonEC2 => [:EC2_ACCESS_KEY, :EC2_SECRET_KEY],
-    GoogleAppEngine => [],
+    GoogleAppEngine => [:appid, :appcfg_cookies, :function],
     MicrosoftAzure => []
   }
 
