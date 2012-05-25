@@ -1,6 +1,6 @@
 # Programmer: Chris Bunch (cgb@cs.ucsb.edu)
 
-$:.unshift File.join(File.dirname(__FILE__), "..", "..", "lib")
+$:.unshift File.join(File.dirname(__FILE__), "..", "lib")
 require 'neptune_manager_client'
 
 require 'test/unit'
