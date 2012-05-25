@@ -51,6 +51,9 @@ module ExodusHelper
   }
 
 
+  OPTIMIZE_FOR_CHOICES = [:performance, :cost]
+
+
   # Given an Array of jobs to run, ensures that they are all Hashes, the
   # standard format for Neptune jobs.
   def self.ensure_all_jobs_are_hashes(jobs)
@@ -71,6 +74,7 @@ module ExodusHelper
     else
       self.convert_clouds_to_use_to_array(job)
       self.validate_clouds_to_use(job)
+      self.validate_optimize_for_param(job)
     end
   end
 
@@ -133,8 +137,31 @@ module ExodusHelper
   end
 
 
+  # Searches the caller's environment variables, and adds any that could
+  # be used in this Exodus job. Only takes in credentials from the
+  # environment if the job does not specify it.
   def self.propogate_credentials_from_environment(job)
+    CLOUD_CREDENTIALS.each { |cloud_name, credential_list|
+      credential_list.each { |cred|
+        if job[:credentials][cred].nil? and !ENV[cred.to_s].nil?
+          job[:credentials][cred] = ENV[cred]
+        end
+      }
+    }
+  end
 
+
+  def self.validate_optimize_for_param(job)
+    if job[:optimize_for].nil?
+      raise BadConfigurationException.new(":optimize_for needs to be " +
+        "specified when running Exodus jobs")
+    end
+
+    if !OPTIMIZE_FOR_CHOICES.include?(job[:optimize_for])
+      raise BadConfigurationException.new("The value given for " +
+        ":optimize_for was not an acceptable value. Acceptable values are: " +
+        "#{OPTIMIZE_FOR_CHOICES.join(', ')}")
+    end
   end
 
 

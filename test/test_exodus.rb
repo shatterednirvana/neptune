@@ -93,6 +93,30 @@ class TestExodus < Test::Unit::TestCase
         }
       })
     }
+
+    # make sure that the user tells us to optimize their task for either
+    # performance or cost
+    assert_raises(BadConfigurationException) {
+      exodus({
+        :clouds_to_use => ExodusHelper::AmazonEC2,
+        :credentials => {
+          :EC2_ACCESS_KEY => "boo",
+          :EC2_SECRET_KEY => "baz"
+        }
+      })
+    }
+
+    assert_raises(BadConfigurationException) {
+      exodus({
+        :clouds_to_use => ExodusHelper::AmazonEC2,
+        :credentials => {
+          :EC2_ACCESS_KEY => "boo",
+          :EC2_SECRET_KEY => "baz"
+        },
+        :optimize_for => 2
+      })
+    }
+
   end
 
   def test_exodus_batch_params
