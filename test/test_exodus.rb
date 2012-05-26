@@ -10,18 +10,25 @@ require 'flexmock/test_unit'
 
 
 class TestExodus < Test::Unit::TestCase
-  def test_exodus_job_good_params
-    #params = {
 
-    #}
 
-    #expected = "output"
-    #actual = exodus(params)
-    #assert_equal(expected, actual.to_s)
-    #assert_equal(expected, actual.stdout)
+  def setup
+    # assume that appscale is always running for keyname=appscale
+    location_file = File.expand_path("~/.appscale/locations-appscale.yaml")
+    flexmock(File).should_receive(:exists?).with(location_file).
+      and_return(true)
+
+    # set up some dummy data that will get read when we try to read the
+    # locations file
+    yaml_info = {
+      :shadow => "127.0.0.1",
+      :secret => "secret"
+    }
+    flexmock(YAML).should_receive(:load_file).and_return(yaml_info)
   end
 
-  def test_exodus_job_bad_params
+
+  def test_exodus_job_format_validation
     # calling exodus with something that's not an Array or Hash should fail
     assert_raises(BadConfigurationException) {
       exodus(2)
@@ -31,20 +38,23 @@ class TestExodus < Test::Unit::TestCase
     assert_raises(BadConfigurationException) {
       exodus([2])
     }
+  end
 
+
+  def test_ensure_all_params_are_present
     # calling exodus without specifying :clouds should fail
     assert_raises(BadConfigurationException) {
-      exodus({})
+      ExodusHelper.ensure_all_params_are_present({})
     }
 
     # calling exodus with invalid clouds specified should fail
     assert_raises(BadConfigurationException) {
-      exodus({:clouds_to_use => "not an acceptable value"})
+      ExodusHelper.ensure_all_params_are_present({:clouds_to_use => "not an acceptable value"})
     }
 
     # doing the same but with an array should also fail
     assert_raises(BadConfigurationException) {
-      exodus({
+      ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => ["not an acceptable value"],
         :credentials => {}
       })
@@ -52,22 +62,22 @@ class TestExodus < Test::Unit::TestCase
 
     # giving an array of not strings should fail
     assert_raises(BadConfigurationException) {
-      exodus({:clouds_to_use => [1, 2, 3]})
+      ExodusHelper.ensure_all_params_are_present({:clouds_to_use => [1, 2, 3]})
     }
 
     # giving not a string should fail
     assert_raises(BadConfigurationException) {
-      exodus({:clouds_to_use => 1})
+      ExodusHelper.ensure_all_params_are_present({:clouds_to_use => 1})
     }
 
     # giving an acceptable cloud but with no credentials should fail
     assert_raises(BadConfigurationException) {
-      exodus({:clouds_to_use => :GoogleAppEngine})
+      ExodusHelper.ensure_all_params_are_present({:clouds_to_use => :GoogleAppEngine})
     }
 
     # similarly, specifying credentials in a non-Hash format should fail
     assert_raises(BadConfigurationException) {
-      exodus({
+      ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :GoogleAppEngine,
         :credentials => 1
       })
@@ -75,7 +85,7 @@ class TestExodus < Test::Unit::TestCase
 
     # if a credential is nil or empty, it should fail
     assert_raises(BadConfigurationException) {
-      exodus({
+      ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :AmazonEC2,
         :credentials => {
           :EC2_ACCESS_KEY => nil,
@@ -85,7 +95,7 @@ class TestExodus < Test::Unit::TestCase
     }
 
     assert_raises(BadConfigurationException) {
-      exodus({
+      ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :AmazonEC2,
         :credentials => {
           :EC2_ACCESS_KEY => "",
@@ -97,7 +107,7 @@ class TestExodus < Test::Unit::TestCase
     # make sure that the user tells us to optimize their task for either
     # performance or cost
     assert_raises(BadConfigurationException) {
-      exodus({
+      ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :AmazonEC2,
         :credentials => {
           :EC2_ACCESS_KEY => "boo",
@@ -107,7 +117,7 @@ class TestExodus < Test::Unit::TestCase
     }
 
     assert_raises(BadConfigurationException) {
-      exodus({
+      ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :AmazonEC2,
         :credentials => {
           :EC2_ACCESS_KEY => "boo",
@@ -122,7 +132,7 @@ class TestExodus < Test::Unit::TestCase
 
     # first, files
     assert_raises(BadConfigurationException) {
-      exodus({
+      ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :AmazonEC2,
         :credentials => {
           :EC2_ACCESS_KEY => "boo",
@@ -134,7 +144,7 @@ class TestExodus < Test::Unit::TestCase
 
     # next, argv
     assert_raises(BadConfigurationException) {
-      exodus({
+      ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :AmazonEC2,
         :credentials => {
           :EC2_ACCESS_KEY => "boo",
@@ -147,7 +157,7 @@ class TestExodus < Test::Unit::TestCase
 
     # finally, executable
     assert_raises(BadConfigurationException) {
-      exodus({
+      ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :AmazonEC2,
         :credentials => {
           :EC2_ACCESS_KEY => "boo",
@@ -159,9 +169,59 @@ class TestExodus < Test::Unit::TestCase
       })
     }
 
+    # and of course, calling this function the right way should not fail
+    assert_nothing_raised(BadConfigurationException) {
+      ExodusHelper.ensure_all_params_are_present({
+        :clouds_to_use => :AmazonEC2,
+        :credentials => {
+          :EC2_ACCESS_KEY => "boo",
+          :EC2_SECRET_KEY => "baz"
+        },
+        :optimize_for => :cost,
+        :code => "/foo/bar.rb",
+        :argv => [],
+        :executable => "ruby"
+      })
+    }
   end
 
-  def test_exodus_batch_params
+
+  def test_get_task_info_from_neptune_manager
+    # this test sets the expectations for what should happen if
+    # we ask the neptune manager for info about a job and it has
+    # never seen this job before
+
+    job = {
+      :clouds_to_use => :AmazonEC2,
+      :credentials => {
+        :EC2_ACCESS_KEY => "boo",
+        :EC2_SECRET_KEY => "baz"
+      },
+      :optimize_for => :cost,
+      :code => "/foo/bar.rb",
+      :argv => [],
+      :executable => "ruby"
+    }
+
+    # mock out the SOAP call for get_profiling_info
+    no_job_data = {
+      'performance' => [],
+      'cost' => []
+    }
+    flexmock(NeptuneManagerClient).new_instances { |instance|
+      instance.should_receive(:get_profiling_info).with(job[:code]).
+        and_return(no_job_data)
+    }
+
+    profiling_info = ExodusHelper.get_profiling_info(job)
+    assert_equal(true, profiling_info['performance'].empty?)
+    assert_equal(true, profiling_info['cost'].empty?)
+  end
+
+
+  def test_get_clouds_to_run_task_on
 
   end
+
+
 end

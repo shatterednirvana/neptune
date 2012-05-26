@@ -2,6 +2,7 @@
 # Programmer: Chris Bunch
 
 
+require 'babel'
 require 'custom_exceptions'
 
 
@@ -12,17 +13,35 @@ require 'custom_exceptions'
 # select the best cloud for their job and run it there.
 def exodus(jobs)
   if jobs.class == Hash
+    job_given_as_hash = true
     jobs = [jobs]
   elsif jobs.class == Array
+    job_given_as_hash = false
     ExodusHelper.ensure_all_jobs_are_hashes(jobs)
   else
-    raise BadConfigurationException.new("jobs was a #{jobs.class}, which is " +
-      "not an acceptable class type")
+    raise BadConfigurationException.new("jobs was a #{jobs.class}, which " +
+      "is not an acceptable class type")
   end
+
+  tasks = []
 
   jobs.each { |job|
     ExodusHelper.ensure_all_params_are_present(job)
+    profiling_info = ExodusHelper.get_profiling_info(job)
+    #clouds_to_run_task_on = ExodusHelper.get_clouds_to_run_task_on(job, 
+    #  profiling_info)
+
+    # TODO(cgb):
+    # generate babel tasks for each place the task should run
+    # make a exodustaskinfo object from running babel() with these tasks
+    # add it to the list of exodustasks
   }
+
+  if job_given_as_hash
+    return tasks[0]
+  else
+    return tasks
+  end
 end
 
 
@@ -42,7 +61,7 @@ module ExodusHelper
   }
 
 
-  OPTIMIZE_FOR_CHOICES = [:performance, :cost]
+  OPTIMIZE_FOR_CHOICES = [:performance, :cost, :auto]
 
 
   # Given an Array of jobs to run, ensures that they are all Hashes, the
@@ -163,6 +182,19 @@ module ExodusHelper
         raise BadConfigurationException.new("#{param} was not specified")
       end
     }
+  end
+
+
+  def self.get_profiling_info(job)
+    key = self.get_key_from_job_data(job)
+    neptune_manager = BabelHelper.get_neptune_manager_client(job)
+    return neptune_manager.get_profiling_info(key)
+  end
+
+
+  # TODO(cgb): what is a job's key?
+  def self.get_key_from_job_data(job)
+    return job[:code]
   end
 
 

@@ -55,6 +55,7 @@ class NeptuneManagerClient
     @conn.add_method("compile_code", "job_data", "secret")
     @conn.add_method("get_supported_babel_engines", "job_data", "secret")
     @conn.add_method("does_file_exist", "file", "job_data", "secret")
+    @conn.add_method("get_profiling_info", "key", "secret")
   end
 
 
@@ -211,4 +212,15 @@ class NeptuneManagerClient
     }
     return result
   end
+
+
+  def get_profiling_info(key)
+    result = {'performance' => [], 'cost' => []}
+    make_call(NO_TIMEOUT, false) {
+      result = conn.get_profiling_info(key, @secret)
+    }
+    return result
+  end
+
+
 end

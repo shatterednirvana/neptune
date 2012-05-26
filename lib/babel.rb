@@ -154,7 +154,7 @@ module BabelHelper
   # the code and any possible inputs actually do exist, before attempting to
   # use them for computation.
   def self.validate_inputs(job_data)
-    controller = self.get_appcontroller(job_data)
+    controller = self.get_neptune_manager_client(job_data)
 
     # First, make sure the code exists
     NeptuneHelper.require_file_to_exist(job_data["@code"], job_data, controller)
@@ -176,13 +176,13 @@ module BabelHelper
   # check to make sure an output file doesn't exist before starting a new job
   # with the given name.
   def self.ensure_output_does_not_exist(job_data, remote_file)
-    controller = self.get_appcontroller(job_data)
+    controller = self.get_neptune_manager_client(job_data)
     NeptuneHelper.require_file_to_not_exist(remote_file, job_data, controller)
   end
 
 
   # Returns an NeptuneManagerClient for the given job data.
-  def self.get_appcontroller(job_data)
+  def self.get_neptune_manager_client(job_data)
     keyname = job_data["@keyname"] || "appscale"
     shadow_ip = CommonFunctions.get_from_yaml(keyname, :shadow)
     secret = CommonFunctions.get_secret_key(keyname)
