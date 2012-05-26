@@ -31,23 +31,14 @@ end
 module ExodusHelper
 
 
-  AmazonEC2 = "amazon-ec2"
-
-
-  GoogleAppEngine = "google-app-engine"
-
-  
-  MicrosoftAzure = "microsoft-azure"
-
-
   # A list of clouds that users can run tasks on via Exodus.
-  SUPPORTED_CLOUDS = [AmazonEC2, GoogleAppEngine, MicrosoftAzure]
+  SUPPORTED_CLOUDS = [:AmazonEC2, :GoogleAppEngine, :MicrosoftAzure]
 
 
   CLOUD_CREDENTIALS = {
-    AmazonEC2 => [:EC2_ACCESS_KEY, :EC2_SECRET_KEY],
-    GoogleAppEngine => [:appid, :appcfg_cookies, :function],
-    MicrosoftAzure => []
+    :AmazonEC2 => [:EC2_ACCESS_KEY, :EC2_SECRET_KEY],
+    :GoogleAppEngine => [:appid, :appcfg_cookies, :function],
+    :MicrosoftAzure => []
   }
 
 
@@ -75,6 +66,7 @@ module ExodusHelper
       self.convert_clouds_to_use_to_array(job)
       self.validate_clouds_to_use(job)
       self.validate_optimize_for_param(job)
+      self.validate_files_argv_executable(job)
     end
   end
 
@@ -85,11 +77,11 @@ module ExodusHelper
   # the right format.
   def self.convert_clouds_to_use_to_array(job)
     clouds_class = job[:clouds_to_use].class
-    if clouds_class == String
+    if clouds_class == Symbol
       job[:clouds_to_use] = [job[:clouds_to_use]]
     elsif clouds_class == Array
       job[:clouds_to_use].each { |cloud|
-        if cloud.class != String
+        if cloud.class != Symbol
           raise BadConfigurationException.new("#{cloud} was not a String, " +
             "but was a #{cloud.class}")
         end
@@ -162,6 +154,15 @@ module ExodusHelper
         ":optimize_for was not an acceptable value. Acceptable values are: " +
         "#{OPTIMIZE_FOR_CHOICES.join(', ')}")
     end
+  end
+
+
+  def self.validate_files_argv_executable(job)
+    [:code, :argv, :executable].each { |param|
+      if job[param].nil?
+        raise BadConfigurationException.new("#{param} was not specified")
+      end
+    }
   end
 
 

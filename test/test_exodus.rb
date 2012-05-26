@@ -62,13 +62,13 @@ class TestExodus < Test::Unit::TestCase
 
     # giving an acceptable cloud but with no credentials should fail
     assert_raises(BadConfigurationException) {
-      exodus({:clouds_to_use => ExodusHelper::GoogleAppEngine})
+      exodus({:clouds_to_use => :GoogleAppEngine})
     }
 
     # similarly, specifying credentials in a non-Hash format should fail
     assert_raises(BadConfigurationException) {
       exodus({
-        :clouds_to_use => ExodusHelper::GoogleAppEngine,
+        :clouds_to_use => :GoogleAppEngine,
         :credentials => 1
       })
     }
@@ -76,7 +76,7 @@ class TestExodus < Test::Unit::TestCase
     # if a credential is nil or empty, it should fail
     assert_raises(BadConfigurationException) {
       exodus({
-        :clouds_to_use => ExodusHelper::AmazonEC2,
+        :clouds_to_use => :AmazonEC2,
         :credentials => {
           :EC2_ACCESS_KEY => nil,
           :EC2_SECRET_KEY => "baz"
@@ -86,7 +86,7 @@ class TestExodus < Test::Unit::TestCase
 
     assert_raises(BadConfigurationException) {
       exodus({
-        :clouds_to_use => ExodusHelper::AmazonEC2,
+        :clouds_to_use => :AmazonEC2,
         :credentials => {
           :EC2_ACCESS_KEY => "",
           :EC2_SECRET_KEY => "baz"
@@ -98,7 +98,7 @@ class TestExodus < Test::Unit::TestCase
     # performance or cost
     assert_raises(BadConfigurationException) {
       exodus({
-        :clouds_to_use => ExodusHelper::AmazonEC2,
+        :clouds_to_use => :AmazonEC2,
         :credentials => {
           :EC2_ACCESS_KEY => "boo",
           :EC2_SECRET_KEY => "baz"
@@ -108,12 +108,54 @@ class TestExodus < Test::Unit::TestCase
 
     assert_raises(BadConfigurationException) {
       exodus({
-        :clouds_to_use => ExodusHelper::AmazonEC2,
+        :clouds_to_use => :AmazonEC2,
         :credentials => {
           :EC2_ACCESS_KEY => "boo",
           :EC2_SECRET_KEY => "baz"
         },
         :optimize_for => 2
+      })
+    }
+
+    # failing to specify files, argv, or executable
+    # should fail
+
+    # first, files
+    assert_raises(BadConfigurationException) {
+      exodus({
+        :clouds_to_use => :AmazonEC2,
+        :credentials => {
+          :EC2_ACCESS_KEY => "boo",
+          :EC2_SECRET_KEY => "baz"
+        },
+        :optimize_for => :cost
+      })
+    }
+
+    # next, argv
+    assert_raises(BadConfigurationException) {
+      exodus({
+        :clouds_to_use => :AmazonEC2,
+        :credentials => {
+          :EC2_ACCESS_KEY => "boo",
+          :EC2_SECRET_KEY => "baz"
+        },
+        :optimize_for => :cost,
+        :code => "/foo/bar.rb"
+      })
+    }
+
+    # finally, executable
+    assert_raises(BadConfigurationException) {
+      exodus({
+        :clouds_to_use => :AmazonEC2,
+        :credentials => {
+          :EC2_ACCESS_KEY => "boo",
+          :EC2_SECRET_KEY => "baz"
+        },
+        :optimize_for => :cost,
+        :code => "/foo/bar.rb",
+        :argv => []
       })
     }
 
