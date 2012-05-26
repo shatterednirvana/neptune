@@ -183,6 +183,24 @@ class TestExodus < Test::Unit::TestCase
         :executable => "ruby"
       })
     }
+
+    # similarly, if the credentials were in the user's environment instead
+    # of in the job specification, exodus should pull them in for us
+    ENV['EC2_ACCESS_KEY'] = "boo"
+    ENV['EC2_SECRET_KEY'] = "baz"
+    assert_nothing_raised(BadConfigurationException) {
+      ExodusHelper.ensure_all_params_are_present({
+        :clouds_to_use => :AmazonEC2,
+        :credentials => {
+        },
+        :optimize_for => :cost,
+        :code => "/foo/bar.rb",
+        :argv => [],
+        :executable => "ruby"
+      })
+    }
+    ENV['EC2_ACCESS_KEY'] = nil
+    ENV['EC2_SECRET_KEY'] = nil
   end
 
 

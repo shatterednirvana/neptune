@@ -579,7 +579,7 @@ the job does not specify it.</p>
   <span class="ruby-constant">CLOUD_CREDENTIALS</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cloud_name</span>, <span class="ruby-identifier">credential_list</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">credential_list</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cred</span><span class="ruby-operator">|</span>
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>[<span class="ruby-value">:credentials</span>][<span class="ruby-identifier">cred</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-constant">ENV</span>[<span class="ruby-identifier">cred</span>.<span class="ruby-identifier">to_s</span>].<span class="ruby-identifier">nil?</span>
-        <span class="ruby-identifier">job</span>[<span class="ruby-value">:credentials</span>][<span class="ruby-identifier">cred</span>] = <span class="ruby-constant">ENV</span>[<span class="ruby-identifier">cred</span>]
+        <span class="ruby-identifier">job</span>[<span class="ruby-value">:credentials</span>][<span class="ruby-identifier">cred</span>] = <span class="ruby-constant">ENV</span>[<span class="ruby-identifier">cred</span>.<span class="ruby-identifier">to_s</span>]
       <span class="ruby-keyword">end</span>
     }
   }

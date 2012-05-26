@@ -157,7 +157,7 @@ module ExodusHelper
     CLOUD_CREDENTIALS.each { |cloud_name, credential_list|
       credential_list.each { |cred|
         if job[:credentials][cred].nil? and !ENV[cred.to_s].nil?
-          job[:credentials][cred] = ENV[cred]
+          job[:credentials][cred] = ENV[cred.to_s]
         end
       }
     }
