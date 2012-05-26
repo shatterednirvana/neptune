@@ -49,13 +49,16 @@ class TestExodus < Test::Unit::TestCase
 
     # calling exodus with invalid clouds specified should fail
     assert_raises(BadConfigurationException) {
-      ExodusHelper.ensure_all_params_are_present({:clouds_to_use => "not an acceptable value"})
+      ExodusHelper.ensure_all_params_are_present({
+        :clouds_to_use => :BazCloud,
+        :credentials => {}
+      })
     }
 
     # doing the same but with an array should also fail
     assert_raises(BadConfigurationException) {
       ExodusHelper.ensure_all_params_are_present({
-        :clouds_to_use => ["not an acceptable value"],
+        :clouds_to_use => [:BazCloud],
         :credentials => {}
       })
     }
