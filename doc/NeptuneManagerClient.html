@@ -80,6 +80,8 @@
     
     <li><a href="#method-i-get_output">#get_output</a>
     
+    <li><a href="#method-i-get_profiling_info">#get_profiling_info</a>
+    
     <li><a href="#method-i-get_supported_babel_engines">#get_supported_babel_engines</a>
     
     <li><a href="#method-i-make_call">#make_call</a>
@@ -214,6 +216,59 @@ can be found on the machine that ran that tool, or on any AppScale machine.</p>
 
     <!-- Methods -->
     
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(ip, secret)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>A constructor that requires both the IP address of the machine to
+communicate with as well as the secret (string) needed to perform
+communication. NeptuneManagers will reject SOAP calls if this secret
+(basically a password) is not present - it can be found in the user’s
+.appscale directory, and a helper method is usually present to fetch this
+for us.</p>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">ip</span>, <span class="ruby-identifier">secret</span>)
+  <span class="ruby-ivar">@ip</span> = <span class="ruby-identifier">ip</span>
+  <span class="ruby-ivar">@secret</span> = <span class="ruby-identifier">secret</span>
+  
+  <span class="ruby-ivar">@conn</span> = <span class="ruby-constant">SOAP</span><span class="ruby-operator">::</span><span class="ruby-constant">RPC</span><span class="ruby-operator">::</span><span class="ruby-constant">Driver</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;https://#{@ip}:#{SERVER_PORT}&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;start_job&quot;</span>, <span class="ruby-string">&quot;jobs&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;put_input&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;get_output&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;get_acl&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;set_acl&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;compile_code&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;get_supported_babel_engines&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;does_file_exist&quot;</span>, <span class="ruby-string">&quot;file&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;get_profiling_info&quot;</span>, <span class="ruby-string">&quot;key&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
       <h3 class="section-header">Public Instance Methods</h3>
 
@@ -235,7 +290,7 @@ The result should then be placed in a location specified in the job data.</p>
 
           
           <div class="method-source-code" id="compile_code-source">
-            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 182</span>
+            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 183</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">compile_code</span>(<span class="ruby-identifier">job_data</span>)
   <span class="ruby-identifier">result</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-identifier">make_call</span>(<span class="ruby-constant">NO_TIMEOUT</span>, <span class="ruby-keyword">false</span>) { 
@@ -272,7 +327,7 @@ searched for within the job data.</p>
 
           
           <div class="method-source-code" id="does_file_exist-3F-source">
-            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 207</span>
+            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 208</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">does_file_exist?</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">job_data</span>)
   <span class="ruby-identifier">result</span> = <span class="ruby-keyword">false</span>
   <span class="ruby-identifier">make_call</span>(<span class="ruby-constant">NO_TIMEOUT</span>, <span class="ruby-keyword">false</span>) {
@@ -309,7 +364,7 @@ exceptions mirror that of start_neptune_job.</p>
 
           
           <div class="method-source-code" id="get_acl-source">
-            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 155</span>
+            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 156</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_acl</span>(<span class="ruby-identifier">job_data</span>)
   <span class="ruby-identifier">result</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-identifier">make_call</span>(<span class="ruby-constant">NO_TIMEOUT</span>, <span class="ruby-keyword">false</span>) { 
@@ -354,7 +409,7 @@ as well as the input format used for job_data.</p>
 
           
           <div class="method-source-code" id="get_output-source">
-            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 140</span>
+            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 141</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_output</span>(<span class="ruby-identifier">job_data</span>)
   <span class="ruby-identifier">result</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-identifier">make_call</span>(<span class="ruby-constant">NO_TIMEOUT</span>, <span class="ruby-keyword">false</span>) { 
@@ -371,6 +426,40 @@ as well as the input format used for job_data.</p>
 
         
       </div><!-- get_output-method -->
+
+    
+      <div id="method-i-get_profiling_info" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_profiling_info</span><span
+            class="method-args">(key)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_profiling_info-source">
+            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 217</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_profiling_info</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">result</span> = {<span class="ruby-string">'performance'</span> =<span class="ruby-operator">&gt;</span> [], <span class="ruby-string">'cost'</span> =<span class="ruby-operator">&gt;</span> []}
+  <span class="ruby-identifier">make_call</span>(<span class="ruby-constant">NO_TIMEOUT</span>, <span class="ruby-keyword">false</span>) {
+    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">get_profiling_info</span>(<span class="ruby-identifier">key</span>, <span class="ruby-ivar">@secret</span>)
+  }
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_profiling_info-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_profiling_info-method -->
 
     
       <div id="method-i-get_supported_babel_engines" class="method-detail ">
@@ -391,7 +480,7 @@ supported for the given credentials.</p>
 
           
           <div class="method-source-code" id="get_supported_babel_engines-source">
-            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 195</span>
+            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 196</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_supported_babel_engines</span>(<span class="ruby-identifier">job_data</span>)
   <span class="ruby-identifier">result</span> = []
   <span class="ruby-identifier">make_call</span>(<span class="ruby-constant">NO_TIMEOUT</span>, <span class="ruby-keyword">false</span>) {
@@ -436,7 +525,7 @@ The result of the block is returned to the caller.</p>
 
           
           <div class="method-source-code" id="make_call-source">
-            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 74</span>
+            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">make_call</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">retry_on_except</span>)
   <span class="ruby-keyword">begin</span>
     <span class="ruby-constant">Timeout</span><span class="ruby-operator">::</span><span class="ruby-identifier">timeout</span>(<span class="ruby-identifier">time</span>) {
@@ -488,7 +577,7 @@ parameter.</p>
 
           
           <div class="method-source-code" id="put_input-source">
-            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 120</span>
+            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 121</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">put_input</span>(<span class="ruby-identifier">job_data</span>)
   <span class="ruby-identifier">result</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-identifier">make_call</span>(<span class="ruby-constant">NO_TIMEOUT</span>, <span class="ruby-keyword">false</span>) {
@@ -528,7 +617,7 @@ that of start_neptune_job.</p>
 
           
           <div class="method-source-code" id="set_acl-source">
-            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 170</span>
+            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 171</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_acl</span>(<span class="ruby-identifier">job_data</span>)
   <span class="ruby-identifier">result</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-identifier">make_call</span>(<span class="ruby-constant">NO_TIMEOUT</span>, <span class="ruby-keyword">false</span>) { 
@@ -571,7 +660,7 @@ NeptuneManager.</p>
 
           
           <div class="method-source-code" id="start_neptune_job-source">
-            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 105</span>
+            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start_neptune_job</span>(<span class="ruby-identifier">job_data</span>)
   <span class="ruby-identifier">result</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-identifier">make_call</span>(<span class="ruby-constant">NO_TIMEOUT</span>, <span class="ruby-keyword">false</span>) { 
@@ -591,58 +680,6 @@ NeptuneManager.</p>
 
     
     </section><!-- public-instance-method-details -->
-  
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Class Methods</h3>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(ip, secret)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>A constructor that requires both the IP address of the machine to
-communicate with as well as the secret (string) needed to perform
-communication. NeptuneManagers will reject SOAP calls if this secret
-(basically a password) is not present - it can be found in the user’s
-.appscale directory, and a helper method is usually present to fetch this
-for us.</p>
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 45</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">ip</span>, <span class="ruby-identifier">secret</span>)
-  <span class="ruby-ivar">@ip</span> = <span class="ruby-identifier">ip</span>
-  <span class="ruby-ivar">@secret</span> = <span class="ruby-identifier">secret</span>
-  
-  <span class="ruby-ivar">@conn</span> = <span class="ruby-constant">SOAP</span><span class="ruby-operator">::</span><span class="ruby-constant">RPC</span><span class="ruby-operator">::</span><span class="ruby-constant">Driver</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;https://#{@ip}:#{SERVER_PORT}&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;start_job&quot;</span>, <span class="ruby-string">&quot;jobs&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;put_input&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;get_output&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;get_acl&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;set_acl&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;compile_code&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;get_supported_babel_engines&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-  <span class="ruby-ivar">@conn</span>.<span class="ruby-identifier">add_method</span>(<span class="ruby-string">&quot;does_file_exist&quot;</span>, <span class="ruby-string">&quot;file&quot;</span>, <span class="ruby-string">&quot;job_data&quot;</span>, <span class="ruby-string">&quot;secret&quot;</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- new-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- new-method -->
-
-    
-    </section><!-- public-class-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 

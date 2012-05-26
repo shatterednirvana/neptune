@@ -205,8 +205,6 @@ class TestExodus < Test::Unit::TestCase
 
     # mock out the SOAP call for get_profiling_info
     no_job_data = {
-      'performance' => [],
-      'cost' => []
     }
     flexmock(NeptuneManagerClient).new_instances { |instance|
       instance.should_receive(:get_profiling_info).with(job[:code]).
@@ -214,13 +212,115 @@ class TestExodus < Test::Unit::TestCase
     }
 
     profiling_info = ExodusHelper.get_profiling_info(job)
-    assert_equal(true, profiling_info['performance'].empty?)
-    assert_equal(true, profiling_info['cost'].empty?)
+    assert_equal(true, profiling_info.empty?)
   end
 
 
-  def test_get_clouds_to_run_task_on
+  def test_get_clouds_to_run_task_on_with_no_data
+    job = {
+      :clouds_to_use => [:AmazonEC2, :Eucalyptus],
+      :credentials => {
+        :EC2_ACCESS_KEY => "boo",
+        :EC2_SECRET_KEY => "baz"
+      },
+      :code => "/foo/bar.rb",
+      :argv => [],
+      :executable => "ruby"
+    }
 
+    # in this entirely hypothetical example, let us assume we have never run
+    # our task previously, so we have no data on what its performance and
+    # cost characteristics look like
+    profiling_info = {
+    }
+
+    job[:optimize_for] = :performance
+    clouds_to_run_task_on = ExodusHelper.get_clouds_to_run_task_on(job,
+      profiling_info)
+    assert_equal(job[:clouds_to_use], clouds_to_run_task_on)
+
+    job[:optimize_for] = :cost
+    clouds_to_run_task_on = ExodusHelper.get_clouds_to_run_task_on(job,
+      profiling_info)
+    assert_equal(job[:clouds_to_use], clouds_to_run_task_on)
+  end
+
+  def test_get_clouds_to_run_task_on_with_data
+    job = {
+      :clouds_to_use => [:AmazonEC2, :Eucalyptus],
+      :credentials => {
+        :EC2_ACCESS_KEY => "boo",
+        :EC2_SECRET_KEY => "baz"
+      },
+      :code => "/foo/bar.rb",
+      :argv => [],
+      :executable => "ruby"
+    }
+
+    # in this entirely hypothetical example, let us assume we have run our
+    # task previously on Amazon EC2 and Eucalyptus, and that it runs
+    # faster on EC2, but cheaper on Eucalyptus (that is, for free).
+    profiling_info = {
+      'AmazonEC2' => {
+        'performance' => [30.2, 40.6, 35.8, 41.2, 38.9],
+        'cost' => [0.40, 0.40, 0.40, 0.40, 0.40]
+      },
+      'Eucalyptus' => {
+        'performance' => [60.0, 65.0, 55.0, 70.3, 63.2],
+        'cost' => [0.0, 0.0, 0.0, 0.0, 0.0]
+      }
+    }
+
+    job[:optimize_for] = :performance
+    clouds_to_run_task_on = ExodusHelper.get_clouds_to_run_task_on(job,
+      profiling_info)
+    assert_equal([:AmazonEC2], clouds_to_run_task_on)
+
+    job[:optimize_for] = :cost
+    clouds_to_run_task_on = ExodusHelper.get_clouds_to_run_task_on(job,
+      profiling_info)
+    assert_equal([:Eucalyptus], clouds_to_run_task_on)
+  end
+
+
+  def test_get_clouds_to_run_task_on_when_profiling_lacks_data
+    job = {
+      :clouds_to_use => [:AmazonEC2, :Eucalyptus, :GoogleAppEngine],
+      :credentials => {
+        :EC2_ACCESS_KEY => "boo",
+        :EC2_SECRET_KEY => "baz"
+      },
+      :code => "/foo/bar.rb",
+      :argv => [],
+      :executable => "ruby"
+    }
+
+    # this example is similar to the prior one, but this time, we have data
+    # on EC2 and Eucalyptus but not Google App Engine. Here, we expect to
+    # run the job on the best one that we're trying to optimize for as well
+    # as anywhere we've never run it before (that is, Google App Engine)
+    profiling_info = {
+      'AmazonEC2' => {
+        'performance' => [30.2, 40.6, 35.8, 41.2, 38.9],
+        'cost' => [0.40, 0.40, 0.40, 0.40, 0.40]
+      },
+      'Eucalyptus' => {
+        'performance' => [60.0, 65.0, 55.0, 70.3, 63.2],
+        'cost' => [0.0, 0.0, 0.0, 0.0, 0.0]
+      }
+    }
+
+    job[:optimize_for] = :performance
+    clouds_to_run_task_on = ExodusHelper.get_clouds_to_run_task_on(job,
+      profiling_info)
+    assert_equal(true, clouds_to_run_task_on.include?(:AmazonEC2))
+    assert_equal(true, clouds_to_run_task_on.include?(:GoogleAppEngine))
+
+    job[:optimize_for] = :cost
+    clouds_to_run_task_on = ExodusHelper.get_clouds_to_run_task_on(job,
+      profiling_info)
+    assert_equal(true, clouds_to_run_task_on.include?(:Eucalyptus))
+    assert_equal(true, clouds_to_run_task_on.include?(:GoogleAppEngine))
   end
 
 

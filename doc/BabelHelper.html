@@ -74,9 +74,9 @@
     
     <li><a href="#method-c-generate_output_location">::generate_output_location</a>
     
-    <li><a href="#method-c-get_appcontroller">::get_appcontroller</a>
-    
     <li><a href="#method-c-get_bucket_for_local_data">::get_bucket_for_local_data</a>
+    
+    <li><a href="#method-c-get_neptune_manager_client">::get_neptune_manager_client</a>
     
     <li><a href="#method-c-put_code">::put_code</a>
     
@@ -288,7 +288,7 @@ with the given name.</p>
           <div class="method-source-code" id="ensure_output_does_not_exist-source">
             <pre><span class="ruby-comment"># File lib/babel.rb, line 178</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ensure_output_does_not_exist</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">remote_file</span>)
-  <span class="ruby-identifier">controller</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_appcontroller</span>(<span class="ruby-identifier">job_data</span>)
+  <span class="ruby-identifier">controller</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_neptune_manager_client</span>(<span class="ruby-identifier">job_data</span>)
   <span class="ruby-constant">NeptuneHelper</span>.<span class="ruby-identifier">require_file_to_not_exist</span>(<span class="ruby-identifier">remote_file</span>, <span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- ensure_output_does_not_exist-source -->
@@ -342,40 +342,6 @@ code).</p>
       </div><!-- generate_output_location-method -->
 
     
-      <div id="method-c-get_appcontroller" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">get_appcontroller</span><span
-            class="method-args">(job_data)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Returns an <a href="NeptuneManagerClient.html">NeptuneManagerClient</a> for
-the given job data.</p>
-          
-
-          
-          <div class="method-source-code" id="get_appcontroller-source">
-            <pre><span class="ruby-comment"># File lib/babel.rb, line 185</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_appcontroller</span>(<span class="ruby-identifier">job_data</span>)
-  <span class="ruby-identifier">keyname</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@keyname&quot;</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&quot;appscale&quot;</span>
-  <span class="ruby-identifier">shadow_ip</span> = <span class="ruby-constant">CommonFunctions</span>.<span class="ruby-identifier">get_from_yaml</span>(<span class="ruby-identifier">keyname</span>, <span class="ruby-value">:shadow</span>)
-  <span class="ruby-identifier">secret</span> = <span class="ruby-constant">CommonFunctions</span>.<span class="ruby-identifier">get_secret_key</span>(<span class="ruby-identifier">keyname</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">NeptuneManagerClient</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">shadow_ip</span>, <span class="ruby-identifier">secret</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- get_appcontroller-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- get_appcontroller-method -->
-
-    
       <div id="method-c-get_bucket_for_local_data" class="method-detail ">
         
         <div class="method-heading">
@@ -416,6 +382,40 @@ be used for Neptune jobs where the code is stored locally.</p>
 
         
       </div><!-- get_bucket_for_local_data-method -->
+
+    
+      <div id="method-c-get_neptune_manager_client" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_neptune_manager_client</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an <a href="NeptuneManagerClient.html">NeptuneManagerClient</a> for
+the given job data.</p>
+          
+
+          
+          <div class="method-source-code" id="get_neptune_manager_client-source">
+            <pre><span class="ruby-comment"># File lib/babel.rb, line 185</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_neptune_manager_client</span>(<span class="ruby-identifier">job_data</span>)
+  <span class="ruby-identifier">keyname</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@keyname&quot;</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&quot;appscale&quot;</span>
+  <span class="ruby-identifier">shadow_ip</span> = <span class="ruby-constant">CommonFunctions</span>.<span class="ruby-identifier">get_from_yaml</span>(<span class="ruby-identifier">keyname</span>, <span class="ruby-value">:shadow</span>)
+  <span class="ruby-identifier">secret</span> = <span class="ruby-constant">CommonFunctions</span>.<span class="ruby-identifier">get_secret_key</span>(<span class="ruby-identifier">keyname</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">NeptuneManagerClient</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">shadow_ip</span>, <span class="ruby-identifier">secret</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- get_neptune_manager_client-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- get_neptune_manager_client-method -->
 
     
       <div id="method-c-put_code" class="method-detail ">
@@ -631,7 +631,7 @@ them for computation.</p>
           <div class="method-source-code" id="validate_inputs-source">
             <pre><span class="ruby-comment"># File lib/babel.rb, line 156</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">validate_inputs</span>(<span class="ruby-identifier">job_data</span>)
-  <span class="ruby-identifier">controller</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_appcontroller</span>(<span class="ruby-identifier">job_data</span>)
+  <span class="ruby-identifier">controller</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_neptune_manager_client</span>(<span class="ruby-identifier">job_data</span>)
 
   <span class="ruby-comment"># First, make sure the code exists</span>
   <span class="ruby-constant">NeptuneHelper</span>.<span class="ruby-identifier">require_file_to_exist</span>(<span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@code&quot;</span>], <span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)

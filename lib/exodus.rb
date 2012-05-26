@@ -28,8 +28,8 @@ def exodus(jobs)
   jobs.each { |job|
     ExodusHelper.ensure_all_params_are_present(job)
     profiling_info = ExodusHelper.get_profiling_info(job)
-    #clouds_to_run_task_on = ExodusHelper.get_clouds_to_run_task_on(job, 
-    #  profiling_info)
+    clouds_to_run_task_on = ExodusHelper.get_clouds_to_run_task_on(job, 
+      profiling_info)
 
     # TODO(cgb):
     # generate babel tasks for each place the task should run
@@ -51,11 +51,13 @@ module ExodusHelper
 
 
   # A list of clouds that users can run tasks on via Exodus.
-  SUPPORTED_CLOUDS = [:AmazonEC2, :GoogleAppEngine, :MicrosoftAzure]
+  SUPPORTED_CLOUDS = [:AmazonEC2, :Eucalyptus, :GoogleAppEngine, 
+    :MicrosoftAzure]
 
 
   CLOUD_CREDENTIALS = {
     :AmazonEC2 => [:EC2_ACCESS_KEY, :EC2_SECRET_KEY],
+    :Eucalyptus => [:EC2_ACCESS_KEY, :EC2_SECRET_KEY, :EC2_URL, :S3_URL],
     :GoogleAppEngine => [:appid, :appcfg_cookies, :function],
     :MicrosoftAzure => []
   }
@@ -195,6 +197,60 @@ module ExodusHelper
   # TODO(cgb): what is a job's key?
   def self.get_key_from_job_data(job)
     return job[:code]
+  end
+
+  
+  def self.get_clouds_to_run_task_on(job, profiling_info)
+    optimize_for = job[:optimize_for]
+    if optimize_for == :performance or optimize_for == :cost
+      return self.get_minimum_val_in_data(job, profiling_info)
+    else
+      return self.find_optimal_cloud_for_task(job, profiling_info)
+    end
+  end
+
+
+  def self.get_minimum_val_in_data(job, profiling_info)
+    min_cloud = nil
+    min_val = 1_000_000  # infinity
+    optimize_for = job[:optimize_for].to_s
+
+    clouds_to_run_on = []
+    job[:clouds_to_use].each { |cloud|
+      # If we have no information on this cloud, then add it to the list
+      # of clouds we should run the task on, since it could potentially be
+      # lower than the minimum in the data we've seen so far.
+      if profiling_info[cloud.to_s].nil?
+        clouds_to_run_on << cloud
+        next
+      end
+
+      val = self.average(profiling_info[cloud.to_s][optimize_for])
+      if val < min_val
+        min_cloud = cloud
+        min_val = val
+      end
+    }
+
+    if !min_cloud.nil?
+      clouds_to_run_on << min_cloud
+    end
+
+    return clouds_to_run_on
+  end
+
+
+  def self.average(vals)
+    sum = vals.reduce(0.0) { |running_total, val|
+      running_total + val
+    }
+
+    return sum / vals.length
+  end
+
+
+  def self.find_optimal_cloud_for_task(job, profiling_info)
+    raise NotImplementedError
   end
 
 
