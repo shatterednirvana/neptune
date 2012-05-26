@@ -347,11 +347,10 @@ select the best cloud for their job and run it there.</p>
     <span class="ruby-identifier">profiling_info</span> = <span class="ruby-constant">ExodusHelper</span>.<span class="ruby-identifier">get_profiling_info</span>(<span class="ruby-identifier">job</span>)
     <span class="ruby-identifier">clouds_to_run_task_on</span> = <span class="ruby-constant">ExodusHelper</span>.<span class="ruby-identifier">get_clouds_to_run_task_on</span>(<span class="ruby-identifier">job</span>, 
       <span class="ruby-identifier">profiling_info</span>)
-
-    <span class="ruby-comment"># TODO(cgb):</span>
-    <span class="ruby-comment"># generate babel tasks for each place the task should run</span>
-    <span class="ruby-comment"># make a exodustaskinfo object from running babel() with these tasks</span>
-    <span class="ruby-comment"># add it to the list of exodustasks</span>
+    <span class="ruby-identifier">babel_tasks_to_run</span> = <span class="ruby-constant">ExodusHelper</span>.<span class="ruby-identifier">generate_babel_tasks</span>(<span class="ruby-identifier">job</span>, 
+      <span class="ruby-identifier">clouds_to_run_task_on</span>)
+    <span class="ruby-constant">ExodusHelper</span>.<span class="ruby-identifier">run_job</span>(<span class="ruby-identifier">babel_tasks_to_run</span>)
+    <span class="ruby-identifier">tasks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">ExodusTaskInfo</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">babel_tasks_to_run</span>)
   }
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_given_as_hash</span>

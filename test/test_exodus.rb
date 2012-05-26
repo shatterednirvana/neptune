@@ -178,7 +178,9 @@ class TestExodus < Test::Unit::TestCase
         :clouds_to_use => :AmazonEC2,
         :credentials => {
           :EC2_ACCESS_KEY => "boo",
-          :EC2_SECRET_KEY => "baz"
+          :EC2_SECRET_KEY => "baz",
+          :EC2_URL => "http://ec2.url",
+          :S3_URL => "http://s3.url"
         },
         :optimize_for => :cost,
         :code => "/foo/bar.rb",
@@ -191,6 +193,8 @@ class TestExodus < Test::Unit::TestCase
     # of in the job specification, exodus should pull them in for us
     ENV['EC2_ACCESS_KEY'] = "boo"
     ENV['EC2_SECRET_KEY'] = "baz"
+    ENV['EC2_URL'] = "http://ec2.url"
+    ENV['S3_URL'] = "http://s3.url"
     assert_nothing_raised(BadConfigurationException) {
       ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :AmazonEC2,
@@ -204,6 +208,8 @@ class TestExodus < Test::Unit::TestCase
     }
     ENV['EC2_ACCESS_KEY'] = nil
     ENV['EC2_SECRET_KEY'] = nil
+    ENV['EC2_URL'] = nil
+    ENV['S3_URL'] = nil
   end
 
 
@@ -342,6 +348,109 @@ class TestExodus < Test::Unit::TestCase
       profiling_info)
     assert_equal(true, clouds_to_run_task_on.include?(:Eucalyptus))
     assert_equal(true, clouds_to_run_task_on.include?(:GoogleAppEngine))
+  end
+
+
+  def test_generate_babel_tasks_one_task
+    job = {
+      :clouds_to_use => [:AmazonEC2, :Eucalyptus, :GoogleAppEngine],
+      :credentials => {
+        :EUCA_ACCESS_KEY => "boo",
+        :EUCA_SECRET_KEY => "baz",
+        :EUCA_URL => "http://euca.url",
+        :WALRUS_URL => "http://walrus.url"
+      },
+      :code => "/foo/bar.rb",
+      :argv => [2],
+      :executable => "ruby",
+      :optimize_for => :cost
+    }
+
+    clouds_to_run_task_on = [:Eucalyptus]
+
+    expected = [{
+      :type => "babel",
+      :EUCA_ACCESS_KEY => "boo",
+      :EUCA_SECRET_KEY => "baz",
+      :EUCA_URL => "http://euca.url",
+      :WALRUS_URL => "http://walrus.url",
+      :code => "/foo/bar.rb",
+      :argv => [2],
+      :executable => "ruby",
+      :is_remote => false,
+      :run_local => false,
+      :storage => "walrus",
+      :engine => "executor-rabbitmq"
+    }]
+    actual = ExodusHelper.generate_babel_tasks(job, clouds_to_run_task_on)
+    assert_equal(expected, actual)
+  end
+
+
+  def test_generate_babel_tasks_many_tasks
+    job = {
+      :clouds_to_use => [:AmazonEC2, :Eucalyptus, :GoogleAppEngine],
+      :credentials => {
+        :EC2_ACCESS_KEY => "boo",
+        :EC2_SECRET_KEY => "baz",
+        :EC2_URL => "http://ec2.url",
+        :S3_URL => "http://s3.url",
+        :appid => "bazappid",
+        :appcfg_cookies => "~/.appcfg_cookies",
+        :function => "bazboo()"
+      },
+      :code => "/foo/bar.rb",
+      :argv => [2],
+      :executable => "ruby",
+      :optimize_for => :cost
+    }
+
+    clouds_to_run_task_on = [:AmazonEC2, :GoogleAppEngine]
+
+    ec2_task = {
+      :type => "babel",
+      :EC2_ACCESS_KEY => "boo",
+      :EC2_SECRET_KEY => "baz",
+      :EC2_URL => "http://ec2.url",
+      :S3_URL => "http://s3.url",
+      :appid => "bazappid",
+      :appcfg_cookies => "~/.appcfg_cookies",
+      :function => "bazboo()",
+      :code => "/foo/bar.rb",
+      :argv => [2],
+      :executable => "ruby",
+      :is_remote => false,
+      :run_local => false,
+      :storage => "s3",
+      :engine => "executor-sqs"
+    }   
+    
+    appengine_task = {
+      :type => "babel",
+      :EC2_ACCESS_KEY => "boo",
+      :EC2_SECRET_KEY => "baz",
+      :EC2_URL => "http://ec2.url",
+      :S3_URL => "http://s3.url",
+      :appid => "bazappid",
+      :appcfg_cookies => "~/.appcfg_cookies",
+      :function => "bazboo()",
+      :code => "/foo/bar.rb",
+      :argv => [2],
+      :executable => "ruby",
+      :is_remote => false,
+      :run_local => false,
+      :storage => "gstorage",
+      :engine => "appengine-push-q"
+    }
+
+    expected = [ec2_task, appengine_task]
+    actual = ExodusHelper.generate_babel_tasks(job, clouds_to_run_task_on)
+    assert_equal(expected, actual)
+  end
+
+
+  def test_exodus_task_info
+
   end
 
 

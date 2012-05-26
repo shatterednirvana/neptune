@@ -30,11 +30,10 @@ def exodus(jobs)
     profiling_info = ExodusHelper.get_profiling_info(job)
     clouds_to_run_task_on = ExodusHelper.get_clouds_to_run_task_on(job, 
       profiling_info)
-
-    # TODO(cgb):
-    # generate babel tasks for each place the task should run
-    # make a exodustaskinfo object from running babel() with these tasks
-    # add it to the list of exodustasks
+    babel_tasks_to_run = ExodusHelper.generate_babel_tasks(job, 
+      clouds_to_run_task_on)
+    ExodusHelper.run_job(babel_tasks_to_run)
+    tasks << ExodusTaskInfo.new(babel_tasks_to_run)
   }
 
   if job_given_as_hash
@@ -56,10 +55,31 @@ module ExodusHelper
 
 
   CLOUD_CREDENTIALS = {
-    :AmazonEC2 => [:EC2_ACCESS_KEY, :EC2_SECRET_KEY],
-    :Eucalyptus => [:EC2_ACCESS_KEY, :EC2_SECRET_KEY, :EC2_URL, :S3_URL],
+    :AmazonEC2 => [:EC2_ACCESS_KEY, :EC2_SECRET_KEY, :EC2_URL, :S3_URL],
+    :Eucalyptus => [:EUCA_ACCESS_KEY, :EUCA_SECRET_KEY, :EUCA_URL, 
+      :WALRUS_URL],
     :GoogleAppEngine => [:appid, :appcfg_cookies, :function],
-    :MicrosoftAzure => []
+    :MicrosoftAzure => [] # TODO(cgb): find out what creds we need here
+  }
+
+  
+  CLOUD_BABEL_PARAMS = {
+    :AmazonEC2 => {
+      :storage => "s3",
+      :engine => "executor-sqs"
+    },
+    :Eucalyptus => {
+      :storage => "walrus",
+      :engine => "executor-rabbitmq"
+    },
+    :GoogleAppEngine => {
+      :storage => "gstorage",
+      :engine => "appengine-push-q"
+    },
+    :MicrosoftAzure => {
+      :storage => "waz-storage",
+      :engine => "waz-push-q"
+    }
   }
 
 
@@ -240,6 +260,7 @@ module ExodusHelper
   end
 
 
+  # Given an Array of values, calculates and returns their average.
   def self.average(vals)
     sum = vals.reduce(0.0) { |running_total, val|
       running_total + val
@@ -251,6 +272,27 @@ module ExodusHelper
 
   def self.find_optimal_cloud_for_task(job, profiling_info)
     raise NotImplementedError
+  end
+
+
+  def self.generate_babel_tasks(job, clouds_to_run_task_on)
+    tasks = []
+
+    clouds_to_run_task_on.each { |cloud|
+      task = { :type => "babel",
+        :code => job[:code],
+        :argv => job[:argv],
+        :executable => job[:executable],
+        :is_remote => false,
+        :run_local => false
+      }
+
+      task.merge!(job[:credentials])
+      task.merge!(CLOUD_BABEL_PARAMS[cloud])
+      tasks << task
+    }
+
+    return tasks
   end
 
 

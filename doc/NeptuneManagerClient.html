@@ -446,7 +446,7 @@ as well as the input format used for job_data.</p>
           <div class="method-source-code" id="get_profiling_info-source">
             <pre><span class="ruby-comment"># File lib/neptune_manager_client.rb, line 217</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_profiling_info</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">result</span> = {<span class="ruby-string">'performance'</span> =<span class="ruby-operator">&gt;</span> [], <span class="ruby-string">'cost'</span> =<span class="ruby-operator">&gt;</span> []}
+  <span class="ruby-identifier">result</span> = {}
   <span class="ruby-identifier">make_call</span>(<span class="ruby-constant">NO_TIMEOUT</span>, <span class="ruby-keyword">false</span>) {
     <span class="ruby-identifier">result</span> = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">get_profiling_info</span>(<span class="ruby-identifier">key</span>, <span class="ruby-ivar">@secret</span>)
   }

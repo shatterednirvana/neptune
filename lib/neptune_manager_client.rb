@@ -215,7 +215,7 @@ class NeptuneManagerClient
 
 
   def get_profiling_info(key)
-    result = {'performance' => [], 'cost' => []}
+    result = {}
     make_call(NO_TIMEOUT, false) {
       result = conn.get_profiling_info(key, @secret)
     }
