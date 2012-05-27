@@ -348,7 +348,8 @@ class TestExodus < Test::Unit::TestCase
         :EUCA_ACCESS_KEY => "boo",
         :EUCA_SECRET_KEY => "baz",
         :EUCA_URL => "http://euca.url",
-        :WALRUS_URL => "http://walrus.url"
+        :WALRUS_URL => "http://walrus.url",
+        :Walrus_bucket_name => "bazbucket"
       },
       :code => "/foo/bar.rb",
       :argv => [2],
@@ -364,6 +365,7 @@ class TestExodus < Test::Unit::TestCase
       :EUCA_SECRET_KEY => "baz",
       :EUCA_URL => "http://euca.url",
       :WALRUS_URL => "http://walrus.url",
+      :Walrus_bucket_name => "bazbucket",
       :code => "/foo/bar.rb",
       :argv => [2],
       :executable => "ruby",
@@ -381,13 +383,18 @@ class TestExodus < Test::Unit::TestCase
     job = {
       :clouds_to_use => [:AmazonEC2, :Eucalyptus, :GoogleAppEngine],
       :credentials => {
+        # ec2 credentials
         :EC2_ACCESS_KEY => "boo",
         :EC2_SECRET_KEY => "baz",
         :EC2_URL => "http://ec2.url",
         :S3_URL => "http://s3.url",
+        :S3_bucket_name => "bazbucket1",
+
+        # google app engine credentials
         :appid => "bazappid",
         :appcfg_cookies => "~/.appcfg_cookies",
-        :function => "bazboo()"
+        :function => "bazboo()",
+        :GStorage_bucket_name => "bazbucket2"
       },
       :code => "/foo/bar.rb",
       :argv => [2],
@@ -403,9 +410,7 @@ class TestExodus < Test::Unit::TestCase
       :EC2_SECRET_KEY => "baz",
       :EC2_URL => "http://ec2.url",
       :S3_URL => "http://s3.url",
-      :appid => "bazappid",
-      :appcfg_cookies => "~/.appcfg_cookies",
-      :function => "bazboo()",
+      :S3_bucket_name => "bazbucket1",
       :code => "/foo/bar.rb",
       :argv => [2],
       :executable => "ruby",
@@ -417,13 +422,10 @@ class TestExodus < Test::Unit::TestCase
     
     appengine_task = {
       :type => "babel",
-      :EC2_ACCESS_KEY => "boo",
-      :EC2_SECRET_KEY => "baz",
-      :EC2_URL => "http://ec2.url",
-      :S3_URL => "http://s3.url",
       :appid => "bazappid",
       :appcfg_cookies => "~/.appcfg_cookies",
       :function => "bazboo()",
+      :GStorage_bucket_name => "bazbucket2",
       :code => "/foo/bar.rb",
       :argv => [2],
       :executable => "ruby",
@@ -500,6 +502,71 @@ class TestExodus < Test::Unit::TestCase
 
     expected = "task output yay!"
     assert_equal(expected, exodus_task.to_s)
+  end
+
+
+  def test_exodus_job_given_as_hash
+    job = {
+      :clouds_to_use => :AmazonEC2,
+      :credentials => {
+        :EC2_ACCESS_KEY => "boo",
+        :EC2_SECRET_KEY => "baz",
+        :EC2_URL => "http://ec2.url",
+        :S3_URL => "http://s3.url",
+        :S3_bucket_name => "bazbucket"
+      },
+      :optimize_for => :cost,
+      :code => "/foo/bar.rb",
+      :argv => [],
+      :executable => "ruby"
+    }
+
+    # mock out calls to the NeptuneManager
+    flexmock(NeptuneManagerClient).new_instances { |instance|
+      # for this test, let's say there's no data on this task right now
+      instance.should_receive(:get_profiling_info).with(String).
+        and_return({})
+
+      # let's say that all checks to see if temp files exist tell us that
+      # the files don't exist
+      instance.should_receive(:does_file_exist?).
+        with(/\A\/bazbucket\/babel\/temp-[\w]+\Z/, Hash).
+        and_return(false)
+
+      # assume that our code got put in the remote datastore fine
+      instance.should_receive(:does_file_exist?).
+        with(/\A\/bazbucket\/babel\/foo\/bar.rb\Z/, Hash).
+        and_return(true)
+
+      # also, calls to put_input should succeed
+      instance.should_receive(:put_input).with(Hash).and_return(true)
+
+      # mock out the call to get_supported_babel_engines and put in
+      # SQS and rabbitmq (which is always supported)
+      instance.should_receive(:get_supported_babel_engines).with(Hash).
+        and_return(["executor-rabbitmq", "executor-sqs"])
+
+      # neptune jobs should start fine
+      instance.should_receive(:start_neptune_job).with(Hash).
+        and_return("babel job is now running")
+
+      # getting the output of the job should return it the first time
+      instance.should_receive(:get_output).with(Hash).
+        and_return("task output yay!")
+    }
+
+    # mock out filesystem checks
+    # we'll say that our code does exist
+    flexmock(File).should_receive(:exists?).with("/foo").and_return(true)
+
+    # mock out scp calls - assume they go through with no problems
+    flexmock(CommonFunctions).should_receive(:shell).with(/\Ascp/).
+      and_return()
+
+    expected = "task output yay!"
+    actual = exodus(job)
+    assert_equal(expected, actual.to_s)
+    assert_equal(expected, actual.stdout)
   end
 
 

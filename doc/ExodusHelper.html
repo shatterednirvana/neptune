@@ -444,7 +444,10 @@ missing params.</p>
       <span class="ruby-value">:run_local</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>
     }
 
-    <span class="ruby-identifier">task</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">job</span>[<span class="ruby-value">:credentials</span>])
+    <span class="ruby-constant">CLOUD_CREDENTIALS</span>[<span class="ruby-identifier">cloud</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">credential</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">task</span>[<span class="ruby-identifier">credential</span>] = <span class="ruby-identifier">job</span>[<span class="ruby-value">:credentials</span>][<span class="ruby-identifier">credential</span>]
+    }
+
     <span class="ruby-identifier">task</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-constant">CLOUD_BABEL_PARAMS</span>[<span class="ruby-identifier">cloud</span>])
     <span class="ruby-identifier">tasks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">task</span>
   }
@@ -667,7 +670,7 @@ the job does not specify it.</p>
 
           
           <div class="method-source-code" id="run_job-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 302</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 305</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">run_job</span>(<span class="ruby-identifier">tasks_to_run</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">babel</span>(<span class="ruby-identifier">tasks_to_run</span>)
 <span class="ruby-keyword">end</span></pre>

@@ -28,17 +28,17 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="lib-exodus_rb.html">lib/exodus.rb</a></td>
-            <td class='right_align'><tt>307</tt></td>
-            <td class='right_align'><tt>216</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>86.32%</tt></div>
+            <td class='right_align'><tt>310</tt></td>
+            <td class='right_align'><tt>218</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>92.26%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:86px"></div>
-            <div class="uncovered" style="width:14px"></div>
+            <div class="covered" style="width:92px"></div>
+            <div class="uncovered" style="width:8px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>81.94%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>88.99%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:82px"></div>
-            <div class="uncovered" style="width:18px"></div>
+            <div class="covered" style="width:89px"></div>
+            <div class="uncovered" style="width:11px"></div>
           </div></td>
           </tr>
         </tbody>
@@ -152,13 +152,13 @@
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line17">17</a>     job_given_as_hash = true</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line18">18</a>     jobs = [jobs]</pre></td>
           </tr>
         
@@ -206,97 +206,97 @@
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line26">26</a> </pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line27">27</a>   tasks = []</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line28">28</a> </pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line29">29</a>   jobs.each { |job|</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line30">30</a>     ExodusHelper.ensure_all_params_are_present(job)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line31">31</a>     profiling_info = ExodusHelper.get_profiling_info(job)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line32">32</a>     clouds_to_run_task_on = ExodusHelper.get_clouds_to_run_task_on(job, </pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line33">33</a>       profiling_info)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line34">34</a>     babel_tasks_to_run = ExodusHelper.generate_babel_tasks(job, </pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line35">35</a>       clouds_to_run_task_on)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line36">36</a>     dispatched_tasks = ExodusHelper.run_job(babel_tasks_to_run)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line37">37</a>     tasks &lt;&lt; ExodusTaskInfo.new(dispatched_tasks)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line38">38</a>   }</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line39">39</a> </pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line40">40</a>   if job_given_as_hash</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line41">41</a>     return tasks[0]</pre></td>
           </tr>
         
@@ -1809,43 +1809,43 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line293">293</a>       task.merge!(job[:credentials])</pre></td>
+            <td><pre><a name="line293">293</a>       CLOUD_CREDENTIALS[cloud].each { |credential|</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line294">294</a>       task.merge!(CLOUD_BABEL_PARAMS[cloud])</pre></td>
+            <td><pre><a name="line294">294</a>         task[credential] = job[:credentials][credential]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line295">295</a>       }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line296">296</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line295">295</a>       tasks &lt;&lt; task</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line296">296</a>     }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line297">297</a> </pre></td>
+            <td><pre><a name="line297">297</a>       task.merge!(CLOUD_BABEL_PARAMS[cloud])</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line298">298</a>     return tasks</pre></td>
+            <td><pre><a name="line298">298</a>       tasks &lt;&lt; task</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line299">299</a>   end</pre></td>
+            <td><pre><a name="line299">299</a>     }</pre></td>
           </tr>
         
           
@@ -1856,50 +1856,68 @@
         
           
           
+          <tr class="marked">
+            <td><pre><a name="line301">301</a>     return tasks</pre></td>
+          </tr>
+        
+          
+          
           <tr class="inferred">
-            <td><pre><a name="line301">301</a> </pre></td>
+            <td><pre><a name="line302">302</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line303">303</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line304">304</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line302">302</a>   def self.run_job(tasks_to_run)</pre></td>
+            <td><pre><a name="line305">305</a>   def self.run_job(tasks_to_run)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line303">303</a>     return babel(tasks_to_run)</pre></td>
+            <td><pre><a name="line306">306</a>     return babel(tasks_to_run)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line304">304</a>   end</pre></td>
+            <td><pre><a name="line307">307</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line305">305</a> </pre></td>
+            <td><pre><a name="line308">308</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line306">306</a> </pre></td>
+            <td><pre><a name="line309">309</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line307">307</a> end</pre></td>
+            <td><pre><a name="line310">310</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Sun May 27 01:00:23 -0700 2012 with <a href="http://github.com/relevance/rcov">rcov 1.0.0</a></p>
+    <p>Generated on Sun May 27 08:30:04 -0700 2012 with <a href="http://github.com/relevance/rcov">rcov 1.0.0</a></p>
 
   </body>
 </html>

@@ -122,7 +122,8 @@ module BabelHelper
   # Provides a common way for callers to get the name of the bucket that
   # should be used for Neptune jobs where the code is stored locally.
   def self.get_bucket_for_local_data(job_data)
-    bucket_name = job_data["@bucket_name"] || ENV['BABEL_BUCKET_NAME']
+    bucket_name = job_data["@bucket_name"] || ENV['BABEL_BUCKET_NAME'] ||
+      job_data["@S3_bucket_name"] || job_data["@Walrus_bucket_name"]
 
     if bucket_name.nil?
       raise BadConfigurationException.new(NEEDS_BUCKET_INFO)

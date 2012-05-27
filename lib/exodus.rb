@@ -290,7 +290,10 @@ module ExodusHelper
         :run_local => false
       }
 
-      task.merge!(job[:credentials])
+      CLOUD_CREDENTIALS[cloud].each { |credential|
+        task[credential] = job[:credentials][credential]
+      }
+
       task.merge!(CLOUD_BABEL_PARAMS[cloud])
       tasks << task
     }
