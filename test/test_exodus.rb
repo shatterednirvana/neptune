@@ -25,6 +25,14 @@ class TestExodus < Test::Unit::TestCase
       :secret => "secret"
     }
     flexmock(YAML).should_receive(:load_file).and_return(yaml_info)
+
+    @ec2_credentials = {
+      :EC2_ACCESS_KEY => "boo",
+      :EC2_SECRET_KEY => "baz",
+      :EC2_URL => "http://ec2.url",
+      :S3_URL => "http://s3.url",
+      :S3_bucket_name => "bazbucket"
+    }
   end
 
 
@@ -112,20 +120,14 @@ class TestExodus < Test::Unit::TestCase
     assert_raises(BadConfigurationException) {
       ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :AmazonEC2,
-        :credentials => {
-          :EC2_ACCESS_KEY => "boo",
-          :EC2_SECRET_KEY => "baz"
-        }
+        :credentials => @ec2_credentials
       })
     }
 
     assert_raises(BadConfigurationException) {
       ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :AmazonEC2,
-        :credentials => {
-          :EC2_ACCESS_KEY => "boo",
-          :EC2_SECRET_KEY => "baz"
-        },
+        :credentials => @ec2_credentials,
         :optimize_for => 2
       })
     }
@@ -137,10 +139,7 @@ class TestExodus < Test::Unit::TestCase
     assert_raises(BadConfigurationException) {
       ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :AmazonEC2,
-        :credentials => {
-          :EC2_ACCESS_KEY => "boo",
-          :EC2_SECRET_KEY => "baz"
-        },
+        :credentials => @ec2_credentials,
         :optimize_for => :cost
       })
     }
@@ -149,10 +148,7 @@ class TestExodus < Test::Unit::TestCase
     assert_raises(BadConfigurationException) {
       ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :AmazonEC2,
-        :credentials => {
-          :EC2_ACCESS_KEY => "boo",
-          :EC2_SECRET_KEY => "baz"
-        },
+        :credentials => @ec2_credentials,
         :optimize_for => :cost,
         :code => "/foo/bar.rb"
       })
@@ -162,10 +158,7 @@ class TestExodus < Test::Unit::TestCase
     assert_raises(BadConfigurationException) {
       ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :AmazonEC2,
-        :credentials => {
-          :EC2_ACCESS_KEY => "boo",
-          :EC2_SECRET_KEY => "baz"
-        },
+        :credentials => @ec2_credentials,
         :optimize_for => :cost,
         :code => "/foo/bar.rb",
         :argv => []
@@ -176,12 +169,7 @@ class TestExodus < Test::Unit::TestCase
     assert_nothing_raised(BadConfigurationException) {
       ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :AmazonEC2,
-        :credentials => {
-          :EC2_ACCESS_KEY => "boo",
-          :EC2_SECRET_KEY => "baz",
-          :EC2_URL => "http://ec2.url",
-          :S3_URL => "http://s3.url"
-        },
+        :credentials => @ec2_credentials,
         :optimize_for => :cost,
         :code => "/foo/bar.rb",
         :argv => [],
@@ -195,6 +183,7 @@ class TestExodus < Test::Unit::TestCase
     ENV['EC2_SECRET_KEY'] = "baz"
     ENV['EC2_URL'] = "http://ec2.url"
     ENV['S3_URL'] = "http://s3.url"
+    ENV['S3_bucket_name'] = "bazbucket"
     assert_nothing_raised(BadConfigurationException) {
       ExodusHelper.ensure_all_params_are_present({
         :clouds_to_use => :AmazonEC2,
@@ -210,6 +199,7 @@ class TestExodus < Test::Unit::TestCase
     ENV['EC2_SECRET_KEY'] = nil
     ENV['EC2_URL'] = nil
     ENV['S3_URL'] = nil
+    ENV['S3_bucket_name'] = nil
   end
 
 
@@ -449,8 +439,67 @@ class TestExodus < Test::Unit::TestCase
   end
 
 
-  def test_exodus_task_info
+  def test_exodus_run_job_with_one_babel_task
+    ec2_task = {
+      :type => "babel",
+      :EC2_ACCESS_KEY => "boo",
+      :EC2_SECRET_KEY => "baz",
+      :EC2_URL => "http://ec2.url",
+      :S3_URL => "http://s3.url",
+      :code => "/foo/bar.rb",
+      :argv => [2],
+      :executable => "ruby",
+      :is_remote => false,
+      :run_local => false,
+      :storage => "s3",
+      :engine => "executor-sqs",
+      :bucket_name => "bazbucket"
+    }
+    babel_tasks = [ec2_task]
 
+    # mock out calls to the NeptuneManager
+    flexmock(NeptuneManagerClient).new_instances { |instance|
+      # let's say that all checks to see if temp files exist tell us that
+      # the files don't exist
+      instance.should_receive(:does_file_exist?).
+        with(/\A\/bazbucket\/babel\/temp-[\w]+\Z/, Hash).
+        and_return(false)
+
+      # assume that our code got put in the remote datastore fine
+      instance.should_receive(:does_file_exist?).
+        with(/\A\/bazbucket\/babel\/foo\/bar.rb\Z/, Hash).
+        and_return(true)
+
+      # also, calls to put_input should succeed
+      instance.should_receive(:put_input).with(Hash).and_return(true)
+
+      # mock out the call to get_supported_babel_engines and put in
+      # SQS and rabbitmq (which is always supported)
+      instance.should_receive(:get_supported_babel_engines).with(Hash).
+        and_return(["executor-rabbitmq", "executor-sqs"])
+
+      # neptune jobs should start fine
+      instance.should_receive(:start_neptune_job).with(Hash).
+        and_return("babel job is now running")
+
+      # getting the output of the job should return it the first time
+      instance.should_receive(:get_output).with(Hash).
+        and_return("task output yay!")
+    }
+
+    # mock out filesystem checks
+    # we'll say that our code does exist
+    flexmock(File).should_receive(:exists?).with("/foo").and_return(true)
+
+    # mock out scp calls - assume they go through with no problems
+    flexmock(CommonFunctions).should_receive(:shell).with(/\Ascp/).
+      and_return()
+
+    dispatched_tasks = ExodusHelper.run_job(babel_tasks)
+    exodus_task = ExodusTaskInfo.new(dispatched_tasks)
+
+    expected = "task output yay!"
+    assert_equal(expected, exodus_task.to_s)
   end
 
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
   <head>
-    <title>lib/custom_exceptions.rb</title>
+    <title>lib/exodus_task_info.rb</title>
     <link href="screen.css" media="all" rel="stylesheet" type="text/css" />
     <link href="print.css" media="print" rel="stylesheet" type="text/css" />
     
@@ -10,7 +10,7 @@
   </head>
   <body>
     <h1>Neptune C0 Coverage Information - RCov</h1>
-    <h2>lib/custom_exceptions.rb</h2>
+    <h2>lib/exodus_task_info.rb</h2>
 
     
 
@@ -27,9 +27,9 @@
         </thead>
         <tbody>
           <tr>
-            <td class="left_align"><a href="lib-custom_exceptions_rb.html">lib/custom_exceptions.rb</a></td>
-            <td class='right_align'><tt>18</tt></td>
-            <td class='right_align'><tt>6</tt></td>
+            <td class="left_align"><a href="lib-exodus_task_info_rb.html">lib/exodus_task_info.rb</a></td>
+            <td class='right_align'><tt>27</tt></td>
+            <td class='right_align'><tt>14</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:100px"></div>
@@ -69,31 +69,31 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line3">3</a> # A special class of exceptions that are thrown whenever the NeptuneManager</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line4">4</a> # experiences an unexpected result.</pre></td>
+            <td><pre><a name="line3">3</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line5">5</a> class NeptuneManagerException &lt; Exception</pre></td>
+            <td><pre><a name="line4">4</a> require 'task_info'</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line6">6</a> end</pre></td>
+            <td><pre><a name="line5">5</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line7">7</a> </pre></td>
+            <td><pre><a name="line6">6</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line7">7</a> class ExodusTaskInfo</pre></td>
           </tr>
         
           
@@ -105,25 +105,25 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line9">9</a> # A class of exceptions that are thrown when the user tries to run a Neptune</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line10">10</a> # job but fails to give us the correct parameters to do so.</pre></td>
+            <td><pre><a name="line9">9</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line11">11</a> class BadConfigurationException &lt; Exception</pre></td>
+            <td><pre><a name="line10">10</a>   def initialize(dispatched_babel_tasks)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line11">11</a>     @babel_tasks = dispatched_babel_tasks</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line12">12</a> end</pre></td>
+            <td><pre><a name="line12">12</a>   end</pre></td>
           </tr>
         
           
@@ -135,31 +135,85 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line14">14</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line15">15</a> # An exception that is thrown whenever the user specifies a file to use</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line16">16</a> # that does not exist.</pre></td>
+            <td><pre><a name="line14">14</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line17">17</a> class FileNotFoundException &lt; Exception</pre></td>
+            <td><pre><a name="line15">15</a>   def to_s</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line16">16</a>     method_missing(:to_s)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line18">18</a> end</pre></td>
+            <td><pre><a name="line17">17</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line18">18</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line19">19</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line20">20</a>   def method_missing(id, *args, &amp;block)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line21">21</a>     @babel_tasks.each { |task|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line22">22</a>       return task.send(id, *args, &amp;block)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line23">23</a>     }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line24">24</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line25">25</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line26">26</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line27">27</a> end</pre></td>
           </tr>
         
       </tbody>

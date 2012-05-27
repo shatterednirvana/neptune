@@ -4,6 +4,7 @@
 
 require 'babel'
 require 'custom_exceptions'
+require 'exodus_task_info'
 
 
 # Exodus provides further improvements to Babel. Instead of making users tell
@@ -32,8 +33,8 @@ def exodus(jobs)
       profiling_info)
     babel_tasks_to_run = ExodusHelper.generate_babel_tasks(job, 
       clouds_to_run_task_on)
-    ExodusHelper.run_job(babel_tasks_to_run)
-    tasks << ExodusTaskInfo.new(babel_tasks_to_run)
+    dispatched_tasks = ExodusHelper.run_job(babel_tasks_to_run)
+    tasks << ExodusTaskInfo.new(dispatched_tasks)
   }
 
   if job_given_as_hash
@@ -55,10 +56,12 @@ module ExodusHelper
 
 
   CLOUD_CREDENTIALS = {
-    :AmazonEC2 => [:EC2_ACCESS_KEY, :EC2_SECRET_KEY, :EC2_URL, :S3_URL],
+    :AmazonEC2 => [:EC2_ACCESS_KEY, :EC2_SECRET_KEY, :EC2_URL, :S3_URL,
+      :S3_bucket_name],
     :Eucalyptus => [:EUCA_ACCESS_KEY, :EUCA_SECRET_KEY, :EUCA_URL, 
-      :WALRUS_URL],
-    :GoogleAppEngine => [:appid, :appcfg_cookies, :function],
+      :WALRUS_URL, :Walrus_bucket_name],
+    :GoogleAppEngine => [:appid, :appcfg_cookies, :function, 
+      :GStorage_bucket_name],
     :MicrosoftAzure => [] # TODO(cgb): find out what creds we need here
   }
 
@@ -293,6 +296,11 @@ module ExodusHelper
     }
 
     return tasks
+  end
+
+
+  def self.run_job(tasks_to_run)
+    return babel(tasks_to_run)
   end
 
 
