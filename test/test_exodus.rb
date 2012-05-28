@@ -505,7 +505,7 @@ class TestExodus < Test::Unit::TestCase
   end
 
 
-  def test_exodus_job_given_as_hash
+  def test_exodus_job_that_generates_one_babel_task
     job = {
       :clouds_to_use => :AmazonEC2,
       :credentials => {
@@ -563,10 +563,18 @@ class TestExodus < Test::Unit::TestCase
     flexmock(CommonFunctions).should_receive(:shell).with(/\Ascp/).
       and_return()
 
+    # first, let's make sure that exodus calls work fine if we give it
+    # a Hash, containing info on one job
     expected = "task output yay!"
     actual = exodus(job)
     assert_equal(expected, actual.to_s)
     assert_equal(expected, actual.stdout)
+
+    # now, let's make sure that exodus calls still work the same way if we
+    # give it an Array, containing info on the same job
+    actual2 = exodus([job])
+    assert_equal(expected, actual2[0].to_s)
+    assert_equal(expected, actual2[0].stdout)
   end
 
 
