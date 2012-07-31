@@ -67,6 +67,10 @@ http://www.neptune-lang.org/2011/6/Neptune-Picks-up-Best-Paper-at-ScienceCloud-2
 
 Version History:
 
+July 30, 2012 - 0.2.2 released, adding batch support for babel calls, and first
+pass on exodus(), which automatically finds the right cloud compute, storage, and
+queue service to deploy your tasks to.
+
 February 12, 2012 - 0.2.1 released, adding support for the babel() method on
 non-Babel job types (e.g., MPI, MapReduce), and removed the is_remote
 parameter for babel() calls (since it can always be inferred from :storage).

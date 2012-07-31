@@ -3,7 +3,7 @@ require 'rake/gempackagetask'
 
 spec = Gem::Specification.new do |s|
   s.name = 'neptune'
-  s.version = '0.2.1'
+  s.version = '0.2.2'
 
   s.summary = "A domain specific language for deploying HPC apps to cloud platforms"
   s.description = <<-EOF
@@ -37,4 +37,3 @@ end
 Rake::GemPackageTask.new(spec) do |pkg|
   pkg.need_tar = true
 end
-
