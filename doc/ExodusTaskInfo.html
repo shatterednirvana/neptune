@@ -137,42 +137,6 @@
 
     <!-- Methods -->
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Class Methods</h3>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(dispatched_babel_tasks)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/exodus_task_info.rb, line 10</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">dispatched_babel_tasks</span>)
-  <span class="ruby-ivar">@babel_tasks</span> = <span class="ruby-identifier">dispatched_babel_tasks</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- new-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- new-method -->
-
-    
-    </section><!-- public-class-method-details -->
-  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
       <h3 class="section-header">Public Instance Methods</h3>
 
@@ -195,8 +159,17 @@
           <div class="method-source-code" id="method_missing-source">
             <pre><span class="ruby-comment"># File lib/exodus_task_info.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">id</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
-  <span class="ruby-ivar">@babel_tasks</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">task</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">task</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">id</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">loop</span> {
+    <span class="ruby-ivar">@babel_tasks</span>.<span class="ruby-identifier">each_with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">task</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-constant">Timeout</span><span class="ruby-operator">::</span><span class="ruby-identifier">timeout</span>(<span class="ruby-value">2</span>) {
+        <span class="ruby-identifier">result</span> = <span class="ruby-identifier">task</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">id</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-identifier">result</span>
+      }
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Timeout</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span>
+      <span class="ruby-keyword">next</span>
+    <span class="ruby-keyword">end</span>
+    }
   }
 <span class="ruby-keyword">end</span></pre>
           </div><!-- method_missing-source -->
@@ -240,6 +213,42 @@
 
     
     </section><!-- public-instance-method-details -->
+  
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(dispatched_babel_tasks)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/exodus_task_info.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">dispatched_babel_tasks</span>)
+  <span class="ruby-ivar">@babel_tasks</span> = <span class="ruby-identifier">dispatched_babel_tasks</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 

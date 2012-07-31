@@ -170,73 +170,6 @@ performance and cost), as well as information that may help with debugging
 
     <!-- Methods -->
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Class Methods</h3>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(job_data)</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Creates a new <a href="TaskInfo.html">TaskInfo</a> object, storing the
-parameters the user gave us to invoke the job for later use. The user can
-give us a Hash containing the parameters that the job was started with, or
-a String that is the JSON-dumped version of that data (also obtainable from
-<a href="TaskInfo.html">TaskInfo</a> objects via <a
-href="TaskInfo.html#method-i-to_json">#to_json</a>).</p>
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/task_info.rb, line 36</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">job_data</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_data</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">String</span>
-    <span class="ruby-keyword">begin</span>
-      <span class="ruby-identifier">job_data</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">job_data</span>)
-    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">JSON</span><span class="ruby-operator">::</span><span class="ruby-constant">ParserError</span>
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;job data not JSONable&quot;</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_data</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">Hash</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;job data not a Hash&quot;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@job_data</span> = <span class="ruby-identifier">job_data</span>
-
-  <span class="ruby-comment"># To prevent us from repeatedly grabbing (potentially) large files over the</span>
-  <span class="ruby-comment"># network repeatedly, we keep a local, cached copy of the task's standard</span>
-  <span class="ruby-comment"># output, error, and metadata - initially empty, but pulled in the first</span>
-  <span class="ruby-comment"># time that the user asks for it. Since we expose this functionality through</span>
-  <span class="ruby-comment"># the accessor methods below, we should not use attr_accessor or attr_reader</span>
-  <span class="ruby-comment"># to directly expose this variables.</span>
-  <span class="ruby-ivar">@output</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@error</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@metadata</span> = <span class="ruby-keyword">nil</span>
-
-  <span class="ruby-comment"># To prevent concurrent threads from pulling in output multiple times, we</span>
-  <span class="ruby-comment"># guard access to remotely grabbing output/error/metadata with this</span>
-  <span class="ruby-comment"># lock.</span>
-  <span class="ruby-ivar">@lock</span> = <span class="ruby-constant">Mutex</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- new-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- new-method -->
-
-    
-    </section><!-- public-class-method-details -->
-  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
       <h3 class="section-header">Public Instance Methods</h3>
 
@@ -414,6 +347,73 @@ of space).</p>
 
     
     </section><!-- public-instance-method-details -->
+  
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(job_data)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new <a href="TaskInfo.html">TaskInfo</a> object, storing the
+parameters the user gave us to invoke the job for later use. The user can
+give us a Hash containing the parameters that the job was started with, or
+a String that is the JSON-dumped version of that data (also obtainable from
+<a href="TaskInfo.html">TaskInfo</a> objects via <a
+href="TaskInfo.html#method-i-to_json">#to_json</a>).</p>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/task_info.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">job_data</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_data</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">String</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">job_data</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">job_data</span>)
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">JSON</span><span class="ruby-operator">::</span><span class="ruby-constant">ParserError</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;job data not JSONable&quot;</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_data</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;job data not a Hash&quot;</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@job_data</span> = <span class="ruby-identifier">job_data</span>
+
+  <span class="ruby-comment"># To prevent us from repeatedly grabbing (potentially) large files over the</span>
+  <span class="ruby-comment"># network repeatedly, we keep a local, cached copy of the task's standard</span>
+  <span class="ruby-comment"># output, error, and metadata - initially empty, but pulled in the first</span>
+  <span class="ruby-comment"># time that the user asks for it. Since we expose this functionality through</span>
+  <span class="ruby-comment"># the accessor methods below, we should not use attr_accessor or attr_reader</span>
+  <span class="ruby-comment"># to directly expose this variables.</span>
+  <span class="ruby-ivar">@output</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@error</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@metadata</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-comment"># To prevent concurrent threads from pulling in output multiple times, we</span>
+  <span class="ruby-comment"># guard access to remotely grabbing output/error/metadata with this</span>
+  <span class="ruby-comment"># lock.</span>
+  <span class="ruby-ivar">@lock</span> = <span class="ruby-constant">Mutex</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 

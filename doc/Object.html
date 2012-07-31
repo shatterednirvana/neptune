@@ -269,7 +269,7 @@ handles this.</p>
       <span class="ruby-constant">BabelHelper</span>.<span class="ruby-identifier">check_output_files</span>(<span class="ruby-identifier">job_data</span>)
 
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@is_remote&quot;</span>]
-        <span class="ruby-constant">BabelHelper</span>.<span class="ruby-identifier">validate_inputs</span>(<span class="ruby-identifier">job_data</span>)
+        <span class="ruby-comment">#BabelHelper.validate_inputs(job_data)</span>
       <span class="ruby-keyword">else</span>
         <span class="ruby-constant">BabelHelper</span>.<span class="ruby-identifier">put_code</span>(<span class="ruby-identifier">job_data</span>)
         <span class="ruby-constant">BabelHelper</span>.<span class="ruby-identifier">put_inputs</span>(<span class="ruby-identifier">job_data</span>)
