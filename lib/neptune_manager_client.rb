@@ -89,7 +89,7 @@ class NeptuneManagerClient
       if retry_on_except
         retry
       else
-        raise NeptuneManagerException.new("We saw an unexpected error of the type #{except.class} with the following message:\n#{except}.")
+        raise NeptuneManagerException.new("We saw an unexpected error of the type #{except.class} talking to #{@ip} with the following message:\n#{except}.")
       end
     end
   end

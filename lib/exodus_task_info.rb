@@ -18,8 +18,17 @@ class ExodusTaskInfo
 
 
   def method_missing(id, *args, &block)
-    @babel_tasks.each { |task|
-      return task.send(id, *args, &block)
+    loop {
+      @babel_tasks.each_with_index { |task, i|
+      begin
+        Timeout::timeout(2) {
+          result = task.send(id, *args, &block)
+          return result
+        }
+      rescue Timeout::Error
+        next
+      end
+      }
     }
   end
 

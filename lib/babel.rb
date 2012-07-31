@@ -67,7 +67,7 @@ def babel(jobs)
       BabelHelper.check_output_files(job_data)
 
       if job_data["@is_remote"]
-        BabelHelper.validate_inputs(job_data)
+        #BabelHelper.validate_inputs(job_data)
       else
         BabelHelper.put_code(job_data)
         BabelHelper.put_inputs(job_data)
@@ -124,7 +124,7 @@ module BabelHelper
   def self.get_bucket_for_local_data(job_data)
     bucket_name = job_data["@bucket_name"] || ENV['BABEL_BUCKET_NAME'] ||
       job_data["@S3_bucket_name"] || job_data["@Walrus_bucket_name"] ||
-      job_data["@GStorage_bucket_name"]
+      job_data["@GStorage_bucket_name"] || job_data["@WAZ_Container_Name"]
 
     if bucket_name.nil?
       raise BadConfigurationException.new(NEEDS_BUCKET_INFO)
@@ -146,9 +146,10 @@ module BabelHelper
     ["@output", "@error", "@metadata"].each { |item|
       if job_data[item].nil? or job_data[item].empty?
         job_data[item] = BabelHelper.generate_output_location(job_data)
+      else
+        BabelHelper.ensure_output_does_not_exist(job_data, job_data[item])
       end
-      BabelHelper.ensure_output_does_not_exist(job_data, job_data[item])
-    }
+      }
   end
 
 
@@ -332,9 +333,9 @@ module BabelHelper
       if output == DOES_NOT_EXIST
         # Exponentially back off, up to a limit of MAX_SLEEP_TIME
         Kernel.sleep(time_to_sleep)
-        if time_to_sleep < MAX_SLEEP_TIME
-          time_to_sleep *= 2
-        end
+        #if time_to_sleep < MAX_SLEEP_TIME
+        #  time_to_sleep *= 2
+        #end
       else
         break
       end

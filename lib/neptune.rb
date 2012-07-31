@@ -32,7 +32,7 @@ NO_OUTPUT_NEEDED = ["input"]
 
 # A list of storage mechanisms that we can use to store and retrieve
 # data to for Neptune jobs.
-ALLOWED_STORAGE_TYPES = ["appdb", "gstorage", "s3", "walrus"]
+ALLOWED_STORAGE_TYPES = %w{appdb gstorage s3 walrus waz-storage}
 
 
 # A list of jobs that require some kind of work to be done before

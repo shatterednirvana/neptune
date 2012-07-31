@@ -62,7 +62,8 @@ module ExodusHelper
       :WALRUS_URL, :Walrus_bucket_name],
     :GoogleAppEngine => [:appid, :appcfg_cookies, :function, 
       :GStorage_bucket_name],
-    :MicrosoftAzure => [] # TODO(cgb): find out what creds we need here
+    :MicrosoftAzure => [:WAZ_Account_Name, :WAZ_Access_Key, 
+      :WAZ_Container_Name]
   }
 
   

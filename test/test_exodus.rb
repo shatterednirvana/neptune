@@ -13,6 +13,9 @@ class TestExodus < Test::Unit::TestCase
 
 
   def setup
+    # all sleeps should immediately return
+    flexmock(Kernel).should_receive(:sleep).and_return()
+
     # assume that appscale is always running for keyname=appscale
     location_file = File.expand_path("~/.appscale/locations-appscale.yaml")
     flexmock(File).should_receive(:exists?).with(location_file).
@@ -573,6 +576,109 @@ class TestExodus < Test::Unit::TestCase
     # now, let's make sure that exodus calls still work the same way if we
     # give it an Array, containing info on the same job
     actual2 = exodus([job])
+    assert_equal(expected, actual2[0].to_s)
+    assert_equal(expected, actual2[0].stdout)
+  end
+
+
+  def test_exodus_job_that_generates_two_babel_tasks
+    job = {
+      :clouds_to_use => [:AmazonEC2, :MicrosoftAzure],
+      :credentials => {
+        # for EC2
+        :EC2_ACCESS_KEY => "boo",
+        :EC2_SECRET_KEY => "baz",
+        :EC2_URL => "http://ec2.url",
+        :S3_URL => "http://s3.url",
+        :S3_bucket_name => "bazbucket",
+
+        # for azure
+        :WAZ_Account_Name => "wazboo",
+        :WAZ_Access_Key => "wazbaz",
+        :WAZ_Container_Name => "wazbucket"
+      },
+      :optimize_for => :cost,
+      :code => "/foo/bar.rb",
+      :argv => [],
+      :executable => "ruby"
+    }
+
+    job2 = job.dup
+
+    # mock out calls to the NeptuneManager
+    flexmock(NeptuneManagerClient).new_instances { |instance|
+      # for this test, let's say there's no data on this task right now
+      instance.should_receive(:get_profiling_info).with(String).
+        and_return({})
+
+      # let's say that all checks to see if temp files exist tell us that
+      # the files don't exist
+      instance.should_receive(:does_file_exist?).
+        with(/\A\/bazbucket\/babel\/temp-[\w]+\Z/, Hash).
+        and_return(false)
+
+      instance.should_receive(:does_file_exist?).
+        with(/\A\/wazbucket\/babel\/temp-[\w]+\Z/, Hash).
+        and_return(false)
+
+      # assume that our code got put in the remote datastore fine
+      instance.should_receive(:does_file_exist?).
+        with(/\A\/bazbucket\/babel\/foo\/bar.rb\Z/, Hash).
+        and_return(true)
+
+      instance.should_receive(:does_file_exist?).
+        with(/\A\/wazbucket\/babel\/foo\/bar.rb\Z/, Hash).
+        and_return(true)
+
+      # also, calls to put_input should succeed
+      instance.should_receive(:put_input).with(Hash).and_return(true)
+
+      # mock out the call to get_supported_babel_engines and put in
+      # SQS, WAZ-push-q, and rabbitmq (which is always supported)
+      instance.should_receive(:get_supported_babel_engines).with(Hash).
+        and_return(["executor-rabbitmq", "executor-sqs", "waz-push-q"])
+
+      # neptune jobs should start fine - instead of expecting a Hash (like
+      # in the last test), we're now expecting an Array, where each item
+      # is a Hash corresponding to each of the jobs that will be run
+      instance.should_receive(:start_neptune_job).with(Array).
+        and_return("babel job is now running")
+
+      # getting the output of the job shouldn't return it the first time
+      # (unlike the last test). this time, we want to make sure that
+      # ExodusTaskInfo is properly asking all the babel tasks it's hiding
+      # from us for the job's output, so we'll have the first babel task
+      # always fail to have the output ready, and the second one will have
+      # it the second time around.
+      instance.should_receive(:get_output).with(on { |job| 
+        job["@output"] =~ /\A\/bazbucket\/babel\/temp-/
+      }).
+        and_return(DOES_NOT_EXIST)
+
+      instance.should_receive(:get_output).with(on { |job| 
+        job["@output"] =~ /\A\/wazbucket\/babel\/temp-/
+      }).
+        and_return("task output yay!")
+    }
+
+    # mock out filesystem checks
+    # we'll say that our code does exist
+    flexmock(File).should_receive(:exists?).with("/foo").and_return(true)
+
+    # mock out scp calls - assume they go through with no problems
+    flexmock(CommonFunctions).should_receive(:shell).with(/\Ascp/).
+      and_return()
+
+    # first, let's make sure that exodus calls work fine if we give it
+    # a Hash, containing info on one job
+    expected = "task output yay!"
+    actual = exodus(job)
+    assert_equal(expected, actual.to_s)
+    assert_equal(expected, actual.stdout)
+
+    # now, let's make sure that exodus calls still work the same way if we
+    # give it an Array, containing info on the same job
+    actual2 = exodus([job2])
     assert_equal(expected, actual2[0].to_s)
     assert_equal(expected, actual2[0].stdout)
   end
