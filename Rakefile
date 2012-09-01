@@ -1,6 +1,10 @@
 require 'rubygems'
+require 'rake'
 require 'rake/gempackagetask'
+require 'rake/testtask'
 
+
+# TODO(cgb): This probably should be moved into a Gemfile and out of this file.
 spec = Gem::Specification.new do |s|
   s.name = 'neptune'
   s.version = '0.2.2'
@@ -34,6 +38,29 @@ spec = Gem::Specification.new do |s|
   s.add_dependency('promise', '>= 0.3.0')
 end
 
+
+# responds to 'rake gem'
 Rake::GemPackageTask.new(spec) do |pkg|
   pkg.need_tar = true
+end
+
+
+# responds to 'rake test'
+Rake::TestTask.new do |test|
+  test.libs << "test"
+  test.test_files = Dir[ "test/test*.rb" ]
+  test.verbose = true
+end
+
+
+task :default => 'test'
+
+
+task :rdoc do
+  puts `bash generate_rdoc.sh`
+end
+
+
+task :coverage do
+  puts `bash generate_coverage.sh`
 end
