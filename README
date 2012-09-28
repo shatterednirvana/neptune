@@ -52,9 +52,7 @@ the specifics of the New BSD License by which Neptune is released.
 Check us out on the web:
 
 http://neptune-lang.org
-
-http://code.google.com/p/appscale
-http://appscale.cs.ucsb.edu
+https://github.com/shatterednirvana/neptune/
 
 Contributors welcome! We would love to add support for other
 cloud platforms and test out Neptune more on non-virtualized
@@ -66,6 +64,10 @@ View the abstract of the paper and the PDF here:
 http://www.neptune-lang.org/2011/6/Neptune-Picks-up-Best-Paper-at-ScienceCloud-2011
 
 Version History:
+
+September 28, 2012 - 0.2.3 released, refactoring batch support to perform much
+better by actually batching requests to the server side, as opposed to just enabling
+batch requests from users.
 
 July 30, 2012 - 0.2.2 released, adding batch support for babel calls, and first
 pass on exodus(), which automatically finds the right cloud compute, storage, and
