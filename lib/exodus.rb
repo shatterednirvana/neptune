@@ -2,7 +2,12 @@
 # Programmer: Chris Bunch
 
 
+require 'rubygems'
+require 'json'
+
+
 require 'babel'
+require 'common_functions'
 require 'custom_exceptions'
 require 'exodus_task_info'
 
@@ -85,6 +90,16 @@ module ExodusHelper
       :engine => "waz-push-q"
     }
   }
+
+
+  # The location on this machine where we can read and write profiling
+  # information about jobs.
+  NEPTUNE_DATA_DIR = File.expand_path("~/.neptune")
+
+
+  # The command that we can run to get information about the number and speed
+  # of CPUs on this machine.
+  GET_CPU_INFO = "cat /proc/cpuinfo"
 
 
   OPTIMIZE_FOR_CHOICES = [:performance, :cost, :auto]
@@ -213,14 +228,47 @@ module ExodusHelper
 
   def self.get_profiling_info(job)
     key = self.get_key_from_job_data(job)
-    neptune_manager = BabelHelper.get_neptune_manager_client(job)
-    return neptune_manager.get_profiling_info(key)
+
+    if !File.exists?(NEPTUNE_DATA_DIR)
+      FileUtils.mkdir(NEPTUNE_DATA_DIR)
+    end
+
+    profiling_info_file = "#{NEPTUNE_DATA_DIR}/#{key}.json"
+    if File.exists?(profiling_info_file)
+      contents = File.open(profiling_info_file) { |f| f.read() }
+      return JSON.load(contents)
+    end
+
+    # If we don't have any profiling info on this job, run it locally and
+    # gather the data ourselves.
+
+    start_time = Time.now
+    # TODO(cgb): exec the user's code
+    end_time = Time.now
+    
+    # To find out how fast this computer is, just check the file that has
+    # this info on it and take the first processor. This should be fine
+    # since we assume the user's code is not-multi-core aware and that
+    # all processors on this box are the same speed.
+    cpu_speed = Float(CommonFunctions.shell(GET_CPU_INFO).
+      scan(/cpu MHz\s*:\s*(\d+\.\d+)/).flatten[0])
+
+    json_info = {
+      "total_execution_time" => end_time - start_time,
+      "cpu_speed" => cpu_speed
+    }
+
+    File.open(profiling_info_file, "w+") { |file| 
+      file.write(JSON.dump(json_info)) 
+    }
+
+    return json_info
   end
 
 
   # TODO(cgb): what is a job's key?
   def self.get_key_from_job_data(job)
-    return job[:code]
+    return job[:code].gsub(/[\/\.]/, "")
   end
 
   

@@ -28,14 +28,14 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="lib-exodus_rb.html">lib/exodus.rb</a></td>
-            <td class='right_align'><tt>311</tt></td>
-            <td class='right_align'><tt>219</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>93.57%</tt></div>
+            <td class='right_align'><tt>359</tt></td>
+            <td class='right_align'><tt>242</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>93.87%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:94px"></div>
             <div class="uncovered" style="width:6px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>90.87%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>90.91%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:91px"></div>
             <div class="uncovered" style="width:9px"></div>
@@ -81,19 +81,19 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line5">5</a> require 'babel'</pre></td>
+            <td><pre><a name="line5">5</a> require 'rubygems'</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line6">6</a> require 'custom_exceptions'</pre></td>
+            <td><pre><a name="line6">6</a> require 'json'</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line7">7</a> require 'exodus_task_info'</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line7">7</a> </pre></td>
           </tr>
         
           
@@ -104,254 +104,254 @@
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line9">9</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line10">10</a> # Exodus provides further improvements to Babel. Instead of making users tell</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line11">11</a> # us what compute, storage, and queue services they want to use (required for</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line12">12</a> # babel calls), Exodus will automatically handle this for us. Callers need</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line13">13</a> # to specify what clouds their job can run over, and Exodus will automatically</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line14">14</a> # select the best cloud for their job and run it there.</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line9">9</a> require 'babel'</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line15">15</a> def exodus(jobs)</pre></td>
+            <td><pre><a name="line10">10</a> require 'common_functions'</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line16">16</a>   if jobs.class == Hash</pre></td>
+            <td><pre><a name="line11">11</a> require 'custom_exceptions'</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line17">17</a>     job_given_as_hash = true</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line18">18</a>     jobs = [jobs]</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line19">19</a>   elsif jobs.class == Array</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line20">20</a>     job_given_as_hash = false</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line21">21</a>     ExodusHelper.ensure_all_jobs_are_hashes(jobs)</pre></td>
+            <td><pre><a name="line12">12</a> require 'exodus_task_info'</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line22">22</a>   else</pre></td>
+            <td><pre><a name="line13">13</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line23">23</a>     raise BadConfigurationException.new(&quot;jobs was a #{jobs.class}, which &quot; +</pre></td>
+            <td><pre><a name="line14">14</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line15">15</a> # Exodus provides further improvements to Babel. Instead of making users tell</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line16">16</a> # us what compute, storage, and queue services they want to use (required for</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line17">17</a> # babel calls), Exodus will automatically handle this for us. Callers need</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line18">18</a> # to specify what clouds their job can run over, and Exodus will automatically</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line19">19</a> # select the best cloud for their job and run it there.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line24">24</a>       &quot;is not an acceptable class type&quot;)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line25">25</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line26">26</a> </pre></td>
+            <td><pre><a name="line20">20</a> def exodus(jobs)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line27">27</a>   tasks = []</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line28">28</a> </pre></td>
+            <td><pre><a name="line21">21</a>   if jobs.class == Hash</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line29">29</a>   jobs.each { |job|</pre></td>
+            <td><pre><a name="line22">22</a>     job_given_as_hash = true</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line30">30</a>     ExodusHelper.ensure_all_params_are_present(job)</pre></td>
+            <td><pre><a name="line23">23</a>     jobs = [jobs]</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line31">31</a>     profiling_info = ExodusHelper.get_profiling_info(job)</pre></td>
+            <td><pre><a name="line24">24</a>   elsif jobs.class == Array</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line32">32</a>     clouds_to_run_task_on = ExodusHelper.get_clouds_to_run_task_on(job, </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line33">33</a>       profiling_info)</pre></td>
+            <td><pre><a name="line25">25</a>     job_given_as_hash = false</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line34">34</a>     babel_tasks_to_run = ExodusHelper.generate_babel_tasks(job, </pre></td>
+            <td><pre><a name="line26">26</a>     ExodusHelper.ensure_all_jobs_are_hashes(jobs)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line35">35</a>       clouds_to_run_task_on)</pre></td>
+            <td><pre><a name="line27">27</a>   else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line28">28</a>     raise BadConfigurationException.new(&quot;jobs was a #{jobs.class}, which &quot; +</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line36">36</a>     dispatched_tasks = ExodusHelper.run_job(babel_tasks_to_run)</pre></td>
+            <td><pre><a name="line29">29</a>       &quot;is not an acceptable class type&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line30">30</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line31">31</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line37">37</a>     tasks &lt;&lt; ExodusTaskInfo.new(dispatched_tasks)</pre></td>
+            <td><pre><a name="line32">32</a>   tasks = []</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line38">38</a>   }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line39">39</a> </pre></td>
+            <td><pre><a name="line33">33</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line40">40</a>   if job_given_as_hash</pre></td>
+            <td><pre><a name="line34">34</a>   jobs.each { |job|</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line41">41</a>     return tasks[0]</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line42">42</a>   else</pre></td>
+            <td><pre><a name="line35">35</a>     ExodusHelper.ensure_all_params_are_present(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line43">43</a>     return tasks</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line44">44</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line45">45</a> end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line46">46</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line47">47</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line48">48</a> # This module provides convenience functions for exodus(), to avoid cluttering</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line49">49</a> # up Object or Kernel's namespace.</pre></td>
+            <td><pre><a name="line36">36</a>     profiling_info = ExodusHelper.get_profiling_info(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line50">50</a> module ExodusHelper</pre></td>
+            <td><pre><a name="line37">37</a>     clouds_to_run_task_on = ExodusHelper.get_clouds_to_run_task_on(job, </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line38">38</a>       profiling_info)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line39">39</a>     babel_tasks_to_run = ExodusHelper.generate_babel_tasks(job, </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line40">40</a>       clouds_to_run_task_on)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line41">41</a>     dispatched_tasks = ExodusHelper.run_job(babel_tasks_to_run)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line42">42</a>     tasks &lt;&lt; ExodusTaskInfo.new(dispatched_tasks)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line43">43</a>   }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line44">44</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line45">45</a>   if job_given_as_hash</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line46">46</a>     return tasks[0]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line47">47</a>   else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line48">48</a>     return tasks</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line49">49</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line50">50</a> end</pre></td>
           </tr>
         
           
@@ -369,19 +369,19 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line53">53</a>   # A list of clouds that users can run tasks on via Exodus.</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line54">54</a>   SUPPORTED_CLOUDS = [:AmazonEC2, :Eucalyptus, :GoogleAppEngine, </pre></td>
+            <td><pre><a name="line53">53</a> # This module provides convenience functions for exodus(), to avoid cluttering</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line55">55</a>     :MicrosoftAzure]</pre></td>
+            <td><pre><a name="line54">54</a> # up Object or Kernel's namespace.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line55">55</a> module ExodusHelper</pre></td>
           </tr>
         
           
@@ -398,272 +398,272 @@
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line58">58</a>   CLOUD_CREDENTIALS = {</pre></td>
-          </tr>
-        
-          
-          
           <tr class="inferred">
-            <td><pre><a name="line59">59</a>     :AmazonEC2 =&gt; [:EC2_ACCESS_KEY, :EC2_SECRET_KEY, :EC2_URL, :S3_URL,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line60">60</a>       :S3_bucket_name],</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line61">61</a>     :Eucalyptus =&gt; [:EUCA_ACCESS_KEY, :EUCA_SECRET_KEY, :EUCA_URL, </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line62">62</a>       :WALRUS_URL, :Walrus_bucket_name],</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line63">63</a>     :GoogleAppEngine =&gt; [:appid, :appcfg_cookies, :function, </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line64">64</a>       :GStorage_bucket_name],</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line65">65</a>     :MicrosoftAzure =&gt; [:WAZ_Account_Name, :WAZ_Access_Key, </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line66">66</a>       :WAZ_Container_Name]</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line67">67</a>   }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line68">68</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line69">69</a>   </pre></td>
+            <td><pre><a name="line58">58</a>   # A list of clouds that users can run tasks on via Exodus.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line70">70</a>   CLOUD_BABEL_PARAMS = {</pre></td>
+            <td><pre><a name="line59">59</a>   SUPPORTED_CLOUDS = [:AmazonEC2, :Eucalyptus, :GoogleAppEngine, </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line71">71</a>     :AmazonEC2 =&gt; {</pre></td>
+            <td><pre><a name="line60">60</a>     :MicrosoftAzure]</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line72">72</a>       :storage =&gt; &quot;s3&quot;,</pre></td>
+            <td><pre><a name="line61">61</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line73">73</a>       :engine =&gt; &quot;executor-sqs&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line74">74</a>     },</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line75">75</a>     :Eucalyptus =&gt; {</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line76">76</a>       :storage =&gt; &quot;walrus&quot;,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line77">77</a>       :engine =&gt; &quot;executor-rabbitmq&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line78">78</a>     },</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line79">79</a>     :GoogleAppEngine =&gt; {</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line80">80</a>       :storage =&gt; &quot;gstorage&quot;,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line81">81</a>       :engine =&gt; &quot;appengine-push-q&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line82">82</a>     },</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line83">83</a>     :MicrosoftAzure =&gt; {</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line84">84</a>       :storage =&gt; &quot;waz-storage&quot;,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line85">85</a>       :engine =&gt; &quot;waz-push-q&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line86">86</a>     }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line87">87</a>   }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line88">88</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line89">89</a> </pre></td>
+            <td><pre><a name="line62">62</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line90">90</a>   OPTIMIZE_FOR_CHOICES = [:performance, :cost, :auto]</pre></td>
+            <td><pre><a name="line63">63</a>   CLOUD_CREDENTIALS = {</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line91">91</a> </pre></td>
+            <td><pre><a name="line64">64</a>     :AmazonEC2 =&gt; [:EC2_ACCESS_KEY, :EC2_SECRET_KEY, :EC2_URL, :S3_URL,</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line92">92</a> </pre></td>
+            <td><pre><a name="line65">65</a>       :S3_bucket_name],</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line93">93</a>   # Given an Array of jobs to run, ensures that they are all Hashes, the</pre></td>
+            <td><pre><a name="line66">66</a>     :Eucalyptus =&gt; [:EUCA_ACCESS_KEY, :EUCA_SECRET_KEY, :EUCA_URL, </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line94">94</a>   # standard format for Neptune jobs.</pre></td>
+            <td><pre><a name="line67">67</a>       :WALRUS_URL, :Walrus_bucket_name],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line68">68</a>     :GoogleAppEngine =&gt; [:appid, :appcfg_cookies, :function, </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line69">69</a>       :GStorage_bucket_name],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line70">70</a>     :MicrosoftAzure =&gt; [:WAZ_Account_Name, :WAZ_Access_Key, </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line71">71</a>       :WAZ_Container_Name]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line72">72</a>   }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line73">73</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line74">74</a>   </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line95">95</a>   def self.ensure_all_jobs_are_hashes(jobs)</pre></td>
+            <td><pre><a name="line75">75</a>   CLOUD_BABEL_PARAMS = {</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line76">76</a>     :AmazonEC2 =&gt; {</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line77">77</a>       :storage =&gt; &quot;s3&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line78">78</a>       :engine =&gt; &quot;executor-sqs&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line79">79</a>     },</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line80">80</a>     :Eucalyptus =&gt; {</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line81">81</a>       :storage =&gt; &quot;walrus&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line82">82</a>       :engine =&gt; &quot;executor-rabbitmq&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line83">83</a>     },</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line84">84</a>     :GoogleAppEngine =&gt; {</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line85">85</a>       :storage =&gt; &quot;gstorage&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line86">86</a>       :engine =&gt; &quot;appengine-push-q&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line87">87</a>     },</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line88">88</a>     :MicrosoftAzure =&gt; {</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line89">89</a>       :storage =&gt; &quot;waz-storage&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line90">90</a>       :engine =&gt; &quot;waz-push-q&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line91">91</a>     }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line92">92</a>   }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line93">93</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line94">94</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line95">95</a>   # The location on this machine where we can read and write profiling</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line96">96</a>   # information about jobs.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line96">96</a>     jobs.each { |job|</pre></td>
+            <td><pre><a name="line97">97</a>   NEPTUNE_DATA_DIR = File.expand_path(&quot;~/.neptune&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line98">98</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line99">99</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line100">100</a>   # The command that we can run to get information about the number and speed</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line101">101</a>   # of CPUs on this machine.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line97">97</a>       if job.class != Hash</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line98">98</a>         raise BadConfigurationException.new(&quot;A job passed to exodus() was &quot; +</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line99">99</a>           &quot;not a Hash, but was a #{job.class}&quot;)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line100">100</a>       end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line101">101</a>     }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line102">102</a>   end</pre></td>
+            <td><pre><a name="line102">102</a>   GET_CPU_INFO = &quot;cat /proc/cpuinfo&quot;</pre></td>
           </tr>
         
           
@@ -680,80 +680,80 @@
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line105">105</a>   # Given an Exodus job, validates its parameters, raising a </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line106">106</a>   # BadConfigurationException for any missing params.</pre></td>
-          </tr>
-        
-          
-          
           <tr class="marked">
-            <td><pre><a name="line107">107</a>   def self.ensure_all_params_are_present(job)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line108">108</a>     if job[:clouds_to_use].nil?</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line109">109</a>       raise BadConfigurationException.new(&quot;:clouds_to_use was not specified&quot;)</pre></td>
+            <td><pre><a name="line105">105</a>   OPTIMIZE_FOR_CHOICES = [:performance, :cost, :auto]</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line110">110</a>     else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line111">111</a>       self.convert_clouds_to_use_to_array(job)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line112">112</a>       self.validate_clouds_to_use(job)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line113">113</a>       self.validate_optimize_for_param(job)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line114">114</a>       self.validate_files_argv_executable(job)</pre></td>
+            <td><pre><a name="line106">106</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line115">115</a>     end</pre></td>
+            <td><pre><a name="line107">107</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line116">116</a>   end</pre></td>
+            <td><pre><a name="line108">108</a>   # Given an Array of jobs to run, ensures that they are all Hashes, the</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line117">117</a> </pre></td>
+            <td><pre><a name="line109">109</a>   # standard format for Neptune jobs.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line110">110</a>   def self.ensure_all_jobs_are_hashes(jobs)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line111">111</a>     jobs.each { |job|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line112">112</a>       if job.class != Hash</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line113">113</a>         raise BadConfigurationException.new(&quot;A job passed to exodus() was &quot; +</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line114">114</a>           &quot;not a Hash, but was a #{job.class}&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line115">115</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line116">116</a>     }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line117">117</a>   end</pre></td>
           </tr>
         
           
@@ -765,427 +765,427 @@
           
           
           <tr class="inferred">
-            <td><pre><a name="line119">119</a>   # Given a single Exodus job, checks to make sure it has either an Array</pre></td>
+            <td><pre><a name="line119">119</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line120">120</a>   # of Strings or a single String listing the clouds that a given task can</pre></td>
+            <td><pre><a name="line120">120</a>   # Given an Exodus job, validates its parameters, raising a </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line121">121</a>   # run on. Raises a BadConfigurationException if :clouds_to_use is not in</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line122">122</a>   # the right format.</pre></td>
+            <td><pre><a name="line121">121</a>   # BadConfigurationException for any missing params.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line123">123</a>   def self.convert_clouds_to_use_to_array(job)</pre></td>
+            <td><pre><a name="line122">122</a>   def self.ensure_all_params_are_present(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line124">124</a>     clouds_class = job[:clouds_to_use].class</pre></td>
+            <td><pre><a name="line123">123</a>     if job[:clouds_to_use].nil?</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line125">125</a>     if clouds_class == Symbol</pre></td>
+            <td><pre><a name="line124">124</a>       raise BadConfigurationException.new(&quot;:clouds_to_use was not specified&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line125">125</a>     else</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line126">126</a>       job[:clouds_to_use] = [job[:clouds_to_use]]</pre></td>
+            <td><pre><a name="line126">126</a>       self.convert_clouds_to_use_to_array(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line127">127</a>     elsif clouds_class == Array</pre></td>
+            <td><pre><a name="line127">127</a>       self.validate_clouds_to_use(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line128">128</a>       job[:clouds_to_use].each { |cloud|</pre></td>
+            <td><pre><a name="line128">128</a>       self.validate_optimize_for_param(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line129">129</a>         if cloud.class != Symbol</pre></td>
+            <td><pre><a name="line129">129</a>       self.validate_files_argv_executable(job)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line130">130</a>           raise BadConfigurationException.new(&quot;#{cloud} was not a String, &quot; +</pre></td>
+            <td><pre><a name="line130">130</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line131">131</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line132">132</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line133">133</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line134">134</a>   # Given a single Exodus job, checks to make sure it has either an Array</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line135">135</a>   # of Strings or a single String listing the clouds that a given task can</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line136">136</a>   # run on. Raises a BadConfigurationException if :clouds_to_use is not in</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line137">137</a>   # the right format.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line131">131</a>             &quot;but was a #{cloud.class}&quot;)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line132">132</a>         end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line133">133</a>       }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line134">134</a>     else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line135">135</a>       raise BadConfigurationException.new(&quot;#{job[:clouds_to_use]} was not &quot; +</pre></td>
+            <td><pre><a name="line138">138</a>   def self.convert_clouds_to_use_to_array(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line136">136</a>         &quot;a String or Array, but was a #{clouds_class}&quot;)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line137">137</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line138">138</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line139">139</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line140">140</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line141">141</a>   # Given a single Exodus job, checks to make sure that we can actually run</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line142">142</a>   # it in this version of Neptune, and that the user has given us all the </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line143">143</a>   # credentials needed to use that cloud.</pre></td>
+            <td><pre><a name="line139">139</a>     clouds_class = job[:clouds_to_use].class</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line144">144</a>   def self.validate_clouds_to_use(job)</pre></td>
+            <td><pre><a name="line140">140</a>     if clouds_class == Symbol</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line145">145</a>     self.ensure_credentials_are_in_correct_format(job)</pre></td>
+            <td><pre><a name="line141">141</a>       job[:clouds_to_use] = [job[:clouds_to_use]]</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line146">146</a>     self.propogate_credentials_from_environment(job)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line147">147</a> </pre></td>
+            <td><pre><a name="line142">142</a>     elsif clouds_class == Array</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line148">148</a>     job[:clouds_to_use].each { |cloud|</pre></td>
+            <td><pre><a name="line143">143</a>       job[:clouds_to_use].each { |cloud|</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line149">149</a>       if SUPPORTED_CLOUDS.include?(cloud)</pre></td>
+            <td><pre><a name="line144">144</a>         if cloud.class != Symbol</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line145">145</a>           raise BadConfigurationException.new(&quot;#{cloud} was not a String, &quot; +</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line150">150</a>         CLOUD_CREDENTIALS[cloud].each { |required_credential|</pre></td>
+            <td><pre><a name="line146">146</a>             &quot;but was a #{cloud.class}&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line147">147</a>         end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line148">148</a>       }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line149">149</a>     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line150">150</a>       raise BadConfigurationException.new(&quot;#{job[:clouds_to_use]} was not &quot; +</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line151">151</a>           val_for_credential = job[:credentials][required_credential]</pre></td>
+            <td><pre><a name="line151">151</a>         &quot;a String or Array, but was a #{clouds_class}&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line152">152</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line153">153</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line154">154</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line155">155</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line156">156</a>   # Given a single Exodus job, checks to make sure that we can actually run</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line157">157</a>   # it in this version of Neptune, and that the user has given us all the </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line158">158</a>   # credentials needed to use that cloud.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line152">152</a>           if val_for_credential.nil? or val_for_credential.empty?</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line153">153</a>             raise BadConfigurationException.new(&quot;To use #{cloud}, &quot; +</pre></td>
+            <td><pre><a name="line159">159</a>   def self.validate_clouds_to_use(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line154">154</a>               &quot;#{required_credential} must be specified.&quot;)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line155">155</a>           end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line156">156</a>         }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line157">157</a>       else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line158">158</a>         raise BadConfigurationException.new(&quot;#{cloud} was specified as in &quot; +</pre></td>
+            <td><pre><a name="line160">160</a>     self.ensure_credentials_are_in_correct_format(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line159">159</a>           &quot;:clouds_to_use, which is not a supported cloud.&quot;)</pre></td>
+            <td><pre><a name="line161">161</a>     self.propogate_credentials_from_environment(job)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line160">160</a>       end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line161">161</a>     }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line162">162</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line163">163</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line164">164</a> </pre></td>
+            <td><pre><a name="line162">162</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line165">165</a>   def self.ensure_credentials_are_in_correct_format(job)</pre></td>
+            <td><pre><a name="line163">163</a>     job[:clouds_to_use].each { |cloud|</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line166">166</a>     if job[:credentials].nil?</pre></td>
+            <td><pre><a name="line164">164</a>       if SUPPORTED_CLOUDS.include?(cloud)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line167">167</a>       raise BadConfigurationException.new(&quot;No credentials were specified.&quot;)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line168">168</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line169">169</a> </pre></td>
+            <td><pre><a name="line165">165</a>         CLOUD_CREDENTIALS[cloud].each { |required_credential|</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line170">170</a>     if job[:credentials].class != Hash</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line171">171</a>       raise BadConfigurationException.new(&quot;Credentials given were not a &quot; +</pre></td>
+            <td><pre><a name="line166">166</a>           val_for_credential = job[:credentials][required_credential]</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line172">172</a>         &quot;Hash, but were a #{job[:credentials].class}&quot;)</pre></td>
+            <td><pre><a name="line167">167</a>           if val_for_credential.nil? or val_for_credential.empty?</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line173">173</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line174">174</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line175">175</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line176">176</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line177">177</a>   # Searches the caller's environment variables, and adds any that could</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line178">178</a>   # be used in this Exodus job. Only takes in credentials from the</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line179">179</a>   # environment if the job does not specify it.</pre></td>
+            <td><pre><a name="line168">168</a>             raise BadConfigurationException.new(&quot;To use #{cloud}, &quot; +</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line180">180</a>   def self.propogate_credentials_from_environment(job)</pre></td>
+            <td><pre><a name="line169">169</a>               &quot;#{required_credential} must be specified.&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line170">170</a>           end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line171">171</a>         }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line172">172</a>       else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line173">173</a>         raise BadConfigurationException.new(&quot;#{cloud} was specified as in &quot; +</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line181">181</a>     CLOUD_CREDENTIALS.each { |cloud_name, credential_list|</pre></td>
+            <td><pre><a name="line174">174</a>           &quot;:clouds_to_use, which is not a supported cloud.&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line175">175</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line176">176</a>     }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line177">177</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line178">178</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line179">179</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line182">182</a>       credential_list.each { |cred|</pre></td>
+            <td><pre><a name="line180">180</a>   def self.ensure_credentials_are_in_correct_format(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line183">183</a>         if job[:credentials][cred].nil? and !ENV[cred.to_s].nil?</pre></td>
+            <td><pre><a name="line181">181</a>     if job[:credentials].nil?</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line184">184</a>           job[:credentials][cred] = ENV[cred.to_s]</pre></td>
+            <td><pre><a name="line182">182</a>       raise BadConfigurationException.new(&quot;No credentials were specified.&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line185">185</a>         end</pre></td>
+            <td><pre><a name="line183">183</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line186">186</a>       }</pre></td>
+            <td><pre><a name="line184">184</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line185">185</a>     if job[:credentials].class != Hash</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line187">187</a>     }</pre></td>
+            <td><pre><a name="line186">186</a>       raise BadConfigurationException.new(&quot;Credentials given were not a &quot; +</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line187">187</a>         &quot;Hash, but were a #{job[:credentials].class}&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line188">188</a>   end</pre></td>
+            <td><pre><a name="line188">188</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line189">189</a> </pre></td>
+            <td><pre><a name="line189">189</a>   end</pre></td>
           </tr>
         
           
@@ -1196,80 +1196,80 @@
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line191">191</a>   def self.validate_optimize_for_param(job)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line192">192</a>     if job[:optimize_for].nil?</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line191">191</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line193">193</a>       raise BadConfigurationException.new(&quot;:optimize_for needs to be &quot; +</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line194">194</a>         &quot;specified when running Exodus jobs&quot;)</pre></td>
+            <td><pre><a name="line192">192</a>   # Searches the caller's environment variables, and adds any that could</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line195">195</a>     end</pre></td>
+            <td><pre><a name="line193">193</a>   # be used in this Exodus job. Only takes in credentials from the</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line196">196</a> </pre></td>
+            <td><pre><a name="line194">194</a>   # environment if the job does not specify it.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line197">197</a>     if !OPTIMIZE_FOR_CHOICES.include?(job[:optimize_for])</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line198">198</a>       raise BadConfigurationException.new(&quot;The value given for &quot; +</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line199">199</a>         &quot;:optimize_for was not an acceptable value. Acceptable values are: &quot; +</pre></td>
+            <td><pre><a name="line195">195</a>   def self.propogate_credentials_from_environment(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line200">200</a>         &quot;#{OPTIMIZE_FOR_CHOICES.join(', ')}&quot;)</pre></td>
+            <td><pre><a name="line196">196</a>     CLOUD_CREDENTIALS.each { |cloud_name, credential_list|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line197">197</a>       credential_list.each { |cred|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line198">198</a>         if job[:credentials][cred].nil? and !ENV[cred.to_s].nil?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line199">199</a>           job[:credentials][cred] = ENV[cred.to_s]</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line201">201</a>     end</pre></td>
+            <td><pre><a name="line200">200</a>         end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line202">202</a>   end</pre></td>
+            <td><pre><a name="line201">201</a>       }</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line203">203</a> </pre></td>
+            <td><pre><a name="line202">202</a>     }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line203">203</a>   end</pre></td>
           </tr>
         
           
@@ -1280,86 +1280,86 @@
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line205">205</a>   def self.validate_files_argv_executable(job)</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line205">205</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line206">206</a>     [:code, :argv, :executable].each { |param|</pre></td>
+            <td><pre><a name="line206">206</a>   def self.validate_optimize_for_param(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line207">207</a>       if job[param].nil?</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line208">208</a>         raise BadConfigurationException.new(&quot;#{param} was not specified&quot;)</pre></td>
+            <td><pre><a name="line207">207</a>     if job[:optimize_for].nil?</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line209">209</a>       end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line210">210</a>     }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line211">211</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line212">212</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line213">213</a> </pre></td>
+            <td><pre><a name="line208">208</a>       raise BadConfigurationException.new(&quot;:optimize_for needs to be &quot; +</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line214">214</a>   def self.get_profiling_info(job)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line215">215</a>     key = self.get_key_from_job_data(job)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line216">216</a>     neptune_manager = BabelHelper.get_neptune_manager_client(job)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line217">217</a>     return neptune_manager.get_profiling_info(key)</pre></td>
+            <td><pre><a name="line209">209</a>         &quot;specified when running Exodus jobs&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line218">218</a>   end</pre></td>
+            <td><pre><a name="line210">210</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line211">211</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line212">212</a>     if !OPTIMIZE_FOR_CHOICES.include?(job[:optimize_for])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line213">213</a>       raise BadConfigurationException.new(&quot;The value given for &quot; +</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line214">214</a>         &quot;:optimize_for was not an acceptable value. Acceptable values are: &quot; +</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line215">215</a>         &quot;#{OPTIMIZE_FOR_CHOICES.join(', ')}&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line216">216</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line217">217</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line218">218</a> </pre></td>
           </tr>
         
           
@@ -1370,92 +1370,92 @@
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line220">220</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line221">221</a>   # TODO(cgb): what is a job's key?</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line220">220</a>   def self.validate_files_argv_executable(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line222">222</a>   def self.get_key_from_job_data(job)</pre></td>
+            <td><pre><a name="line221">221</a>     [:code, :argv, :executable].each { |param|</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line223">223</a>     return job[:code]</pre></td>
+            <td><pre><a name="line222">222</a>       if job[param].nil?</pre></td>
           </tr>
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line224">224</a>   end</pre></td>
+          <tr class="marked">
+            <td><pre><a name="line223">223</a>         raise BadConfigurationException.new(&quot;#{param} was not specified&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line225">225</a> </pre></td>
+            <td><pre><a name="line224">224</a>       end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line226">226</a>   </pre></td>
+            <td><pre><a name="line225">225</a>     }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line226">226</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line227">227</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line228">228</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line227">227</a>   def self.get_clouds_to_run_task_on(job, profiling_info)</pre></td>
+            <td><pre><a name="line229">229</a>   def self.get_profiling_info(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line228">228</a>     optimize_for = job[:optimize_for]</pre></td>
+            <td><pre><a name="line230">230</a>     key = self.get_key_from_job_data(job)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line231">231</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line229">229</a>     if optimize_for == :performance or optimize_for == :cost</pre></td>
+            <td><pre><a name="line232">232</a>     if !File.exists?(NEPTUNE_DATA_DIR)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line230">230</a>       return self.get_minimum_val_in_data(job, profiling_info)</pre></td>
+            <td><pre><a name="line233">233</a>       FileUtils.mkdir(NEPTUNE_DATA_DIR)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
-            <td><pre><a name="line231">231</a>     else</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line232">232</a>       return self.find_optimal_cloud_for_task(job, profiling_info)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line233">233</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="uncovered">
-            <td><pre><a name="line234">234</a>   end</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line234">234</a>     end</pre></td>
           </tr>
         
           
@@ -1466,32 +1466,32 @@
         
           
           
+          <tr class="marked">
+            <td><pre><a name="line236">236</a>     profiling_info_file = &quot;#{NEPTUNE_DATA_DIR}/#{key}.json&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line237">237</a>     if File.exists?(profiling_info_file)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line238">238</a>       contents = File.open(profiling_info_file) { |f| f.read() }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line239">239</a>       return JSON.load(contents)</pre></td>
+          </tr>
+        
+          
+          
           <tr class="inferred">
-            <td><pre><a name="line236">236</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line237">237</a>   def self.get_minimum_val_in_data(job, profiling_info)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line238">238</a>     min_cloud = nil</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line239">239</a>     min_val = 1_000_000  # infinity</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line240">240</a>     optimize_for = job[:optimize_for].to_s</pre></td>
+            <td><pre><a name="line240">240</a>     end</pre></td>
           </tr>
         
           
@@ -1502,254 +1502,254 @@
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line242">242</a>     clouds_to_run_on = []</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line243">243</a>     job[:clouds_to_use].each { |cloud|</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line242">242</a>     # If we don't have any profiling info on this job, run it locally and</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line244">244</a>       # If we have no information on this cloud, then add it to the list</pre></td>
+            <td><pre><a name="line243">243</a>     # gather the data ourselves.</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line245">245</a>       # of clouds we should run the task on, since it could potentially be</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line246">246</a>       # lower than the minimum in the data we've seen so far.</pre></td>
+            <td><pre><a name="line244">244</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line247">247</a>       if profiling_info[cloud.to_s].nil?</pre></td>
+            <td><pre><a name="line245">245</a>     start_time = Time.now</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line246">246</a>     # TODO(cgb): exec the user's code</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line248">248</a>         clouds_to_run_on &lt;&lt; cloud</pre></td>
+            <td><pre><a name="line247">247</a>     end_time = Time.now</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line248">248</a>     </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line249">249</a>     # To find out how fast this computer is, just check the file that has</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line250">250</a>     # this info on it and take the first processor. This should be fine</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line251">251</a>     # since we assume the user's code is not-multi-core aware and that</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line252">252</a>     # all processors on this box are the same speed.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line249">249</a>         next</pre></td>
+            <td><pre><a name="line253">253</a>     cpu_speed = Float(CommonFunctions.shell(GET_CPU_INFO).</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line250">250</a>       end</pre></td>
+            <td><pre><a name="line254">254</a>       scan(/cpu MHz\s*:\s*(\d+\.\d+)/).flatten[0])</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line251">251</a> </pre></td>
+            <td><pre><a name="line255">255</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line252">252</a>       val = self.average(profiling_info[cloud.to_s][optimize_for])</pre></td>
+            <td><pre><a name="line256">256</a>     json_info = {</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line257">257</a>       &quot;total_execution_time&quot; =&gt; end_time - start_time,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line258">258</a>       &quot;cpu_speed&quot; =&gt; cpu_speed</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line259">259</a>     }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line260">260</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line253">253</a>       if val &lt; min_val</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line254">254</a>         min_cloud = cloud</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line255">255</a>         min_val = val</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line256">256</a>       end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line257">257</a>     }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line258">258</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line259">259</a>     if !min_cloud.nil?</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line260">260</a>       clouds_to_run_on &lt;&lt; min_cloud</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line261">261</a>     end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line262">262</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line263">263</a>     return clouds_to_run_on</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line264">264</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line265">265</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line266">266</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line267">267</a>   # Given an Array of values, calculates and returns their average.</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line268">268</a>   def self.average(vals)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line269">269</a>     sum = vals.reduce(0.0) { |running_total, val|</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line270">270</a>       running_total + val</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line271">271</a>     }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line272">272</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line273">273</a>     return sum / vals.length</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line274">274</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line275">275</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line276">276</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line277">277</a>   def self.find_optimal_cloud_for_task(job, profiling_info)</pre></td>
+            <td><pre><a name="line261">261</a>     File.open(profiling_info_file, &quot;w+&quot;) { |file| </pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line278">278</a>     raise NotImplementedError</pre></td>
+            <td><pre><a name="line262">262</a>       file.write(JSON.dump(json_info)) </pre></td>
           </tr>
         
           
           
           <tr class="uncovered">
-            <td><pre><a name="line279">279</a>   end</pre></td>
+            <td><pre><a name="line263">263</a>     }</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line280">280</a> </pre></td>
+            <td><pre><a name="line264">264</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line265">265</a>     return json_info</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line281">281</a> </pre></td>
+            <td><pre><a name="line266">266</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line267">267</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line268">268</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line269">269</a>   # TODO(cgb): what is a job's key?</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line282">282</a>   def self.generate_babel_tasks(job, clouds_to_run_task_on)</pre></td>
+            <td><pre><a name="line270">270</a>   def self.get_key_from_job_data(job)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line283">283</a>     tasks = []</pre></td>
+            <td><pre><a name="line271">271</a>     return job[:code].gsub(/[\/\.]/, &quot;&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line272">272</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line273">273</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line274">274</a>   </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line275">275</a>   def self.get_clouds_to_run_task_on(job, profiling_info)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line276">276</a>     optimize_for = job[:optimize_for]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line277">277</a>     if optimize_for == :performance or optimize_for == :cost</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line278">278</a>       return self.get_minimum_val_in_data(job, profiling_info)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line279">279</a>     else</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line280">280</a>       return self.find_optimal_cloud_for_task(job, profiling_info)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line281">281</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line282">282</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line283">283</a> </pre></td>
           </tr>
         
           
@@ -1761,151 +1761,151 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line285">285</a>     clouds_to_run_task_on.each { |cloud|</pre></td>
+            <td><pre><a name="line285">285</a>   def self.get_minimum_val_in_data(job, profiling_info)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line286">286</a>       task = { :type =&gt; &quot;babel&quot;,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line287">287</a>         :code =&gt; job[:code],</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line288">288</a>         :argv =&gt; job[:argv],</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line289">289</a>         :executable =&gt; job[:executable],</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line290">290</a>         :is_remote =&gt; false,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line291">291</a>         :run_local =&gt; false</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line292">292</a>       }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line293">293</a> </pre></td>
+            <td><pre><a name="line286">286</a>     min_cloud = nil</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line294">294</a>       CLOUD_CREDENTIALS[cloud].each { |credential|</pre></td>
+            <td><pre><a name="line287">287</a>     min_val = 1_000_000  # infinity</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line295">295</a>         task[credential] = job[:credentials][credential]</pre></td>
+            <td><pre><a name="line288">288</a>     optimize_for = job[:optimize_for].to_s</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line296">296</a>       }</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line297">297</a> </pre></td>
+            <td><pre><a name="line289">289</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line298">298</a>       task.merge!(CLOUD_BABEL_PARAMS[cloud])</pre></td>
+            <td><pre><a name="line290">290</a>     clouds_to_run_on = []</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line299">299</a>       tasks &lt;&lt; task</pre></td>
+            <td><pre><a name="line291">291</a>     job[:clouds_to_use].each { |cloud|</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line300">300</a>     }</pre></td>
+            <td><pre><a name="line292">292</a>       # If we have no information on this cloud, then add it to the list</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line301">301</a> </pre></td>
+            <td><pre><a name="line293">293</a>       # of clouds we should run the task on, since it could potentially be</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line294">294</a>       # lower than the minimum in the data we've seen so far.</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line302">302</a>     return tasks</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line303">303</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line304">304</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line305">305</a> </pre></td>
+            <td><pre><a name="line295">295</a>       if profiling_info[cloud.to_s].nil?</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line306">306</a>   def self.run_job(tasks_to_run)</pre></td>
+            <td><pre><a name="line296">296</a>         clouds_to_run_on &lt;&lt; cloud</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line307">307</a>     return babel(tasks_to_run)</pre></td>
+            <td><pre><a name="line297">297</a>         next</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line308">308</a>   end</pre></td>
+            <td><pre><a name="line298">298</a>       end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line309">309</a> </pre></td>
+            <td><pre><a name="line299">299</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line300">300</a>       val = self.average(profiling_info[cloud.to_s][optimize_for])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line301">301</a>       if val &lt; min_val</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line302">302</a>         min_cloud = cloud</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line303">303</a>         min_val = val</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line304">304</a>       end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line305">305</a>     }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line306">306</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line307">307</a>     if !min_cloud.nil?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line308">308</a>       clouds_to_run_on &lt;&lt; min_cloud</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line309">309</a>     end</pre></td>
           </tr>
         
           
@@ -1916,14 +1916,302 @@
         
           
           
+          <tr class="marked">
+            <td><pre><a name="line311">311</a>     return clouds_to_run_on</pre></td>
+          </tr>
+        
+          
+          
           <tr class="inferred">
-            <td><pre><a name="line311">311</a> end</pre></td>
+            <td><pre><a name="line312">312</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line313">313</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line314">314</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line315">315</a>   # Given an Array of values, calculates and returns their average.</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line316">316</a>   def self.average(vals)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line317">317</a>     sum = vals.reduce(0.0) { |running_total, val|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line318">318</a>       running_total + val</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line319">319</a>     }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line320">320</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line321">321</a>     return sum / vals.length</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line322">322</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line323">323</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line324">324</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line325">325</a>   def self.find_optimal_cloud_for_task(job, profiling_info)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line326">326</a>     raise NotImplementedError</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line327">327</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line328">328</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line329">329</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line330">330</a>   def self.generate_babel_tasks(job, clouds_to_run_task_on)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line331">331</a>     tasks = []</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line332">332</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line333">333</a>     clouds_to_run_task_on.each { |cloud|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line334">334</a>       task = { :type =&gt; &quot;babel&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line335">335</a>         :code =&gt; job[:code],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line336">336</a>         :argv =&gt; job[:argv],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line337">337</a>         :executable =&gt; job[:executable],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line338">338</a>         :is_remote =&gt; false,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line339">339</a>         :run_local =&gt; false</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line340">340</a>       }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line341">341</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line342">342</a>       CLOUD_CREDENTIALS[cloud].each { |credential|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line343">343</a>         task[credential] = job[:credentials][credential]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line344">344</a>       }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line345">345</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line346">346</a>       task.merge!(CLOUD_BABEL_PARAMS[cloud])</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line347">347</a>       tasks &lt;&lt; task</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line348">348</a>     }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line349">349</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line350">350</a>     return tasks</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line351">351</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line352">352</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line353">353</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line354">354</a>   def self.run_job(tasks_to_run)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line355">355</a>     return babel(tasks_to_run)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line356">356</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line357">357</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line358">358</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line359">359</a> end</pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Mon Jul 30 17:12:00 -0700 2012 with <a href="http://github.com/relevance/rcov">rcov 1.0.0</a></p>
+    <p>Generated on Fri Sep 28 13:16:53 -0700 2012 with <a href="http://github.com/relevance/rcov">rcov 1.0.0</a></p>
 
   </body>
 </html>

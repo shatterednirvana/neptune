@@ -186,7 +186,7 @@ indicates whether or not the compilation was successful.</p>
 
           
           <div class="method-source-code" id="compile_code-source">
-            <pre><span class="ruby-comment"># File lib/neptune.rb, line 458</span>
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 459</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">compile_code</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">ssh_args</span>, <span class="ruby-identifier">shadow_ip</span>)
   <span class="ruby-identifier">compiled_location</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">compile_code</span>(<span class="ruby-identifier">job_data</span>)
   <span class="ruby-identifier">copy_to</span> = <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@copy_to&quot;</span>]
@@ -278,7 +278,7 @@ job succeeded and if it failed, the reason for it.</p>
 
           
           <div class="method-source-code" id="get_input-source">
-            <pre><span class="ruby-comment"># File lib/neptune.rb, line 406</span>
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 407</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_input</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">ssh_args</span>, <span class="ruby-identifier">shadow_ip</span>, <span class="ruby-identifier">controller</span>)
   <span class="ruby-identifier">result</span> = {<span class="ruby-value">:result</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:success</span>}
 
@@ -335,7 +335,7 @@ NeptuneManager.</p>
 
           
           <div class="method-source-code" id="get_job_data-source">
-            <pre><span class="ruby-comment"># File lib/neptune.rb, line 313</span>
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 314</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_job_data</span>(<span class="ruby-identifier">params</span>)
   <span class="ruby-identifier">job_data</span> = {}
   <span class="ruby-identifier">params</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
@@ -411,7 +411,7 @@ not the job completed successfully (success = no errors).</p>
 
           
           <div class="method-source-code" id="get_std_out_and_err-source">
-            <pre><span class="ruby-comment"># File lib/neptune.rb, line 486</span>
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 487</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_std_out_and_err</span>(<span class="ruby-identifier">location</span>)
   <span class="ruby-identifier">result</span> = {}
 
@@ -458,7 +458,7 @@ engines can be found by contacting an AppScale node.</p>
 
           
           <div class="method-source-code" id="preprocess_babel-source">
-            <pre><span class="ruby-comment"># File lib/neptune.rb, line 261</span>
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 262</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">preprocess_babel</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-string">&quot;@code&quot;</span>, <span class="ruby-identifier">job_data</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_param</span>(<span class="ruby-string">&quot;@engine&quot;</span>, <span class="ruby-identifier">job_data</span>)
@@ -731,7 +731,8 @@ it does not, throws an exception.</p>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">does_file_exist?</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">job_data</span>)
     <span class="ruby-keyword">return</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">FileNotFoundException</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">FileNotFoundException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;Expecting file #{file} to exist &quot;</span> <span class="ruby-operator">+</span>
+      <span class="ruby-string">&quot;in the remote datastore, which did not exist.&quot;</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- require_file_to_exist-source -->
@@ -762,7 +763,7 @@ raising an exception if the named file does exist.</p>
 
           
           <div class="method-source-code" id="require_file_to_not_exist-source">
-            <pre><span class="ruby-comment"># File lib/neptune.rb, line 246</span>
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 247</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_file_to_not_exist</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
   <span class="ruby-keyword">begin</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">require_file_to_exist</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">controller</span>)
@@ -832,7 +833,7 @@ as well as information about the node to send the request to.</p>
 
           
           <div class="method-source-code" id="run_job-source">
-            <pre><span class="ruby-comment"># File lib/neptune.rb, line 536</span>
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 537</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">run_job</span>(<span class="ruby-identifier">job_data</span>, <span class="ruby-identifier">ssh_args</span>, <span class="ruby-identifier">shadow_ip</span>, <span class="ruby-identifier">secret</span>)
   <span class="ruby-identifier">controller</span> = <span class="ruby-constant">NeptuneManagerClient</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">shadow_ip</span>, <span class="ruby-identifier">secret</span>)
 
@@ -893,7 +894,7 @@ with Cicero jobs. It requires the AppScale tools to be installed.</p>
 
           
           <div class="method-source-code" id="upload_app_for_cicero-source">
-            <pre><span class="ruby-comment"># File lib/neptune.rb, line 507</span>
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 508</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">upload_app_for_cicero</span>(<span class="ruby-identifier">job_data</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@app&quot;</span>]
     <span class="ruby-comment"># Kernel.puts &quot;No app specified, not uploading...&quot; </span>
@@ -948,7 +949,7 @@ parameter is missing.</p>
 
           
           <div class="method-source-code" id="validate_storage_params-source">
-            <pre><span class="ruby-comment"># File lib/neptune.rb, line 366</span>
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 367</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">validate_storage_params</span>(<span class="ruby-identifier">job_data</span>)
   <span class="ruby-identifier">job_data</span>[<span class="ruby-string">&quot;@storage&quot;</span>] <span class="ruby-operator">||=</span> <span class="ruby-string">&quot;appdb&quot;</span>
 
@@ -1012,7 +1013,7 @@ location.</p>
 
           
           <div class="method-source-code" id="wait_for_compilation_to_finish-source">
-            <pre><span class="ruby-comment"># File lib/neptune.rb, line 437</span>
+            <pre><span class="ruby-comment"># File lib/neptune.rb, line 438</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">wait_for_compilation_to_finish</span>(<span class="ruby-identifier">ssh_args</span>, <span class="ruby-identifier">shadow_ip</span>, <span class="ruby-identifier">compiled_location</span>)
   <span class="ruby-identifier">loop</span> {
     <span class="ruby-identifier">ssh_command</span> = <span class="ruby-node">&quot;ssh #{ssh_args} root@#{shadow_ip} 'ls #{compiled_location}' 2&gt;&amp;1&quot;</span>

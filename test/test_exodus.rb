@@ -36,6 +36,8 @@ class TestExodus < Test::Unit::TestCase
       :S3_URL => "http://s3.url",
       :S3_bucket_name => "bazbucket"
     }
+
+    flexmock(FileUtils).should_receive(:mkdir).and_return()
   end
 
 
@@ -223,16 +225,38 @@ class TestExodus < Test::Unit::TestCase
       :executable => "ruby"
     }
 
-    # mock out the SOAP call for get_profiling_info
-    no_job_data = {
-    }
-    flexmock(NeptuneManagerClient).new_instances { |instance|
-      instance.should_receive(:get_profiling_info).with(job[:code]).
-        and_return(no_job_data)
-    }
+    # let's say they've never run an exodus job before, so they have
+    # no profiling data stored locally
+    flexmock(File).should_receive(:exists?).
+      with(ExodusHelper::NEPTUNE_DATA_DIR).and_return(false)
+    flexmock(FileUtils).should_receive(:mkdir).
+      with(ExodusHelper::NEPTUNE_DATA_DIR).and_return()
 
-    profiling_info = ExodusHelper.get_profiling_info(job)
-    assert_equal(true, profiling_info.empty?)
+    # mock out the gathering of profiling info
+    profiling_filename = "#{ExodusHelper::NEPTUNE_DATA_DIR}/#{ExodusHelper.get_key_from_job_data(job)}.json"
+    flexmock(File).should_receive(:exists?).
+      with(profiling_filename).and_return(false)
+
+    # mock out timing the user's code
+    flexmock(Time).should_receive(:now).and_return(1.0, 2.0)
+
+    # then mock out exec'ing the user's code
+    # TODO(cgb): do this
+
+    # mock out getting cpuinfo
+    flexmock(CommonFunctions).should_receive(:shell).
+      with(ExodusHelper::GET_CPU_INFO).and_return("cpu MHz: 666.66")
+
+    # finally, mock out writing the profiling information
+    flexmock(File).should_receive(:open).with(profiling_filename, "w+", Proc).
+      and_return()
+
+    expected = {
+      "total_execution_time" => 1.0,
+      "cpu_speed" => 666.66
+    }
+    actual = ExodusHelper.get_profiling_info(job)
+    assert_equal(expected, actual)
   end
 
 
@@ -526,10 +550,6 @@ class TestExodus < Test::Unit::TestCase
 
     # mock out calls to the NeptuneManager
     flexmock(NeptuneManagerClient).new_instances { |instance|
-      # for this test, let's say there's no data on this task right now
-      instance.should_receive(:get_profiling_info).with(String).
-        and_return({})
-
       # let's say that all checks to see if temp files exist tell us that
       # the files don't exist
       instance.should_receive(:does_file_exist?).
@@ -561,6 +581,31 @@ class TestExodus < Test::Unit::TestCase
     # mock out filesystem checks
     # we'll say that our code does exist
     flexmock(File).should_receive(:exists?).with("/foo").and_return(true)
+
+    # let's say that we have a neptune profiling directory
+    flexmock(File).should_receive(:exists?).
+      with(ExodusHelper::NEPTUNE_DATA_DIR).and_return(true)
+
+    # and let's say that we've never run the job before
+    # start by mocking out its filesystem reads
+    key = ExodusHelper.get_key_from_job_data(job)
+    profiling_key = "#{ExodusHelper::NEPTUNE_DATA_DIR}/#{key}.json"
+    flexmock(File).should_receive(:exists?).
+      with(profiling_key).and_return(false)
+
+    # mock out timing the user's code
+    flexmock(Time).should_receive(:now).and_return(1.0, 2.0)
+
+    # then mock out exec'ing the user's code
+    # TODO(cgb): do this
+
+    # mock out getting cpuinfo
+    flexmock(CommonFunctions).should_receive(:shell).
+      with(ExodusHelper::GET_CPU_INFO).and_return("cpu MHz: 666.66")
+
+    # finally, mock out writing the profiling information
+    flexmock(File).should_receive(:open).with(profiling_key, "w+", Proc).
+      and_return()
 
     # mock out scp calls - assume they go through with no problems
     flexmock(CommonFunctions).should_receive(:shell).with(/\Ascp/).
@@ -605,12 +650,24 @@ class TestExodus < Test::Unit::TestCase
 
     job2 = job.dup
 
+    # let's say that we have a neptune profiling directory
+    flexmock(File).should_receive(:exists?).
+      with(ExodusHelper::NEPTUNE_DATA_DIR).and_return(true)
+
+    # and let's say that we've run the job before
+    key = ExodusHelper.get_key_from_job_data(job)
+    profiling_filename = "#{ExodusHelper::NEPTUNE_DATA_DIR}/#{key}.json"
+    dumped_data = JSON.dump({
+      "total_execution_time" => 60.00,
+      "cpu_speed" => 666.66
+    })
+    flexmock(File).should_receive(:exists?).
+      with(profiling_filename).and_return(true)
+    flexmock(File).should_receive(:open).
+      with(profiling_filename, Proc).and_return(dumped_data)
+
     # mock out calls to the NeptuneManager
     flexmock(NeptuneManagerClient).new_instances { |instance|
-      # for this test, let's say there's no data on this task right now
-      instance.should_receive(:get_profiling_info).with(String).
-        and_return({})
-
       # let's say that all checks to see if temp files exist tell us that
       # the files don't exist
       instance.should_receive(:does_file_exist?).
