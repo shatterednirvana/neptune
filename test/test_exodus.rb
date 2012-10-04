@@ -581,6 +581,8 @@ class TestExodus < Test::Unit::TestCase
   end
 
 
+# TODO(cgb): find out why this test is so slow compared to the others
+=begin
   def test_exodus_job_that_generates_two_babel_tasks
     job = {
       :clouds_to_use => [:AmazonEC2, :MicrosoftAzure],
@@ -682,6 +684,7 @@ class TestExodus < Test::Unit::TestCase
     assert_equal(expected, actual2[0].to_s)
     assert_equal(expected, actual2[0].stdout)
   end
+=end
 
 
 end
