@@ -170,6 +170,18 @@ cluttering up <a href="Object.html">Object</a> or Kernel’s namespace.</p>
         <dd class="description">
         
       
+        <dt id="GET_CPU_INFO">GET_CPU_INFO
+        
+        <dd class="description"><p>The command that we can run to get information about the number and speed
+of CPUs on this machine.</p>
+        
+      
+        <dt id="NEPTUNE_DATA_DIR">NEPTUNE_DATA_DIR
+        
+        <dd class="description"><p>The location on this machine where we can read and write profiling
+information about jobs.</p>
+        
+      
         <dt id="OPTIMIZE_FOR_CHOICES">OPTIMIZE_FOR_CHOICES
         
         <dd class="description">
@@ -208,7 +220,7 @@ cluttering up <a href="Object.html">Object</a> or Kernel’s namespace.</p>
 
           
           <div class="method-source-code" id="average-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 268</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 316</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">average</span>(<span class="ruby-identifier">vals</span>)
   <span class="ruby-identifier">sum</span> = <span class="ruby-identifier">vals</span>.<span class="ruby-identifier">reduce</span>(<span class="ruby-value">0.0</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">running_total</span>, <span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">running_total</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">val</span>
@@ -246,7 +258,7 @@ href="BadConfigurationException.html">BadConfigurationException</a> if
 
           
           <div class="method-source-code" id="convert_clouds_to_use_to_array-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 123</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">convert_clouds_to_use_to_array</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-identifier">clouds_class</span> = <span class="ruby-identifier">job</span>[<span class="ruby-value">:clouds_to_use</span>].<span class="ruby-identifier">class</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">clouds_class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Symbol</span>
@@ -290,7 +302,7 @@ standard format for Neptune jobs.</p>
 
           
           <div class="method-source-code" id="ensure_all_jobs_are_hashes-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 95</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 110</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ensure_all_jobs_are_hashes</span>(<span class="ruby-identifier">jobs</span>)
   <span class="ruby-identifier">jobs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">job</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">Hash</span>
@@ -327,7 +339,7 @@ missing params.</p>
 
           
           <div class="method-source-code" id="ensure_all_params_are_present-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 107</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 122</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ensure_all_params_are_present</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>[<span class="ruby-value">:clouds_to_use</span>].<span class="ruby-identifier">nil?</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;:clouds_to_use was not specified&quot;</span>)
@@ -364,7 +376,7 @@ missing params.</p>
 
           
           <div class="method-source-code" id="ensure_credentials_are_in_correct_format-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 165</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 180</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ensure_credentials_are_in_correct_format</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>[<span class="ruby-value">:credentials</span>].<span class="ruby-identifier">nil?</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;No credentials were specified.&quot;</span>)
@@ -401,7 +413,7 @@ missing params.</p>
 
           
           <div class="method-source-code" id="find_optimal_cloud_for_task-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 277</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 325</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_optimal_cloud_for_task</span>(<span class="ruby-identifier">job</span>, <span class="ruby-identifier">profiling_info</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
 <span class="ruby-keyword">end</span></pre>
@@ -431,7 +443,7 @@ missing params.</p>
 
           
           <div class="method-source-code" id="generate_babel_tasks-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 282</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 330</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate_babel_tasks</span>(<span class="ruby-identifier">job</span>, <span class="ruby-identifier">clouds_to_run_task_on</span>)
   <span class="ruby-identifier">tasks</span> = []
 
@@ -480,7 +492,7 @@ missing params.</p>
 
           
           <div class="method-source-code" id="get_clouds_to_run_task_on-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 227</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 275</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_clouds_to_run_task_on</span>(<span class="ruby-identifier">job</span>, <span class="ruby-identifier">profiling_info</span>)
   <span class="ruby-identifier">optimize_for</span> = <span class="ruby-identifier">job</span>[<span class="ruby-value">:optimize_for</span>]
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">optimize_for</span> <span class="ruby-operator">==</span> <span class="ruby-value">:performance</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">optimize_for</span> <span class="ruby-operator">==</span> <span class="ruby-value">:cost</span>
@@ -515,9 +527,9 @@ missing params.</p>
 
           
           <div class="method-source-code" id="get_key_from_job_data-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 222</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 270</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_key_from_job_data</span>(<span class="ruby-identifier">job</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">job</span>[<span class="ruby-value">:code</span>]
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">job</span>[<span class="ruby-value">:code</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r[\/\.]/</span>, <span class="ruby-string">&quot;&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- get_key_from_job_data-source -->
           
@@ -545,7 +557,7 @@ missing params.</p>
 
           
           <div class="method-source-code" id="get_minimum_val_in_data-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 237</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 285</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_minimum_val_in_data</span>(<span class="ruby-identifier">job</span>, <span class="ruby-identifier">profiling_info</span>)
   <span class="ruby-identifier">min_cloud</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">min_val</span> = <span class="ruby-value">1_000_000</span>  <span class="ruby-comment"># infinity</span>
@@ -600,11 +612,44 @@ missing params.</p>
 
           
           <div class="method-source-code" id="get_profiling_info-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 214</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 229</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_profiling_info</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-identifier">key</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_key_from_job_data</span>(<span class="ruby-identifier">job</span>)
-  <span class="ruby-identifier">neptune_manager</span> = <span class="ruby-constant">BabelHelper</span>.<span class="ruby-identifier">get_neptune_manager_client</span>(<span class="ruby-identifier">job</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">neptune_manager</span>.<span class="ruby-identifier">get_profiling_info</span>(<span class="ruby-identifier">key</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-constant">NEPTUNE_DATA_DIR</span>)
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir</span>(<span class="ruby-constant">NEPTUNE_DATA_DIR</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">profiling_info_file</span> = <span class="ruby-node">&quot;#{NEPTUNE_DATA_DIR}/#{key}.json&quot;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">profiling_info_file</span>)
+    <span class="ruby-identifier">contents</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">profiling_info_file</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">read</span>() }
+    <span class="ruby-keyword">return</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># If we don't have any profiling info on this job, run it locally and</span>
+  <span class="ruby-comment"># gather the data ourselves.</span>
+
+  <span class="ruby-identifier">start_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+  <span class="ruby-comment"># TODO(cgb): exec the user's code</span>
+  <span class="ruby-identifier">end_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+  
+  <span class="ruby-comment"># To find out how fast this computer is, just check the file that has</span>
+  <span class="ruby-comment"># this info on it and take the first processor. This should be fine</span>
+  <span class="ruby-comment"># since we assume the user's code is not-multi-core aware and that</span>
+  <span class="ruby-comment"># all processors on this box are the same speed.</span>
+  <span class="ruby-identifier">cpu_speed</span> = <span class="ruby-constant">Float</span>(<span class="ruby-constant">CommonFunctions</span>.<span class="ruby-identifier">shell</span>(<span class="ruby-constant">GET_CPU_INFO</span>).
+    <span class="ruby-identifier">scan</span>(<span class="ruby-regexp">%rcpu MHz\s*:\s*(\d+\.\d+)/</span>).<span class="ruby-identifier">flatten</span>[<span class="ruby-value">0</span>])
+
+  <span class="ruby-identifier">json_info</span> = {
+    <span class="ruby-string">&quot;total_execution_time&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">end_time</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">start_time</span>,
+    <span class="ruby-string">&quot;cpu_speed&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">cpu_speed</span>
+  }
+
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">profiling_info_file</span>, <span class="ruby-string">&quot;w+&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span> 
+    <span class="ruby-identifier">file</span>.<span class="ruby-identifier">write</span>(<span class="ruby-constant">JSON</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-identifier">json_info</span>)) 
+  }
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">json_info</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- get_profiling_info-source -->
           
@@ -634,7 +679,7 @@ the job does not specify it.</p>
 
           
           <div class="method-source-code" id="propogate_credentials_from_environment-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 180</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 195</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">propogate_credentials_from_environment</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-constant">CLOUD_CREDENTIALS</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cloud_name</span>, <span class="ruby-identifier">credential_list</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">credential_list</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cred</span><span class="ruby-operator">|</span>
@@ -670,7 +715,7 @@ the job does not specify it.</p>
 
           
           <div class="method-source-code" id="run_job-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 306</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 354</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">run_job</span>(<span class="ruby-identifier">tasks_to_run</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">babel</span>(<span class="ruby-identifier">tasks_to_run</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -702,7 +747,7 @@ credentials needed to use that cloud.</p>
 
           
           <div class="method-source-code" id="validate_clouds_to_use-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 144</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 159</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">validate_clouds_to_use</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ensure_credentials_are_in_correct_format</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">propogate_credentials_from_environment</span>(<span class="ruby-identifier">job</span>)
@@ -748,7 +793,7 @@ credentials needed to use that cloud.</p>
 
           
           <div class="method-source-code" id="validate_files_argv_executable-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 205</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 220</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">validate_files_argv_executable</span>(<span class="ruby-identifier">job</span>)
   [<span class="ruby-value">:code</span>, <span class="ruby-value">:argv</span>, <span class="ruby-value">:executable</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">param</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>[<span class="ruby-identifier">param</span>].<span class="ruby-identifier">nil?</span>
@@ -782,7 +827,7 @@ credentials needed to use that cloud.</p>
 
           
           <div class="method-source-code" id="validate_optimize_for_param-source">
-            <pre><span class="ruby-comment"># File lib/exodus.rb, line 191</span>
+            <pre><span class="ruby-comment"># File lib/exodus.rb, line 206</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">validate_optimize_for_param</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>[<span class="ruby-value">:optimize_for</span>].<span class="ruby-identifier">nil?</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">BadConfigurationException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;:optimize_for needs to be &quot;</span> <span class="ruby-operator">+</span>

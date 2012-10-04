@@ -236,7 +236,8 @@ module NeptuneHelper
     if controller.does_file_exist?(file, job_data)
       return
     else
-      raise FileNotFoundException
+      raise FileNotFoundException.new("Expecting file #{file} to exist " +
+        "in the remote datastore, which did not exist.")
     end
   end
 

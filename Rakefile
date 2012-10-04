@@ -7,7 +7,7 @@ require 'rake/testtask'
 # TODO(cgb): This probably should be moved into a Gemfile and out of this file.
 spec = Gem::Specification.new do |s|
   s.name = 'neptune'
-  s.version = '0.2.2'
+  s.version = '0.2.3'
 
   s.summary = "A domain specific language for deploying HPC apps to cloud platforms"
   s.description = <<-EOF
