@@ -446,7 +446,7 @@ module NeptuneHelper
         # Kernel.puts "compilation complete! Copying compiled code to #{copy_to}"
         return
       end
-      sleep(5)
+      Kernel.sleep(5)
     }
   end
 
