@@ -16,6 +16,9 @@ class TestExodus < Test::Unit::TestCase
     # all sleeps should immediately return
     flexmock(Kernel).should_receive(:sleep).and_return()
 
+    # all shell calls should fail except those okay'ed by tests
+    flexmock(CommonFunctions).should_receive(:kernel).and_return()
+
     # assume that appscale is always running for keyname=appscale
     location_file = File.expand_path("~/.appscale/locations-appscale.yaml")
     flexmock(File).should_receive(:exists?).with(location_file).
