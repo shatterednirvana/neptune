@@ -242,8 +242,9 @@ module ExodusHelper
     # If we don't have any profiling info on this job, run it locally and
     # gather the data ourselves.
 
+    command = "#{job[:executable]} #{job[:code]} #{job[:argv].join(' ')}"
     start_time = Time.now
-    # TODO(cgb): exec the user's code
+    CommonFunctions.shell(command)
     end_time = Time.now
     
     # To find out how fast this computer is, just check the file that has

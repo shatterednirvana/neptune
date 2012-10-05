@@ -17,7 +17,7 @@ class TestExodus < Test::Unit::TestCase
     flexmock(Kernel).should_receive(:sleep).and_return()
 
     # all shell calls should fail except those okay'ed by tests
-    flexmock(CommonFunctions).should_receive(:kernel).and_return()
+    flexmock(CommonFunctions).should_receive(:shell).with("").and_return()
 
     # assume that appscale is always running for keyname=appscale
     location_file = File.expand_path("~/.appscale/locations-appscale.yaml")
@@ -244,7 +244,8 @@ class TestExodus < Test::Unit::TestCase
     flexmock(Time).should_receive(:now).and_return(1.0, 2.0)
 
     # then mock out exec'ing the user's code
-    # TODO(cgb): do this
+    flexmock(CommonFunctions).should_receive(:shell).
+      with("ruby /foo/bar.rb ").and_return("")
 
     # mock out getting cpuinfo
     flexmock(CommonFunctions).should_receive(:shell).
@@ -600,7 +601,8 @@ class TestExodus < Test::Unit::TestCase
     flexmock(Time).should_receive(:now).and_return(1.0, 2.0)
 
     # then mock out exec'ing the user's code
-    # TODO(cgb): do this
+    flexmock(CommonFunctions).should_receive(:shell).
+      with("ruby /foo/bar.rb ").and_return()
 
     # mock out getting cpuinfo
     flexmock(CommonFunctions).should_receive(:shell).
