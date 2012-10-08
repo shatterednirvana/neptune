@@ -34,10 +34,10 @@ def exodus(jobs)
   jobs.each { |job|
     ExodusHelper.ensure_all_params_are_present(job)
     profiling_info = ExodusHelper.get_profiling_info(job)
-    clouds_to_run_task_on = ExodusHelper.get_clouds_to_run_task_on(job, 
+    optimal_cloud_resources = ExodusHelper.find_optimal_cloud_resources(job, 
       profiling_info)
     babel_tasks_to_run = ExodusHelper.generate_babel_tasks(job, 
-      clouds_to_run_task_on)
+      optimal_cloud_resources)
     dispatched_tasks = ExodusHelper.run_job(babel_tasks_to_run)
     tasks << ExodusTaskInfo.new(dispatched_tasks)
   }
@@ -91,6 +91,86 @@ module ExodusHelper
     }
   }
 
+  
+  # The speed of a "Compute Unit" for instances in Amazon EC2. This link
+  # (http://aws.amazon.com/ec2/instance-types) cites the speed of a Compute
+  # Unit at 1.0-1.2 GHz, so take the average for our calculations.
+  EC2_COMPUTE_UNIT = 1100  # MHz
+
+
+  CLOUD_INSTANCE_TYPES = {
+    :AmazonEC2 => [
+
+      # Standard Instances
+       {
+        :name => "m1.small",
+        :cpu => 1 * EC2_COMPUTE_UNIT,
+        :cores => 1,
+        :cost => 0.08
+      }, 
+
+      {
+        :name => "m1.medium",
+        :cpu => 2 * EC2_COMPUTE_UNIT,
+        :cores => 1,
+        :cost => 0.160
+      },
+
+      {
+        :name => "m1.large",
+        :cpu => 2 * EC2_COMPUTE_UNIT,
+        :cores => 2,
+        :cost => 0.320
+      }, 
+      
+      {
+        :name => "m1.xlarge",
+        :cpu => 2 * EC2_COMPUTE_UNIT,
+        :cores => 4,
+        :cost => 0.640
+      }, 
+      
+      # High-Memory Instances
+      {
+        :name => "m2.xlarge",
+        :cpu => 3.25 * EC2_COMPUTE_UNIT,
+        :cores => 2,
+        :cost => 0.450
+      }, 
+      
+      {
+        :name => "m2.2xlarge",
+        :cpu => 3.25 * EC2_COMPUTE_UNIT,
+        :cores => 4,
+        :cost => 0.900
+      }, 
+      
+      {
+        :name => "m2.4xlarge",
+        :cpu => 3.25 * EC2_COMPUTE_UNIT,
+        :cores => 8,
+        :cost => 1.800
+      }, 
+    
+      # High-CPU Instances
+      {
+        :name => "c1.medium",
+        :cpu => 2.5 * EC2_COMPUTE_UNIT,
+        :cores => 2,
+        :cost => 0.165
+      }, 
+      
+      {
+        :name => "c1.xlarge",
+        :cpu => 2.5 * EC2_COMPUTE_UNIT,
+        :cores => 8,
+        :cost => 0.660
+      }
+
+      # No Micro or Cluster-Compute Instances for now
+    ]
+  }
+
 
   # The location on this machine where we can read and write profiling
   # information about jobs.
@@ -103,6 +183,16 @@ module ExodusHelper
 
 
   OPTIMIZE_FOR_CHOICES = [:performance, :cost, :auto]
+
+
+  # The number of seconds in one hour, the standard quantum of pricing in
+  # Amazon EC2.
+  ONE_HOUR = 3600
+
+
+  # The maximum number of virtual machines that can be acquired in Amazon
+  # EC2 with a standard set of AWS credentials.
+  MAX_NODES_IN_EC2 = 20
 
 
   # Given an Array of jobs to run, ensures that they are all Hashes, the
@@ -271,82 +361,103 @@ module ExodusHelper
   def self.get_key_from_job_data(job)
     return job[:code].gsub(/[\/\.]/, "")
   end
-
   
-  def self.get_clouds_to_run_task_on(job, profiling_info)
-    optimize_for = job[:optimize_for]
-    if optimize_for == :performance or optimize_for == :cost
-      return self.get_minimum_val_in_data(job, profiling_info)
-    else
-      return self.find_optimal_cloud_for_task(job, profiling_info)
-    end
-  end
+  
+  def self.find_optimal_cloud_resources(job, profiling_info)
+    min_data = { :weighted_cost => 1000000 } # a large number
 
-
-  def self.get_minimum_val_in_data(job, profiling_info)
-    min_cloud = nil
-    min_val = 1_000_000  # infinity
-    optimize_for = job[:optimize_for].to_s
-
-    clouds_to_run_on = []
     job[:clouds_to_use].each { |cloud|
-      # If we have no information on this cloud, then add it to the list
-      # of clouds we should run the task on, since it could potentially be
-      # lower than the minimum in the data we've seen so far.
-      if profiling_info[cloud.to_s].nil?
-        clouds_to_run_on << cloud
-        next
-      end
-
-      val = self.average(profiling_info[cloud.to_s][optimize_for])
-      if val < min_val
-        min_cloud = cloud
-        min_val = val
-      end
+      CLOUD_INSTANCE_TYPES[cloud].each { |instance_type|
+        optimal_data = self.optimize_for_instance_type(job, profiling_info,
+          instance_type, cloud)
+        if optimal_data[:weighted_cost] < min_data[:weighted_cost]
+          min_data = optimal_data
+        end
+      }
     }
 
-    if !min_cloud.nil?
-      clouds_to_run_on << min_cloud
+    return min_data
+  end
+
+
+  def self.optimize_for_instance_type(job, profiling_info, instance_type, cloud)
+    num_nodes_possible = (1 .. MAX_NODES_IN_EC2).to_a
+
+    time_local = profiling_info["total_execution_time"]
+    cpu_local = profiling_info["cpu_speed"]
+    time_per_adjusted_cpu = instance_type[:cpu] * time_local / cpu_local
+
+    times = num_nodes_possible.map { |n|
+      job[:num_tasks] * time_per_adjusted_cpu / (n * instance_type[:cores])
+    }
+
+    costs = []
+    times.each_with_index { |n, i|
+      costs << self.get_num_hours_for_time(n) * num_nodes_possible[i] * instance_type[:cost]
+    }
+
+    if job[:optimize_for] == :performance
+      alpha = 1.0
+    elsif job[:optimize_for] == :cost
+      alpha = 0.0
+    elsif job[:optimize_for] == :auto
+      alpha = 0.5
     end
 
-    return clouds_to_run_on
-  end
-
-
-  # Given an Array of values, calculates and returns their average.
-  def self.average(vals)
-    sum = vals.reduce(0.0) { |running_total, val|
-      running_total + val
+    combined_cost = []
+    num_nodes_possible.each_with_index { |n, i|
+      weighted_time = alpha * times[i]
+      weighted_cost = (1.0 - alpha) * costs[i] * (1 / instance_type[:cost])
+      total_cost = weighted_time + weighted_cost
+      combined_cost << {
+        :num_nodes => n,
+        :weighted_cost => total_cost,
+        :cloud => cloud,
+        :instance_type => instance_type[:name]
+      }
     }
 
-    return sum / vals.length
+    min_cost = combined_cost[0]
+    combined_cost.each { |cost_info|
+      if cost_info[:weighted_cost] < min_cost[:weighted_cost]
+        min_cost = cost_info
+      end
+    }
+    return min_cost
   end
 
 
-  def self.find_optimal_cloud_for_task(job, profiling_info)
-    raise NotImplementedError
+  def self.get_num_hours_for_time(t)
+    num_hours = 1
+
+    loop {
+      break if t < ONE_HOUR
+      t -= ONE_HOUR
+      num_hours += 1
+    }
+
+    return num_hours
   end
 
 
-  def self.generate_babel_tasks(job, clouds_to_run_task_on)
+  def self.generate_babel_tasks(job, optimal_cloud_resources)
     tasks = []
 
-    clouds_to_run_task_on.each { |cloud|
-      task = { :type => "babel",
-        :code => job[:code],
-        :argv => job[:argv],
-        :executable => job[:executable],
-        :is_remote => false,
-        :run_local => false
-      }
-
-      CLOUD_CREDENTIALS[cloud].each { |credential|
-        task[credential] = job[:credentials][credential]
-      }
-
-      task.merge!(CLOUD_BABEL_PARAMS[cloud])
-      tasks << task
+    cloud = optimal_cloud_resources[:cloud]
+    task = { :type => "babel",
+      :code => job[:code],
+      :argv => job[:argv],
+      :executable => job[:executable],
+      :is_remote => false,
+      :run_local => false
     }
+
+    CLOUD_CREDENTIALS[cloud].each { |credential|
+      task[credential] = job[:credentials][credential]
+    }
+
+    task.merge!(CLOUD_BABEL_PARAMS[cloud])
+    tasks << task
 
     return tasks
   end
