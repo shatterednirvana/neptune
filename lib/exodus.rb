@@ -168,6 +168,48 @@ module ExodusHelper
       }
 
       # No Micro or Cluster-Compute Instances for now
+    ],
+
+    :Eucalyptus => [
+      # Use the default CPU profiles for now. 
+      # TODO(cgb): Use euca-describe-availability-zones verbose to get
+      # info on the specific cloud we're using.
+       {
+        :name => "m1.small",
+        :cpu => 1 * EC2_COMPUTE_UNIT,
+        :cores => 1,
+        :cost => 0.000
+      }, 
+
+      {
+        :name => "m1.large",
+        :cpu => 1 * EC2_COMPUTE_UNIT,
+        :cores => 2,
+        :cost => 0.000
+      }, 
+      
+      {
+        :name => "m1.xlarge",
+        :cpu => 1 * EC2_COMPUTE_UNIT,
+        :cores => 2,
+        :cost => 0.000
+      }, 
+      
+      # High-CPU Instances
+      {
+        :name => "c1.medium",
+        :cpu => 1 * EC2_COMPUTE_UNIT,
+        :cores => 1,
+        :cost => 0.000
+      }, 
+      
+      {
+        :name => "c1.xlarge",
+        :cpu => 1 * EC2_COMPUTE_UNIT,
+        :cores => 4,
+        :cost => 0.000
+      }
+
     ]
   }
 
@@ -193,6 +235,15 @@ module ExodusHelper
   # The maximum number of virtual machines that can be acquired in Amazon
   # EC2 with a standard set of AWS credentials.
   MAX_NODES_IN_EC2 = 20
+
+
+  # The maximum number of virtual machines that can be acquired in Eucalyptus
+  # with a standard set of Eucalyptus credentials.
+  # TODO(cgb): This value is really cloud specific, and thus not a constant.
+  # We should grab it from the underlying cloud via 
+  # "euca-describe-availability-zones verbose" (noting that this value varies
+  # based on instance type).
+  MAX_NODES_IN_EUCA = 10
 
 
   # Given an Array of jobs to run, ensures that they are all Hashes, the
@@ -364,14 +415,21 @@ module ExodusHelper
   
   
   def self.find_optimal_cloud_resources(job, profiling_info)
-    min_data = { :weighted_cost => 1000000 } # a large number
+    min_data = { :aggregate => 1000000 } # a large number
 
     job[:clouds_to_use].each { |cloud|
       CLOUD_INSTANCE_TYPES[cloud].each { |instance_type|
         optimal_data = self.optimize_for_instance_type(job, profiling_info,
           instance_type, cloud)
-        if optimal_data[:weighted_cost] < min_data[:weighted_cost]
+        if optimal_data[:aggregate] < min_data[:aggregate]
           min_data = optimal_data
+        elsif optimal_data[:aggregate] == min_data[:aggregate]
+          # In the case of Eucalyptus, all nodes are free - for these cases,
+          # pick whichever dataset gives better performance (likely the one
+          # with more nodes).
+          if optimal_data[:time] < min_data[:time]
+            min_data = optimal_data
+          end
         end
       }
     }
@@ -381,8 +439,14 @@ module ExodusHelper
 
 
   def self.optimize_for_instance_type(job, profiling_info, instance_type, cloud)
-    num_nodes_possible = (1 .. MAX_NODES_IN_EC2).to_a
-
+    if cloud == :AmazonEC2
+      num_nodes_possible = (1 .. MAX_NODES_IN_EC2).to_a
+    elsif cloud == :Eucalyptus
+      num_nodes_possible = (1 .. MAX_NODES_IN_EUCA).to_a
+    else
+      raise NotImplementedError
+    end
+    
     time_local = profiling_info["total_execution_time"]
     cpu_local = profiling_info["cpu_speed"]
     time_per_adjusted_cpu = instance_type[:cpu] * time_local / cpu_local
@@ -407,11 +471,20 @@ module ExodusHelper
     combined_cost = []
     num_nodes_possible.each_with_index { |n, i|
       weighted_time = alpha * times[i]
-      weighted_cost = (1.0 - alpha) * costs[i] * (1 / instance_type[:cost])
+
+      if instance_type[:cost].zero?
+        smoothing_factor = 1 / 0.00001
+      else
+        smoothing_factor = 1 / instance_type[:cost]
+      end
+      weighted_cost = (1.0 - alpha) * costs[i] * smoothing_factor
+
       total_cost = weighted_time + weighted_cost
       combined_cost << {
         :num_nodes => n,
-        :weighted_cost => total_cost,
+        :time => times[i],
+        :cost => costs[i],
+        :aggregate => total_cost,
         :cloud => cloud,
         :instance_type => instance_type[:name]
       }
@@ -419,8 +492,12 @@ module ExodusHelper
 
     min_cost = combined_cost[0]
     combined_cost.each { |cost_info|
-      if cost_info[:weighted_cost] < min_cost[:weighted_cost]
+      if cost_info[:aggregate] < min_cost[:aggregate]
         min_cost = cost_info
+      elsif cost_info[:aggregate] == min_cost[:aggregate]
+        if cost_info[:time] < min_cost[:time]
+          min_cost = cost_info
+        end
       end
     }
     return min_cost

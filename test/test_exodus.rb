@@ -264,7 +264,7 @@ class TestExodus < Test::Unit::TestCase
   end
 
 
-  def test_find_optimal_cloud_resources_in_ec2
+  def test_find_fastest_cloud_resources_in_ec2
     job = {
       :clouds_to_use => [:AmazonEC2],
       :credentials => {
@@ -292,6 +292,71 @@ class TestExodus < Test::Unit::TestCase
     actual = ExodusHelper.find_optimal_cloud_resources(job, profiling_info)
     assert_equal(:AmazonEC2, actual[:cloud])
     assert_equal(ExodusHelper::MAX_NODES_IN_EC2, actual[:num_nodes])
+    assert_equal("c1.xlarge", actual[:instance_type])
+  end
+
+
+  def test_find_optimal_cloud_resources_in_euca
+    job = {
+      :clouds_to_use => [:Eucalyptus],
+      :credentials => {
+        :EUCA_ACCESS_KEY => "boo",
+        :EUCA_SECRET_KEY => "baz",
+        :EUCA_URL => "http://euca.url",
+        :WALRUS_URL => "http://walrus.url",
+        :Walrus_bucket_name => "bazbucket"
+      },
+      :code => "/foo/bar.rb",
+      :argv => [2],
+      :executable => "ruby",
+      :optimize_for => :auto,
+      :num_tasks => 1000
+    }
+
+    profiling_info = {
+      "total_execution_time" => 1000,  # seconds
+      "cpu_speed" => 2000  # MHz
+    }
+
+    # if we want to run our tasks "optimally" and we're in euca, then the 
+    # boxes are considered free - in this case, we should be running it over as
+    # many nodes as possible (and thus as fast as possible)
+    actual = ExodusHelper.find_optimal_cloud_resources(job, profiling_info)
+    assert_equal(:Eucalyptus, actual[:cloud])
+    assert_equal(ExodusHelper::MAX_NODES_IN_EUCA, actual[:num_nodes])
+    assert_equal("c1.xlarge", actual[:instance_type])
+  end
+
+
+  def test_find_cheapest_cloud_resources_in_euca
+    job = {
+      :clouds_to_use => [:Eucalyptus],
+      :credentials => {
+        :EUCA_ACCESS_KEY => "boo",
+        :EUCA_SECRET_KEY => "baz",
+        :EUCA_URL => "http://euca.url",
+        :WALRUS_URL => "http://walrus.url",
+        :Walrus_bucket_name => "bazbucket"
+      },
+      :code => "/foo/bar.rb",
+      :argv => [2],
+      :executable => "ruby",
+      :optimize_for => :cost,
+      :num_tasks => 1000
+    }
+
+    profiling_info = {
+      "total_execution_time" => 1000,  # seconds
+      "cpu_speed" => 2000  # MHz
+    }
+
+    # if we want to run our tasks as cheaply as possible and we're in euca, 
+    # then the boxes are considered free - in this case, all options cost the
+    # same and we should be running it over as
+    # many nodes as possible (and thus as fast as possible)
+    actual = ExodusHelper.find_optimal_cloud_resources(job, profiling_info)
+    assert_equal(:Eucalyptus, actual[:cloud])
+    assert_equal(ExodusHelper::MAX_NODES_IN_EUCA, actual[:num_nodes])
     assert_equal("c1.xlarge", actual[:instance_type])
   end
 
