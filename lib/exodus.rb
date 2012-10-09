@@ -440,12 +440,17 @@ module ExodusHelper
 
   def self.optimize_for_instance_type(job, profiling_info, instance_type, cloud)
     if cloud == :AmazonEC2
-      num_nodes_possible = (1 .. MAX_NODES_IN_EC2).to_a
+      max_nodes_in_cloud = MAX_NODES_IN_EC2
     elsif cloud == :Eucalyptus
-      num_nodes_possible = (1 .. MAX_NODES_IN_EUCA).to_a
+      max_nodes_in_cloud = MAX_NODES_IN_EUCA
     else
       raise NotImplementedError
     end
+
+    if job[:max_nodes]
+      max_nodes_in_cloud = [job[:max_nodes], max_nodes_in_cloud].min
+    end
+    num_nodes_possible = (1 .. max_nodes_in_cloud).to_a
     
     time_local = profiling_info["total_execution_time"]
     cpu_local = profiling_info["cpu_speed"]

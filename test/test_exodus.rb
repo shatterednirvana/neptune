@@ -358,6 +358,38 @@ class TestExodus < Test::Unit::TestCase
     assert_equal(:Eucalyptus, actual[:cloud])
     assert_equal(ExodusHelper::MAX_NODES_IN_EUCA, actual[:num_nodes])
     assert_equal("c1.xlarge", actual[:instance_type])
+ end
+
+
+ def test_find_cloud_resources_with_max_set
+    job = {
+      :clouds_to_use => [:AmazonEC2],
+      :credentials => {
+        :EC2_ACCESS_KEY => "boo",
+        :EC2_SECRET_KEY => "baz",
+        :EC2_URL => "http://ec2.url",
+        :S3_URL => "http://s3.url",
+        :S3_bucket_name => "bazbucket"
+      },
+      :code => "/foo/bar.rb",
+      :argv => [2],
+      :executable => "ruby",
+      :optimize_for => :cost,
+      :num_tasks => 1000,
+      :max_nodes => 1
+    }
+
+    profiling_info = {
+      "total_execution_time" => 1000,  # seconds
+      "cpu_speed" => 2000  # MHz
+    }
+
+    # here, we're saying that no more than one machine should be used,
+    # and since we're optimizing for cost, we should expect that the
+    # cheapest instance type will be chosen
+    actual = ExodusHelper.find_optimal_cloud_resources(job, profiling_info)
+    assert_equal(:AmazonEC2, actual[:cloud])
+    assert_equal(1, actual[:num_nodes])
   end
 
 
