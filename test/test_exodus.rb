@@ -682,4 +682,57 @@ class TestExodus < Test::Unit::TestCase
   end
 
 
+  def test_exodus_recommendation_only_mode
+    job = {
+      :clouds_to_use => :AmazonEC2,
+      :credentials => {
+        :EC2_ACCESS_KEY => "boo",
+        :EC2_SECRET_KEY => "baz",
+        :EC2_URL => "http://ec2.url",
+        :S3_URL => "http://s3.url",
+        :S3_bucket_name => "bazbucket"
+      },
+      :optimize_for => :performance,
+      :code => "/foo/bar.rb",
+      :argv => [],
+      :executable => "ruby",
+      :num_tasks => 1,
+      :recommend_only => true
+    }
+
+    # let's say that we have a neptune profiling directory
+    flexmock(File).should_receive(:exists?).
+      with(ExodusHelper::NEPTUNE_DATA_DIR).and_return(true)
+
+    # and let's say that we've run the job before
+    # start by mocking out its filesystem reads
+    key = ExodusHelper.get_key_from_job_data(job)
+    profiling_key = "#{ExodusHelper::NEPTUNE_DATA_DIR}/#{key}.json"
+    flexmock(File).should_receive(:exists?).with(profiling_key).
+      and_return(true)
+
+    jsoned_contents = JSON.dump({
+      "total_execution_time" => 1000,
+      "cpu_speed" => 1500
+    })
+    flexmock(File).should_receive(:open).with(profiling_key, Proc).
+      and_return(jsoned_contents)
+
+    # this time, we aren't expecting to get an Array of babel jobs back
+    # but just a hash, indicating where to run our tasks
+    actual = exodus(job)
+
+    # we only gave it ec2, so we expect to get ec2 back
+    assert_equal(:AmazonEC2, actual[:cloud])
+
+    # tasks only run on one node - therefore, if we run one task, it
+    # should only run on one node
+    assert_equal(1, actual[:num_nodes])
+
+    # if we want to run it as fast as possible, we expect that the 
+    # fastest instance type should be used
+    assert_equal("c1.xlarge", actual[:instance_type])
+  end
+
+
 end

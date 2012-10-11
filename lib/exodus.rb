@@ -34,6 +34,10 @@ def exodus(jobs)
     profiling_info = ExodusHelper.get_profiling_info(job)
     optimal_cloud_resources = ExodusHelper.find_optimal_cloud_resources(job, 
       profiling_info)
+    if job[:recommend_only]
+      return optimal_cloud_resources 
+    end
+
     babel_tasks_to_run = ExodusHelper.generate_babel_tasks(job, 
       optimal_cloud_resources)
     return ExodusHelper.run_job(babel_tasks_to_run)
@@ -431,9 +435,9 @@ module ExodusHelper
 
   def self.optimize_for_instance_type(job, profiling_info, instance_type, cloud)
     if cloud == :AmazonEC2
-      max_nodes_in_cloud = MAX_NODES_IN_EC2
+      max_nodes_in_cloud = [job[:num_tasks], MAX_NODES_IN_EC2].min
     elsif cloud == :Eucalyptus
-      max_nodes_in_cloud = MAX_NODES_IN_EUCA
+      max_nodes_in_cloud = [job[:num_tasks], MAX_NODES_IN_EUCA].min
     else
       raise NotImplementedError
     end
