@@ -1,6 +1,8 @@
 #!/usr/bin/ruby -w
 # Programmer: Chris Bunch (cgb@cs.ucsb.edu)
 
+require 'custom_exceptions'
+
 require 'openssl'
 require 'soap/rpc/driver'
 require 'timeout'
@@ -140,7 +142,7 @@ class NeptuneManagerClient
   # can raise NeptuneManagerException.new as well as the input format used for job_data.
   def get_output(job_data)
     result = ""
-    make_call(NO_TIMEOUT, false) { 
+    make_call(NO_TIMEOUT, true) { 
       result = conn.get_output(job_data, @secret)
     }  
     raise NeptuneManagerException.new(result) if result =~ /Error:/

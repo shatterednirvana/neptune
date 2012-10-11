@@ -3,7 +3,8 @@
 $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
 require 'neptune'
 
-require 'test/unit'
+require 'rubygems'
+require 'flexmock/test_unit'
 
 
 class TestNeptune < Test::Unit::TestCase
@@ -189,6 +190,11 @@ class TestNeptune < Test::Unit::TestCase
     }
 
     job_data_3 = {"@storage" => "s3"}
+    # blank out any possible S3 credentials that the user may have in their
+    # environment, as this can interfere with this test
+    ENV['EC2_ACCESS_KEY'] = nil
+    ENV['EC2_SECRET_KEY'] = nil
+    ENV['S3_URL'] = nil
     assert_raise(BadConfigurationException) {
       NeptuneHelper.validate_storage_params(job_data_3)
     }

@@ -54,6 +54,7 @@ def babel(jobs)
     end
 
     job_data_list = []
+    inputs_to_store = {}
     jobs.each { |params|
       job_data = BabelHelper.convert_from_neptune_params(params)
       job_data['@metadata_info'] = {'time_to_store_inputs' => 0.0}
@@ -69,13 +70,13 @@ def babel(jobs)
       if job_data["@is_remote"]
         #BabelHelper.validate_inputs(job_data)
       else
-        BabelHelper.put_code(job_data)
-        BabelHelper.put_inputs(job_data)
+        BabelHelper.get_code(job_data, inputs_to_store)
+        BabelHelper.get_inputs(job_data, inputs_to_store)
       end
 
       job_data_list << job_data
     }
-
+    BabelHelper.store_inputs(inputs_to_store)
     BabelHelper.run_job(job_data_list)
 
     # Return an object to the user that has all the information about their
@@ -193,35 +194,60 @@ module BabelHelper
   end
 
 
-  # Stores the user's code (and the directory it's in, and directories in the
-  # same directory as the user's code, since there could be libraries used)
-  # in the remote datastore.
-  def self.put_code(job_data)
+  def self.get_code(job_data, inputs_to_store)
     code_dir = File.dirname(job_data["@code"])
-    code = File.basename(job_data["@code"])
-    remote_code_dir = self.put_file(code_dir, job_data)
-    job_data["@code"] = remote_code_dir + "/" + code
-    return job_data["@code"]
+    job_data["@code"] = self.get_remote_name_for_stored_file(job_data["@code"], job_data)
+    if inputs_to_store[job_data].nil?
+      inputs_to_store[job_data] = []
+    end
+    if !inputs_to_store[job_data].include?(code_dir)
+      inputs_to_store[job_data] << code_dir
+    end
+    return
   end
 
 
-  # If any input files are specified, they are copied to the remote datastore
-  # via Neptune 'input' jobs. Inputs are assumed to be files on the local
-  # filesystem if they begin with a slash, and job_data gets updated with
-  # the remote location of these files.
-  def self.put_inputs(job_data)
+  def self.get_inputs(job_data, inputs_to_store)
     if job_data["@argv"].nil? or job_data["@argv"].empty?
-      return job_data
+      return
     end
 
     job_data["@argv"].each_index { |i|
       arg = job_data["@argv"][i]
       if arg[0].chr == "/"
-        job_data["@argv"][i] = self.put_file(arg, job_data)
+        job_data["@argv"][i] = self.get_remote_name_for_stored_file(arg, job_data)
+        if inputs_to_store[job_data].nil?
+          inputs_to_store[job_data] = []
+        end
+        if !inputs_to_store[job_data].include?(arg)
+          inputs_to_store[job_data] << arg
+        end
       end
     }
 
-    return job_data
+    return
+  end
+
+
+  def self.store_inputs(inputs_to_store)
+    remote_locations = []
+
+    files_to_store = []
+    job_data_to_use = {}
+    inputs_to_store.each { |job_data, files|
+      files.each { |local_file|
+        if !files_to_store.include?(local_file)
+          files_to_store << local_file
+          job_data_to_use = job_data
+        end
+      }
+    }
+
+    files_to_store.each { |file|
+      remote_locations << self.put_file(file, job_data_to_use)
+    }
+
+    return remote_locations
   end
 
 
@@ -231,9 +257,7 @@ module BabelHelper
     input_data = self.convert_to_neptune_params(job_data)
     input_data[:type] = "input"
     input_data[:local] = local_path
-
-    bucket_name = self.get_bucket_for_local_data(job_data)
-    input_data[:remote] = "/#{bucket_name}/babel#{local_path}"
+    input_data[:remote] = self.get_remote_name_for_stored_file(local_path, job_data)
 
     start = Time.now
     Kernel.neptune(input_data)
@@ -246,6 +270,12 @@ module BabelHelper
     job_data['@metadata_info']['time_to_store_inputs'] += fin - start
 
     return input_data[:remote]
+  end
+
+
+  def self.get_remote_name_for_stored_file(local_path, job_data)
+    bucket_name = self.get_bucket_for_local_data(job_data)
+    return "/#{bucket_name}/babel#{local_path}"
   end
 
 

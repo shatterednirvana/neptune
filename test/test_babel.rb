@@ -174,59 +174,28 @@ class TestBabel < Test::Unit::TestCase
   end
 
   def test_put_code
-    job_data = {"@code" => "/baz/boo/code.baz", "@bucket_name" => "/remote"}
+    code = "/baz/boo/code.baz"
+    code_dir = "/baz/boo"
+    job_data = {"@code" => code, "@bucket_name" => "/remote"}
 
     neptune_params = {
       :type => "input",
-      :local => "/baz/boo",
+      :local => code_dir,
       :remote => "/remote/babel/baz/boo",
       :bucket_name => "/remote",
-      :code => "/baz/boo/code.baz"
+      :code => code
     }
 
     kernel = flexmock(Kernel)
     kernel.should_receive(:neptune).with(neptune_params)
 
-    expected = "/remote/babel/baz/boo/code.baz"
-    actual = BabelHelper.put_code(job_data)
+    inputs_to_store = { job_data => [code_dir] }
+
+    expected = ["/remote/babel/baz/boo"]
+    actual = BabelHelper.store_inputs(inputs_to_store)
     assert_equal(expected, actual)
   end
 
-  def test_put_inputs
-    # If we specify no inputs or no file inputs, we should get back exactly what
-    # we give it
-    job_data = {"@code" => "/baz/boo/code.baz", "@bucket_name" => "/remote"}
-    actual_1 = BabelHelper.put_inputs(job_data)
-    assert_equal(job_data, actual_1)
-
-    job_data["@argv"] = ["boo", "baz", "gbaz"]
-    actual_2 = BabelHelper.put_inputs(job_data)
-    assert_equal(job_data, actual_2)
-
-    # If we specify inputs on the file system, they should be uploaded and 
-    # replaced with remote file locations
-    neptune_params = {
-      :type => "input",
-      :local => "/baz",
-      :remote => "/remote/babel/baz",
-      :bucket_name => "/remote",
-      :code => "/baz/boo/code.baz",
-      :argv => ["boo", "/baz", "gbaz"]
-    }
-
-    kernel = flexmock(Kernel)
-    kernel.should_receive(:neptune).with(neptune_params)
-
-    time = flexmock(Time)
-    time.should_receive(:now).and_return(0.0)
-
-    job_data["@argv"] = ["boo", "/baz", "gbaz"]
-    expected = job_data.dup
-    expected["@argv"] = ["boo", "/remote/babel/baz", "gbaz"]
-    expected["@metadata_info"] = {"time_to_store_inputs" => 0.0}
-    actual_3 = BabelHelper.put_inputs(job_data.dup)
-    assert_equal(expected, actual_3)
-  end
 
   def test_run_babel_job
     # Running a job with no @type specified means it should be a Babel job
@@ -332,8 +301,9 @@ class TestBabel < Test::Unit::TestCase
     babelhelper = flexmock(BabelHelper)
     babelhelper.should_receive(:check_output_files).and_return()
     babelhelper.should_receive(:validate_inputs).and_return()
-    babelhelper.should_receive(:put_code).and_return()
-    babelhelper.should_receive(:put_inputs).and_return()
+    babelhelper.should_receive(:get_code).and_return()
+    babelhelper.should_receive(:get_inputs).and_return()
+    babelhelper.should_receive(:store_inputs).and_return()
 
     # mocks for neptune
     neptunehelper = flexmock(NeptuneHelper)

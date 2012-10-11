@@ -3,7 +3,9 @@
 $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
 require 'common_functions'
 
-require 'test/unit'
+require 'rubygems'
+require 'flexmock/test_unit'
+
 
 SECRET = "hey-its-a-secret"
 

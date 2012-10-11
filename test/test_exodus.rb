@@ -407,14 +407,14 @@ class TestExodus < Test::Unit::TestCase
       :argv => [2],
       :executable => "ruby",
       :optimize_for => :cost,
-      :num_tasks => 1000
+      :num_tasks => 2
     }
 
     optimal_cloud_resources = {
       :cloud => :Eucalyptus
     }
 
-    expected = [{
+    expected_one_task = {
       :type => "babel",
       :EUCA_ACCESS_KEY => "boo",
       :EUCA_SECRET_KEY => "baz",
@@ -427,8 +427,10 @@ class TestExodus < Test::Unit::TestCase
       :is_remote => false,
       :run_local => false,
       :storage => "walrus",
-      :engine => "executor-rabbitmq"
-    }]
+      :engine => "executor-rabbitmq",
+      :keyname => "appscale"
+    }
+    expected = [expected_one_task, expected_one_task]
     actual = ExodusHelper.generate_babel_tasks(job, optimal_cloud_resources)
     assert_equal(expected, actual)
   end
@@ -454,7 +456,9 @@ class TestExodus < Test::Unit::TestCase
       :code => "/foo/bar.rb",
       :argv => [2],
       :executable => "ruby",
-      :optimize_for => :cost
+      :optimize_for => :cost,
+      :num_tasks => 1,
+      :keyname => "appscale"
     }
 
     optimal_cloud_resources = {
@@ -474,7 +478,8 @@ class TestExodus < Test::Unit::TestCase
       :is_remote => false,
       :run_local => false,
       :storage => "s3",
-      :engine => "executor-sqs"
+      :engine => "executor-sqs",
+      :keyname => "appscale"
     }   
     
     appengine_task = {
@@ -562,7 +567,7 @@ class TestExodus < Test::Unit::TestCase
   end
 
 
-  def test_exodus_job_that_generates_one_babel_task
+  def test_exodus_job_that_generates_two_babel_tasks
     job = {
       :clouds_to_use => :AmazonEC2,
       :credentials => {
@@ -576,8 +581,18 @@ class TestExodus < Test::Unit::TestCase
       :code => "/foo/bar.rb",
       :argv => [],
       :executable => "ruby",
-      :num_tasks => 1000
+      :num_tasks => 2
     }
+
+    # mock out the random generation of output, error, and metadata paths
+    # so that we can can put non-random values in there and identify
+    # which task is which later
+    flexmock(CommonFunctions).should_receive(:get_random_alphanumeric).
+      and_return("output1", "error1", "metadata1", "output2", "error2", 
+        "metadata2") 
+
+    expected1 = "task output 1 yay!"
+    expected2 = "task output 2 yay!"
 
     # mock out calls to the NeptuneManager
     flexmock(NeptuneManagerClient).new_instances { |instance|
@@ -601,12 +616,25 @@ class TestExodus < Test::Unit::TestCase
         and_return(["executor-rabbitmq", "executor-sqs"])
 
       # neptune jobs should start fine
-      instance.should_receive(:start_neptune_job).with(Hash).
+      instance.should_receive(:start_neptune_job).with(Array).
         and_return("babel job is now running")
 
-      # getting the output of the job should return it the first time
-      instance.should_receive(:get_output).with(Hash).
-        and_return("task output yay!")
+      # getting the output of the jobs should return it the first time
+      instance.should_receive(:get_output).with(on { |job_data|
+        if job_data["@output"] =~ /output1\Z/
+          true
+        else
+          false
+        end
+      }).and_return(expected1)
+
+      instance.should_receive(:get_output).with(on { |job_data|
+        if job_data["@output"] =~ /output2\Z/
+          true
+        else
+          false
+        end
+      }).and_return(expected2)
     }
 
     # mock out filesystem checks
@@ -644,136 +672,14 @@ class TestExodus < Test::Unit::TestCase
       and_return()
 
     # first, let's make sure that exodus calls work fine if we give it
-    # a Hash, containing info on one job
-    expected = "task output yay!"
+    # a Hash, that generates two babel tasks
     actual = exodus(job)
-    assert_equal(expected, actual.to_s)
-    assert_equal(expected, actual.stdout)
+    assert_equal(expected1, actual[0].to_s)
+    assert_equal(expected1, actual[0].stdout)
 
-    # now, let's make sure that exodus calls still work the same way if we
-    # give it an Array, containing info on the same job
-    actual2 = exodus([job])
-    assert_equal(expected, actual2[0].to_s)
-    assert_equal(expected, actual2[0].stdout)
+    assert_equal(expected2, actual[1].to_s)
+    assert_equal(expected2, actual[1].stdout)
   end
-
-
-# TODO(cgb): find out why this test is so slow compared to the others
-=begin
-  def test_exodus_job_that_generates_two_babel_tasks
-    job = {
-      :clouds_to_use => [:AmazonEC2, :MicrosoftAzure],
-      :credentials => {
-        # for EC2
-        :EC2_ACCESS_KEY => "boo",
-        :EC2_SECRET_KEY => "baz",
-        :EC2_URL => "http://ec2.url",
-        :S3_URL => "http://s3.url",
-        :S3_bucket_name => "bazbucket",
-
-        # for azure
-        :WAZ_Account_Name => "wazboo",
-        :WAZ_Access_Key => "wazbaz",
-        :WAZ_Container_Name => "wazbucket"
-      },
-      :optimize_for => :cost,
-      :code => "/foo/bar.rb",
-      :argv => [],
-      :executable => "ruby"
-    }
-
-    job2 = job.dup
-
-    # let's say that we have a neptune profiling directory
-    flexmock(File).should_receive(:exists?).
-      with(ExodusHelper::NEPTUNE_DATA_DIR).and_return(true)
-
-    # and let's say that we've run the job before
-    key = ExodusHelper.get_key_from_job_data(job)
-    profiling_filename = "#{ExodusHelper::NEPTUNE_DATA_DIR}/#{key}.json"
-    dumped_data = JSON.dump({
-      "total_execution_time" => 60.00,
-      "cpu_speed" => 666.66
-    })
-    flexmock(File).should_receive(:exists?).
-      with(profiling_filename).and_return(true)
-    flexmock(File).should_receive(:open).
-      with(profiling_filename, Proc).and_return(dumped_data)
-
-    # mock out calls to the NeptuneManager
-    flexmock(NeptuneManagerClient).new_instances { |instance|
-      # let's say that all checks to see if temp files exist tell us that
-      # the files don't exist
-      instance.should_receive(:does_file_exist?).
-        with(/\A\/bazbucket\/babel\/temp-[\w]+\Z/, Hash).
-        and_return(false)
-
-      instance.should_receive(:does_file_exist?).
-        with(/\A\/wazbucket\/babel\/temp-[\w]+\Z/, Hash).
-        and_return(false)
-
-      # assume that our code got put in the remote datastore fine
-      instance.should_receive(:does_file_exist?).
-        with(/\A\/bazbucket\/babel\/foo\/bar.rb\Z/, Hash).
-        and_return(true)
-
-      instance.should_receive(:does_file_exist?).
-        with(/\A\/wazbucket\/babel\/foo\/bar.rb\Z/, Hash).
-        and_return(true)
-
-      # also, calls to put_input should succeed
-      instance.should_receive(:put_input).with(Hash).and_return(true)
-
-      # mock out the call to get_supported_babel_engines and put in
-      # SQS, WAZ-push-q, and rabbitmq (which is always supported)
-      instance.should_receive(:get_supported_babel_engines).with(Hash).
-        and_return(["executor-rabbitmq", "executor-sqs", "waz-push-q"])
-
-      # neptune jobs should start fine - instead of expecting a Hash (like
-      # in the last test), we're now expecting an Array, where each item
-      # is a Hash corresponding to each of the jobs that will be run
-      instance.should_receive(:start_neptune_job).with(Array).
-        and_return("babel job is now running")
-
-      # getting the output of the job shouldn't return it the first time
-      # (unlike the last test). this time, we want to make sure that
-      # ExodusTaskInfo is properly asking all the babel tasks it's hiding
-      # from us for the job's output, so we'll have the first babel task
-      # always fail to have the output ready, and the second one will have
-      # it the second time around.
-      instance.should_receive(:get_output).with(on { |job| 
-        job["@output"] =~ /\A\/bazbucket\/babel\/temp-/
-      }).
-        and_return(DOES_NOT_EXIST)
-
-      instance.should_receive(:get_output).with(on { |job| 
-        job["@output"] =~ /\A\/wazbucket\/babel\/temp-/
-      }).
-        and_return("task output yay!")
-    }
-
-    # mock out filesystem checks
-    # we'll say that our code does exist
-    flexmock(File).should_receive(:exists?).with("/foo").and_return(true)
-
-    # mock out scp calls - assume they go through with no problems
-    flexmock(CommonFunctions).should_receive(:shell).with(/\Ascp/).
-      and_return()
-
-    # first, let's make sure that exodus calls work fine if we give it
-    # a Hash, containing info on one job
-    expected = "task output yay!"
-    actual = exodus(job)
-    assert_equal(expected, actual.to_s)
-    assert_equal(expected, actual.stdout)
-
-    # now, let's make sure that exodus calls still work the same way if we
-    # give it an Array, containing info on the same job
-    actual2 = exodus([job2])
-    assert_equal(expected, actual2[0].to_s)
-    assert_equal(expected, actual2[0].stdout)
-  end
-=end
 
 
 end

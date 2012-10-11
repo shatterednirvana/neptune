@@ -43,7 +43,8 @@ class TaskInfo
     end
 
     if job_data.class != Hash
-      raise BadConfigurationException.new("job data not a Hash")
+      raise BadConfigurationException.new("job data not a Hash, but was a " +
+        "#{job_data.class} - #{job_data}")
     end
     @job_data = job_data
 

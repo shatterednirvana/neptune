@@ -29,8 +29,6 @@ def exodus(jobs)
       "is not an acceptable class type")
   end
 
-  tasks = []
-
   jobs.each { |job|
     ExodusHelper.ensure_all_params_are_present(job)
     profiling_info = ExodusHelper.get_profiling_info(job)
@@ -38,15 +36,8 @@ def exodus(jobs)
       profiling_info)
     babel_tasks_to_run = ExodusHelper.generate_babel_tasks(job, 
       optimal_cloud_resources)
-    dispatched_tasks = ExodusHelper.run_job(babel_tasks_to_run)
-    tasks << ExodusTaskInfo.new(dispatched_tasks)
+    return ExodusHelper.run_job(babel_tasks_to_run)
   }
-
-  if job_given_as_hash
-    return tasks[0]
-  else
-    return tasks
-  end
 end
 
 
@@ -526,20 +517,28 @@ module ExodusHelper
     tasks = []
 
     cloud = optimal_cloud_resources[:cloud]
-    task = { :type => "babel",
-      :code => job[:code],
-      :argv => job[:argv],
-      :executable => job[:executable],
-      :is_remote => false,
-      :run_local => false
-    }
+    job[:num_tasks].times { |i|
+      task = { :type => "babel",
+        :code => job[:code],
+        :argv => job[:argv],
+        :executable => job[:executable],
+        :is_remote => false,
+        :run_local => false
+      }
+      task[:keyname] = job[:keyname] || "appscale"
 
-    CLOUD_CREDENTIALS[cloud].each { |credential|
-      task[credential] = job[:credentials][credential]
-    }
+      if job[:max_nodes]
+        task[:global_max_nodes] = job[:max_nodes]
+      end
 
-    task.merge!(CLOUD_BABEL_PARAMS[cloud])
-    tasks << task
+
+      CLOUD_CREDENTIALS[cloud].each { |credential|
+        task[credential] = job[:credentials][credential]
+      }
+
+      task.merge!(CLOUD_BABEL_PARAMS[cloud])
+      tasks << task
+    }
 
     return tasks
   end
