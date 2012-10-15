@@ -375,10 +375,21 @@ module ExodusHelper
       return JSON.load(contents)
     end
 
+    if job[:argv].class == Proc
+      args = job[:argv].call(0)
+      if args.class == Array
+        argv = args.join(' ')
+      else
+        argv = "#{args}"
+      end
+    else
+      argv = job[:argv].join(' ')
+    end
+
     # If we don't have any profiling info on this job, run it locally and
     # gather the data ourselves.
 
-    command = "#{job[:executable]} #{job[:code]} #{job[:argv].join(' ')}"
+    command = "#{job[:executable]} #{job[:code]} #{argv}"
     start_time = Time.now
     CommonFunctions.shell(command)
     end_time = Time.now
@@ -522,9 +533,15 @@ module ExodusHelper
 
     cloud = optimal_cloud_resources[:cloud]
     job[:num_tasks].times { |i|
+      if job[:argv].class == Proc
+        argv = ["#{job[:argv].call(i)}"]
+      else
+        argv = job[:argv]
+      end
+
       task = { :type => "babel",
         :code => job[:code],
-        :argv => job[:argv],
+        :argv => argv,
         :executable => job[:executable],
         :is_remote => false,
         :run_local => false
